@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 
 from jellyfin.api_client import ApiClient, RequestSerialized
@@ -42,7 +42,7 @@ class VideoApi:
     @validate_call
     def delete_alternate_sources(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,7 +60,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -112,7 +112,7 @@ class VideoApi:
     @validate_call
     def delete_alternate_sources_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -130,7 +130,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -182,7 +182,7 @@ class VideoApi:
     @validate_call
     def delete_alternate_sources_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -200,7 +200,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -315,8 +315,8 @@ class VideoApi:
     @validate_call
     def get_additional_part(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -334,9 +334,9 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -388,8 +388,8 @@ class VideoApi:
     @validate_call
     def get_additional_part_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -407,9 +407,9 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -461,8 +461,8 @@ class VideoApi:
     @validate_call
     def get_additional_part_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -480,9 +480,9 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -602,7 +602,7 @@ class VideoApi:
     @validate_call
     def get_attachment(
         self,
-        video_id: Annotated[StrictStr, Field(description="Video ID.")],
+        video_id: Annotated[UUID, Field(description="Video ID.")],
         media_source_id: Annotated[StrictStr, Field(description="Media Source ID.")],
         index: Annotated[StrictInt, Field(description="Attachment Index.")],
         _request_timeout: Union[
@@ -617,12 +617,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get video attachment.
 
 
         :param video_id: Video ID. (required)
-        :type video_id: str
+        :type video_id: UUID
         :param media_source_id: Media Source ID. (required)
         :type media_source_id: str
         :param index: Attachment Index. (required)
@@ -660,7 +660,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -678,7 +678,7 @@ class VideoApi:
     @validate_call
     def get_attachment_with_http_info(
         self,
-        video_id: Annotated[StrictStr, Field(description="Video ID.")],
+        video_id: Annotated[UUID, Field(description="Video ID.")],
         media_source_id: Annotated[StrictStr, Field(description="Media Source ID.")],
         index: Annotated[StrictInt, Field(description="Attachment Index.")],
         _request_timeout: Union[
@@ -693,12 +693,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get video attachment.
 
 
         :param video_id: Video ID. (required)
-        :type video_id: str
+        :type video_id: UUID
         :param media_source_id: Media Source ID. (required)
         :type media_source_id: str
         :param index: Attachment Index. (required)
@@ -736,7 +736,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -754,7 +754,7 @@ class VideoApi:
     @validate_call
     def get_attachment_without_preload_content(
         self,
-        video_id: Annotated[StrictStr, Field(description="Video ID.")],
+        video_id: Annotated[UUID, Field(description="Video ID.")],
         media_source_id: Annotated[StrictStr, Field(description="Media Source ID.")],
         index: Annotated[StrictInt, Field(description="Attachment Index.")],
         _request_timeout: Union[
@@ -774,7 +774,7 @@ class VideoApi:
 
 
         :param video_id: Video ID. (required)
-        :type video_id: str
+        :type video_id: UUID
         :param media_source_id: Media Source ID. (required)
         :type media_source_id: str
         :param index: Attachment Index. (required)
@@ -812,7 +812,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -899,7 +899,7 @@ class VideoApi:
     @validate_call
     def get_video_stream(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -962,12 +962,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -1149,7 +1149,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1166,7 +1166,7 @@ class VideoApi:
     @validate_call
     def get_video_stream_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -1229,12 +1229,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -1416,7 +1416,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1433,7 +1433,7 @@ class VideoApi:
     @validate_call
     def get_video_stream_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -1501,7 +1501,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -1683,7 +1683,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2010,7 +2010,7 @@ class VideoApi:
     @validate_call
     def get_video_stream_by_container(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -2073,12 +2073,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -2260,7 +2260,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2277,7 +2277,7 @@ class VideoApi:
     @validate_call
     def get_video_stream_by_container_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -2340,12 +2340,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -2527,7 +2527,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2544,7 +2544,7 @@ class VideoApi:
     @validate_call
     def get_video_stream_by_container_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -2612,7 +2612,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -2794,7 +2794,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -3119,7 +3119,7 @@ class VideoApi:
     @validate_call
     def head_video_stream(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -3182,12 +3182,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -3369,7 +3369,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -3386,7 +3386,7 @@ class VideoApi:
     @validate_call
     def head_video_stream_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -3449,12 +3449,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -3636,7 +3636,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -3653,7 +3653,7 @@ class VideoApi:
     @validate_call
     def head_video_stream_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -3721,7 +3721,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -3903,7 +3903,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -4230,7 +4230,7 @@ class VideoApi:
     @validate_call
     def head_video_stream_by_container(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -4293,12 +4293,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -4480,7 +4480,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -4497,7 +4497,7 @@ class VideoApi:
     @validate_call
     def head_video_stream_by_container_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -4560,12 +4560,12 @@ class VideoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a video stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -4747,7 +4747,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -4764,7 +4764,7 @@ class VideoApi:
     @validate_call
     def head_video_stream_by_container_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -4832,7 +4832,7 @@ class VideoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The video container. Possible values are: ts, webm, asf, wmv, ogv, mp4, m4v, mkv, mpeg, mpg, avi, 3gp, wmv, wtv, m2ts, mov, iso, flv. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -5014,7 +5014,7 @@ class VideoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -5339,7 +5339,7 @@ class VideoApi:
     @validate_call
     def merge_versions(
         self,
-        ids: Annotated[List[StrictStr], Field(description="Item id list. This allows multiple, comma delimited.")],
+        ids: Annotated[List[UUID], Field(description="Item id list. This allows multiple, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5357,7 +5357,7 @@ class VideoApi:
 
 
         :param ids: Item id list. This allows multiple, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5409,7 +5409,7 @@ class VideoApi:
     @validate_call
     def merge_versions_with_http_info(
         self,
-        ids: Annotated[List[StrictStr], Field(description="Item id list. This allows multiple, comma delimited.")],
+        ids: Annotated[List[UUID], Field(description="Item id list. This allows multiple, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5427,7 +5427,7 @@ class VideoApi:
 
 
         :param ids: Item id list. This allows multiple, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5479,7 +5479,7 @@ class VideoApi:
     @validate_call
     def merge_versions_without_preload_content(
         self,
-        ids: Annotated[List[StrictStr], Field(description="Item id list. This allows multiple, comma delimited.")],
+        ids: Annotated[List[UUID], Field(description="Item id list. This allows multiple, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5497,7 +5497,7 @@ class VideoApi:
 
 
         :param ids: Item id list. This allows multiple, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

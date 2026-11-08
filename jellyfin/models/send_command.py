@@ -18,18 +18,20 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.send_command_type import SendCommandType
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SendCommand(BaseModel):
     """
     Class SendCommand.
     """ # noqa: E501
-    group_id: Optional[StrictStr] = Field(default=None, description="Gets the group identifier.", alias="GroupId")
-    playlist_item_id: Optional[StrictStr] = Field(default=None, description="Gets the playlist identifier of the playing item.", alias="PlaylistItemId")
+    group_id: Optional[UUID] = Field(default=None, description="Gets the group identifier.", alias="GroupId")
+    playlist_item_id: Optional[UUID] = Field(default=None, description="Gets the playlist identifier of the playing item.", alias="PlaylistItemId")
     when: Optional[datetime] = Field(default=None, description="Gets or sets the UTC time when to execute the command.", alias="When")
     position_ticks: Optional[StrictInt] = Field(default=None, description="Gets the position ticks.", alias="PositionTicks")
     command: Optional[SendCommandType] = Field(default=None, description="Gets the command.", alias="Command")
@@ -37,7 +39,8 @@ class SendCommand(BaseModel):
     __properties: ClassVar[List[str]] = ["GroupId", "PlaylistItemId", "When", "PositionTicks", "Command", "EmittedAt"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +52,7 @@ class SendCommand(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

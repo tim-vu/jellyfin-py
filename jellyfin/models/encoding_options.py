@@ -29,6 +29,7 @@ from jellyfin.models.tonemapping_mode import TonemappingMode
 from jellyfin.models.tonemapping_range import TonemappingRange
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class EncodingOptions(BaseModel):
     """
@@ -86,7 +87,8 @@ class EncodingOptions(BaseModel):
     __properties: ClassVar[List[str]] = ["EncodingThreadCount", "TranscodingTempPath", "FallbackFontPath", "EnableFallbackFont", "EnableAudioVbr", "DownMixAudioBoost", "DownMixStereoAlgorithm", "MaxMuxingQueueSize", "EnableThrottling", "ThrottleDelaySeconds", "EnableSegmentDeletion", "SegmentKeepSeconds", "HardwareAccelerationType", "EncoderAppPath", "EncoderAppPathDisplay", "VaapiDevice", "QsvDevice", "EnableTonemapping", "EnableVppTonemapping", "EnableVideoToolboxTonemapping", "TonemappingAlgorithm", "TonemappingMode", "TonemappingRange", "TonemappingDesat", "TonemappingPeak", "TonemappingParam", "VppTonemappingBrightness", "VppTonemappingContrast", "H264Crf", "H265Crf", "EncoderPreset", "DeinterlaceDoubleRate", "DeinterlaceMethod", "EnableDecodingColorDepth10Hevc", "EnableDecodingColorDepth10Vp9", "EnableDecodingColorDepth10HevcRext", "EnableDecodingColorDepth12HevcRext", "EnableEnhancedNvdecDecoder", "PreferSystemNativeHwDecoder", "EnableIntelLowPowerH264HwEncoder", "EnableIntelLowPowerHevcHwEncoder", "EnableHardwareEncoding", "AllowHevcEncoding", "AllowAv1Encoding", "EnableSubtitleExtraction", "SubtitleExtractionTimeoutMinutes", "HardwareDecodingCodecs", "AllowOnDemandMetadataBasedKeyframeExtractionForExtensions", "HlsAudioSeekStrategy"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -98,8 +100,7 @@ class EncodingOptions(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

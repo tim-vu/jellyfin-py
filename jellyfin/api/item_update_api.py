@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.metadata_editor_info import MetadataEditorInfo
 
@@ -43,7 +43,7 @@ class ItemUpdateApi:
     @validate_call
     def get_metadata_editor_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,7 +61,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -113,7 +113,7 @@ class ItemUpdateApi:
     @validate_call
     def get_metadata_editor_info_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,7 +131,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -183,7 +183,7 @@ class ItemUpdateApi:
     @validate_call
     def get_metadata_editor_info_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -201,7 +201,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -316,7 +316,7 @@ class ItemUpdateApi:
     @validate_call
     def update_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         base_item_dto: Annotated[BaseItemDto, Field(description="The new item properties.")],
         _request_timeout: Union[
             None,
@@ -335,7 +335,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param base_item_dto: The new item properties. (required)
         :type base_item_dto: BaseItemDto
         :param _request_timeout: timeout setting for this request. If one
@@ -390,7 +390,7 @@ class ItemUpdateApi:
     @validate_call
     def update_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         base_item_dto: Annotated[BaseItemDto, Field(description="The new item properties.")],
         _request_timeout: Union[
             None,
@@ -409,7 +409,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param base_item_dto: The new item properties. (required)
         :type base_item_dto: BaseItemDto
         :param _request_timeout: timeout setting for this request. If one
@@ -464,7 +464,7 @@ class ItemUpdateApi:
     @validate_call
     def update_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         base_item_dto: Annotated[BaseItemDto, Field(description="The new item properties.")],
         _request_timeout: Union[
             None,
@@ -483,7 +483,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param base_item_dto: The new item properties. (required)
         :type base_item_dto: BaseItemDto
         :param _request_timeout: timeout setting for this request. If one
@@ -619,7 +619,7 @@ class ItemUpdateApi:
     @validate_call
     def update_item_content_type(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         content_type: Annotated[Optional[StrictStr], Field(description="The content type of the item.")] = None,
         _request_timeout: Union[
             None,
@@ -638,7 +638,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param content_type: The content type of the item.
         :type content_type: str
         :param _request_timeout: timeout setting for this request. If one
@@ -693,7 +693,7 @@ class ItemUpdateApi:
     @validate_call
     def update_item_content_type_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         content_type: Annotated[Optional[StrictStr], Field(description="The content type of the item.")] = None,
         _request_timeout: Union[
             None,
@@ -712,7 +712,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param content_type: The content type of the item.
         :type content_type: str
         :param _request_timeout: timeout setting for this request. If one
@@ -767,7 +767,7 @@ class ItemUpdateApi:
     @validate_call
     def update_item_content_type_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         content_type: Annotated[Optional[StrictStr], Field(description="The content type of the item.")] = None,
         _request_timeout: Union[
             None,
@@ -786,7 +786,7 @@ class ItemUpdateApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param content_type: The content type of the item.
         :type content_type: str
         :param _request_timeout: timeout setting for this request. If one

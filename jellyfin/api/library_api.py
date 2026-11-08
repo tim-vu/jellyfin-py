@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -20,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictBytes, StrictFloat, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.all_theme_media_result import AllThemeMediaResult
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
@@ -59,7 +59,7 @@ class LibraryApi:
     @validate_call
     def delete_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -77,7 +77,7 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -129,7 +129,7 @@ class LibraryApi:
     @validate_call
     def delete_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,7 +147,7 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -199,7 +199,7 @@ class LibraryApi:
     @validate_call
     def delete_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -217,7 +217,7 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -332,7 +332,7 @@ class LibraryApi:
     @validate_call
     def delete_items(
         self,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The item ids.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="The item ids.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -350,7 +350,7 @@ class LibraryApi:
 
 
         :param ids: The item ids.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -402,7 +402,7 @@ class LibraryApi:
     @validate_call
     def delete_items_with_http_info(
         self,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The item ids.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="The item ids.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -420,7 +420,7 @@ class LibraryApi:
 
 
         :param ids: The item ids.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -472,7 +472,7 @@ class LibraryApi:
     @validate_call
     def delete_items_without_preload_content(
         self,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The item ids.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="The item ids.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -490,7 +490,7 @@ class LibraryApi:
 
 
         :param ids: The item ids.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -608,8 +608,8 @@ class LibraryApi:
     @validate_call
     def get_ancestors(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -627,9 +627,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -682,8 +682,8 @@ class LibraryApi:
     @validate_call
     def get_ancestors_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -701,9 +701,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -756,8 +756,8 @@ class LibraryApi:
     @validate_call
     def get_ancestors_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -775,9 +775,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -898,7 +898,7 @@ class LibraryApi:
     @validate_call
     def get_download(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -911,12 +911,12 @@ class LibraryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Downloads item media.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -948,7 +948,7 @@ class LibraryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -968,7 +968,7 @@ class LibraryApi:
     @validate_call
     def get_download_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -981,12 +981,12 @@ class LibraryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Downloads item media.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1018,7 +1018,7 @@ class LibraryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -1038,7 +1038,7 @@ class LibraryApi:
     @validate_call
     def get_download_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1056,7 +1056,7 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1088,7 +1088,7 @@ class LibraryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -1173,7 +1173,7 @@ class LibraryApi:
     @validate_call
     def get_file(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1186,12 +1186,12 @@ class LibraryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get the original file of an item.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1223,7 +1223,7 @@ class LibraryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -1243,7 +1243,7 @@ class LibraryApi:
     @validate_call
     def get_file_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1256,12 +1256,12 @@ class LibraryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get the original file of an item.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1293,7 +1293,7 @@ class LibraryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -1313,7 +1313,7 @@ class LibraryApi:
     @validate_call
     def get_file_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1331,7 +1331,7 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1363,7 +1363,7 @@ class LibraryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -1448,8 +1448,8 @@ class LibraryApi:
     @validate_call
     def get_intros(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1467,9 +1467,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1521,8 +1521,8 @@ class LibraryApi:
     @validate_call
     def get_intros_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1540,9 +1540,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1594,8 +1594,8 @@ class LibraryApi:
     @validate_call
     def get_intros_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1613,9 +1613,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1735,8 +1735,8 @@ class LibraryApi:
     @validate_call
     def get_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1754,9 +1754,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1808,8 +1808,8 @@ class LibraryApi:
     @validate_call
     def get_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1827,9 +1827,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1881,8 +1881,8 @@ class LibraryApi:
     @validate_call
     def get_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1900,9 +1900,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2022,8 +2022,8 @@ class LibraryApi:
     @validate_call
     def get_item_collections(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The index of the first record in the output.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
@@ -2044,9 +2044,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The index of the first record in the output.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -2108,8 +2108,8 @@ class LibraryApi:
     @validate_call
     def get_item_collections_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The index of the first record in the output.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
@@ -2130,9 +2130,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The index of the first record in the output.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -2194,8 +2194,8 @@ class LibraryApi:
     @validate_call
     def get_item_collections_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The index of the first record in the output.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
@@ -2216,9 +2216,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The index of the first record in the output.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -2364,7 +2364,7 @@ class LibraryApi:
     @validate_call
     def get_item_counts(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Get counts from a specific user's library.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Get counts from a specific user's library.")] = None,
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional. Get counts of favorite items.")] = None,
         _request_timeout: Union[
             None,
@@ -2383,7 +2383,7 @@ class LibraryApi:
 
 
         :param user_id: Optional. Get counts from a specific user's library.
-        :type user_id: str
+        :type user_id: UUID
         :param is_favorite: Optional. Get counts of favorite items.
         :type is_favorite: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -2437,7 +2437,7 @@ class LibraryApi:
     @validate_call
     def get_item_counts_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Get counts from a specific user's library.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Get counts from a specific user's library.")] = None,
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional. Get counts of favorite items.")] = None,
         _request_timeout: Union[
             None,
@@ -2456,7 +2456,7 @@ class LibraryApi:
 
 
         :param user_id: Optional. Get counts from a specific user's library.
-        :type user_id: str
+        :type user_id: UUID
         :param is_favorite: Optional. Get counts of favorite items.
         :type is_favorite: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -2510,7 +2510,7 @@ class LibraryApi:
     @validate_call
     def get_item_counts_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Get counts from a specific user's library.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Get counts from a specific user's library.")] = None,
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional. Get counts of favorite items.")] = None,
         _request_timeout: Union[
             None,
@@ -2529,7 +2529,7 @@ class LibraryApi:
 
 
         :param user_id: Optional. Get counts from a specific user's library.
-        :type user_id: str
+        :type user_id: UUID
         :param is_favorite: Optional. Get counts of favorite items.
         :type is_favorite: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -2653,14 +2653,14 @@ class LibraryApi:
     @validate_call
     def get_items(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
         max_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).")] = None,
         has_theme_song: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme songs.")] = None,
         has_theme_video: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme videos.")] = None,
         has_subtitles: Annotated[Optional[StrictBool], Field(description="Optional filter by items with subtitles.")] = None,
         has_special_feature: Annotated[Optional[StrictBool], Field(description="Optional filter by items with special features.")] = None,
         has_trailer: Annotated[Optional[StrictBool], Field(description="Optional filter by items with trailers.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by index number.")] = None,
         parent_index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by parent index number.")] = None,
         has_parental_rating: Annotated[Optional[StrictBool], Field(description="Optional filter by items that have or do not have a parental rating.")] = None,
@@ -2685,13 +2685,13 @@ class LibraryApi:
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv news.")] = None,
         is_kids: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv kids.")] = None,
         is_sports: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv sports.")] = None,
-        exclude_item_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
+        exclude_item_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="When searching within folders, this determines whether or not the search will be recursive. true/false.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Filter based on a search term.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending, Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on the item type. This allows multiple, comma delimited.")] = None,
@@ -2709,17 +2709,17 @@ class LibraryApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
         artists: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.")] = None,
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
-        artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
-        album_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
-        contributing_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
+        artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
+        album_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
+        contributing_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
         albums: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.")] = None,
-        album_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
+        album_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
         video_types: Annotated[Optional[List[VideoType]], Field(description="Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.")] = None,
         min_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are locked.")] = None,
@@ -2735,8 +2735,8 @@ class LibraryApi:
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         audio_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.")] = None,
         subtitle_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on subtitle language. This allows multiple, comma delimited values.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Optional. Enable the total record count.")] = None,
@@ -2758,7 +2758,7 @@ class LibraryApi:
 
 
         :param user_id: The user id supplied as query parameter; this is required when not using an API key.
-        :type user_id: str
+        :type user_id: UUID
         :param max_official_rating: Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
         :type max_official_rating: str
         :param has_theme_song: Optional filter by items with theme songs.
@@ -2772,7 +2772,7 @@ class LibraryApi:
         :param has_trailer: Optional filter by items with trailers.
         :type has_trailer: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param index_number: Optional filter by index number.
         :type index_number: int
         :param parent_index_number: Optional filter by parent index number.
@@ -2822,7 +2822,7 @@ class LibraryApi:
         :param is_sports: Optional filter for live tv sports.
         :type is_sports: bool
         :param exclude_item_ids: Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.
-        :type exclude_item_ids: List[str]
+        :type exclude_item_ids: List[UUID]
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -2834,7 +2834,7 @@ class LibraryApi:
         :param sort_order: Sort Order - Ascending, Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -2870,7 +2870,7 @@ class LibraryApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person id.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
@@ -2878,19 +2878,19 @@ class LibraryApi:
         :param artists: Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.
         :type artists: List[str]
         :param exclude_artist_ids: Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param artist_ids: Optional. If specified, results will be filtered to include only those containing the specified artist id.
-        :type artist_ids: List[str]
+        :type artist_ids: List[UUID]
         :param album_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified album artist id.
-        :type album_artist_ids: List[str]
+        :type album_artist_ids: List[UUID]
         :param contributing_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.
-        :type contributing_artist_ids: List[str]
+        :type contributing_artist_ids: List[UUID]
         :param albums: Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.
         :type albums: List[str]
         :param album_ids: Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.
-        :type album_ids: List[str]
+        :type album_ids: List[UUID]
         :param ids: Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param video_types: Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.
         :type video_types: List[VideoType]
         :param min_official_rating: Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).
@@ -2922,9 +2922,9 @@ class LibraryApi:
         :param name_less_than: Optional filter by items whose name is equally or lesser than a given input string.
         :type name_less_than: str
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param audio_languages: Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.
         :type audio_languages: List[str]
         :param subtitle_languages: Optional. If specified, results will be filtered based on subtitle language. This allows multiple, comma delimited values.
@@ -3070,14 +3070,14 @@ class LibraryApi:
     @validate_call
     def get_items_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
         max_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).")] = None,
         has_theme_song: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme songs.")] = None,
         has_theme_video: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme videos.")] = None,
         has_subtitles: Annotated[Optional[StrictBool], Field(description="Optional filter by items with subtitles.")] = None,
         has_special_feature: Annotated[Optional[StrictBool], Field(description="Optional filter by items with special features.")] = None,
         has_trailer: Annotated[Optional[StrictBool], Field(description="Optional filter by items with trailers.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by index number.")] = None,
         parent_index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by parent index number.")] = None,
         has_parental_rating: Annotated[Optional[StrictBool], Field(description="Optional filter by items that have or do not have a parental rating.")] = None,
@@ -3102,13 +3102,13 @@ class LibraryApi:
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv news.")] = None,
         is_kids: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv kids.")] = None,
         is_sports: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv sports.")] = None,
-        exclude_item_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
+        exclude_item_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="When searching within folders, this determines whether or not the search will be recursive. true/false.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Filter based on a search term.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending, Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on the item type. This allows multiple, comma delimited.")] = None,
@@ -3126,17 +3126,17 @@ class LibraryApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
         artists: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.")] = None,
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
-        artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
-        album_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
-        contributing_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
+        artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
+        album_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
+        contributing_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
         albums: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.")] = None,
-        album_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
+        album_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
         video_types: Annotated[Optional[List[VideoType]], Field(description="Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.")] = None,
         min_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are locked.")] = None,
@@ -3152,8 +3152,8 @@ class LibraryApi:
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         audio_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.")] = None,
         subtitle_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on subtitle language. This allows multiple, comma delimited values.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Optional. Enable the total record count.")] = None,
@@ -3175,7 +3175,7 @@ class LibraryApi:
 
 
         :param user_id: The user id supplied as query parameter; this is required when not using an API key.
-        :type user_id: str
+        :type user_id: UUID
         :param max_official_rating: Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
         :type max_official_rating: str
         :param has_theme_song: Optional filter by items with theme songs.
@@ -3189,7 +3189,7 @@ class LibraryApi:
         :param has_trailer: Optional filter by items with trailers.
         :type has_trailer: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param index_number: Optional filter by index number.
         :type index_number: int
         :param parent_index_number: Optional filter by parent index number.
@@ -3239,7 +3239,7 @@ class LibraryApi:
         :param is_sports: Optional filter for live tv sports.
         :type is_sports: bool
         :param exclude_item_ids: Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.
-        :type exclude_item_ids: List[str]
+        :type exclude_item_ids: List[UUID]
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -3251,7 +3251,7 @@ class LibraryApi:
         :param sort_order: Sort Order - Ascending, Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -3287,7 +3287,7 @@ class LibraryApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person id.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
@@ -3295,19 +3295,19 @@ class LibraryApi:
         :param artists: Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.
         :type artists: List[str]
         :param exclude_artist_ids: Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param artist_ids: Optional. If specified, results will be filtered to include only those containing the specified artist id.
-        :type artist_ids: List[str]
+        :type artist_ids: List[UUID]
         :param album_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified album artist id.
-        :type album_artist_ids: List[str]
+        :type album_artist_ids: List[UUID]
         :param contributing_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.
-        :type contributing_artist_ids: List[str]
+        :type contributing_artist_ids: List[UUID]
         :param albums: Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.
         :type albums: List[str]
         :param album_ids: Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.
-        :type album_ids: List[str]
+        :type album_ids: List[UUID]
         :param ids: Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param video_types: Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.
         :type video_types: List[VideoType]
         :param min_official_rating: Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).
@@ -3339,9 +3339,9 @@ class LibraryApi:
         :param name_less_than: Optional filter by items whose name is equally or lesser than a given input string.
         :type name_less_than: str
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param audio_languages: Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.
         :type audio_languages: List[str]
         :param subtitle_languages: Optional. If specified, results will be filtered based on subtitle language. This allows multiple, comma delimited values.
@@ -3487,14 +3487,14 @@ class LibraryApi:
     @validate_call
     def get_items_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
         max_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).")] = None,
         has_theme_song: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme songs.")] = None,
         has_theme_video: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme videos.")] = None,
         has_subtitles: Annotated[Optional[StrictBool], Field(description="Optional filter by items with subtitles.")] = None,
         has_special_feature: Annotated[Optional[StrictBool], Field(description="Optional filter by items with special features.")] = None,
         has_trailer: Annotated[Optional[StrictBool], Field(description="Optional filter by items with trailers.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by index number.")] = None,
         parent_index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by parent index number.")] = None,
         has_parental_rating: Annotated[Optional[StrictBool], Field(description="Optional filter by items that have or do not have a parental rating.")] = None,
@@ -3519,13 +3519,13 @@ class LibraryApi:
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv news.")] = None,
         is_kids: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv kids.")] = None,
         is_sports: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv sports.")] = None,
-        exclude_item_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
+        exclude_item_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="When searching within folders, this determines whether or not the search will be recursive. true/false.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Filter based on a search term.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending, Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on the item type. This allows multiple, comma delimited.")] = None,
@@ -3543,17 +3543,17 @@ class LibraryApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
         artists: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.")] = None,
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
-        artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
-        album_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
-        contributing_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
+        artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
+        album_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
+        contributing_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
         albums: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.")] = None,
-        album_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
+        album_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
         video_types: Annotated[Optional[List[VideoType]], Field(description="Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.")] = None,
         min_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are locked.")] = None,
@@ -3569,8 +3569,8 @@ class LibraryApi:
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         audio_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.")] = None,
         subtitle_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on subtitle language. This allows multiple, comma delimited values.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Optional. Enable the total record count.")] = None,
@@ -3592,7 +3592,7 @@ class LibraryApi:
 
 
         :param user_id: The user id supplied as query parameter; this is required when not using an API key.
-        :type user_id: str
+        :type user_id: UUID
         :param max_official_rating: Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
         :type max_official_rating: str
         :param has_theme_song: Optional filter by items with theme songs.
@@ -3606,7 +3606,7 @@ class LibraryApi:
         :param has_trailer: Optional filter by items with trailers.
         :type has_trailer: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param index_number: Optional filter by index number.
         :type index_number: int
         :param parent_index_number: Optional filter by parent index number.
@@ -3656,7 +3656,7 @@ class LibraryApi:
         :param is_sports: Optional filter for live tv sports.
         :type is_sports: bool
         :param exclude_item_ids: Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.
-        :type exclude_item_ids: List[str]
+        :type exclude_item_ids: List[UUID]
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -3668,7 +3668,7 @@ class LibraryApi:
         :param sort_order: Sort Order - Ascending, Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -3704,7 +3704,7 @@ class LibraryApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person id.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
@@ -3712,19 +3712,19 @@ class LibraryApi:
         :param artists: Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.
         :type artists: List[str]
         :param exclude_artist_ids: Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param artist_ids: Optional. If specified, results will be filtered to include only those containing the specified artist id.
-        :type artist_ids: List[str]
+        :type artist_ids: List[UUID]
         :param album_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified album artist id.
-        :type album_artist_ids: List[str]
+        :type album_artist_ids: List[UUID]
         :param contributing_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.
-        :type contributing_artist_ids: List[str]
+        :type contributing_artist_ids: List[UUID]
         :param albums: Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.
         :type albums: List[str]
         :param album_ids: Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.
-        :type album_ids: List[str]
+        :type album_ids: List[UUID]
         :param ids: Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param video_types: Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.
         :type video_types: List[VideoType]
         :param min_official_rating: Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).
@@ -3756,9 +3756,9 @@ class LibraryApi:
         :param name_less_than: Optional filter by items whose name is equally or lesser than a given input string.
         :type name_less_than: str
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param audio_languages: Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.
         :type audio_languages: List[str]
         :param subtitle_languages: Optional. If specified, results will be filtered based on subtitle language. This allows multiple, comma delimited values.
@@ -4473,8 +4473,8 @@ class LibraryApi:
     @validate_call
     def get_latest_media(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         is_played: Annotated[Optional[StrictBool], Field(description="Filter by items that are played, or not.")] = None,
@@ -4501,9 +4501,9 @@ class LibraryApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -4582,8 +4582,8 @@ class LibraryApi:
     @validate_call
     def get_latest_media_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         is_played: Annotated[Optional[StrictBool], Field(description="Filter by items that are played, or not.")] = None,
@@ -4610,9 +4610,9 @@ class LibraryApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -4691,8 +4691,8 @@ class LibraryApi:
     @validate_call
     def get_latest_media_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         is_played: Annotated[Optional[StrictBool], Field(description="Filter by items that are played, or not.")] = None,
@@ -4719,9 +4719,9 @@ class LibraryApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -5207,8 +5207,8 @@ class LibraryApi:
     @validate_call
     def get_local_trailers(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5226,9 +5226,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5280,8 +5280,8 @@ class LibraryApi:
     @validate_call
     def get_local_trailers_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5299,9 +5299,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5353,8 +5353,8 @@ class LibraryApi:
     @validate_call
     def get_local_trailers_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5372,9 +5372,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6021,11 +6021,11 @@ class LibraryApi:
     @validate_call
     def get_resume_items(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The start index.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The item limit.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="The search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional. Filter by MediaType. Allows multiple, comma delimited.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
@@ -6053,7 +6053,7 @@ class LibraryApi:
 
 
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: The start index.
         :type start_index: int
         :param limit: The item limit.
@@ -6061,7 +6061,7 @@ class LibraryApi:
         :param search_term: The search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param media_types: Optional. Filter by MediaType. Allows multiple, comma delimited.
@@ -6146,11 +6146,11 @@ class LibraryApi:
     @validate_call
     def get_resume_items_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The start index.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The item limit.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="The search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional. Filter by MediaType. Allows multiple, comma delimited.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
@@ -6178,7 +6178,7 @@ class LibraryApi:
 
 
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: The start index.
         :type start_index: int
         :param limit: The item limit.
@@ -6186,7 +6186,7 @@ class LibraryApi:
         :param search_term: The search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param media_types: Optional. Filter by MediaType. Allows multiple, comma delimited.
@@ -6271,11 +6271,11 @@ class LibraryApi:
     @validate_call
     def get_resume_items_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The start index.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="The item limit.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="The search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional. Filter by MediaType. Allows multiple, comma delimited.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
@@ -6303,7 +6303,7 @@ class LibraryApi:
 
 
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: The start index.
         :type start_index: int
         :param limit: The item limit.
@@ -6311,7 +6311,7 @@ class LibraryApi:
         :param search_term: The search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param media_types: Optional. Filter by MediaType. Allows multiple, comma delimited.
@@ -6536,7 +6536,7 @@ class LibraryApi:
     @validate_call
     def get_root_folder(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6554,7 +6554,7 @@ class LibraryApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6605,7 +6605,7 @@ class LibraryApi:
     @validate_call
     def get_root_folder_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6623,7 +6623,7 @@ class LibraryApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6674,7 +6674,7 @@ class LibraryApi:
     @validate_call
     def get_root_folder_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6692,7 +6692,7 @@ class LibraryApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6808,9 +6808,9 @@ class LibraryApi:
     @validate_call
     def get_similar_albums(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -6830,11 +6830,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -6893,9 +6893,9 @@ class LibraryApi:
     @validate_call
     def get_similar_albums_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -6915,11 +6915,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -6978,9 +6978,9 @@ class LibraryApi:
     @validate_call
     def get_similar_albums_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7000,11 +7000,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7148,9 +7148,9 @@ class LibraryApi:
     @validate_call
     def get_similar_artists(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7170,11 +7170,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7233,9 +7233,9 @@ class LibraryApi:
     @validate_call
     def get_similar_artists_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7255,11 +7255,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7318,9 +7318,9 @@ class LibraryApi:
     @validate_call
     def get_similar_artists_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7340,11 +7340,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7488,9 +7488,9 @@ class LibraryApi:
     @validate_call
     def get_similar_items(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7510,11 +7510,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7573,9 +7573,9 @@ class LibraryApi:
     @validate_call
     def get_similar_items_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7595,11 +7595,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7658,9 +7658,9 @@ class LibraryApi:
     @validate_call
     def get_similar_items_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7680,11 +7680,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7828,9 +7828,9 @@ class LibraryApi:
     @validate_call
     def get_similar_movies(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7850,11 +7850,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7913,9 +7913,9 @@ class LibraryApi:
     @validate_call
     def get_similar_movies_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -7935,11 +7935,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -7998,9 +7998,9 @@ class LibraryApi:
     @validate_call
     def get_similar_movies_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8020,11 +8020,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8168,9 +8168,9 @@ class LibraryApi:
     @validate_call
     def get_similar_shows(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8190,11 +8190,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8253,9 +8253,9 @@ class LibraryApi:
     @validate_call
     def get_similar_shows_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8275,11 +8275,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8338,9 +8338,9 @@ class LibraryApi:
     @validate_call
     def get_similar_shows_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8360,11 +8360,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8508,9 +8508,9 @@ class LibraryApi:
     @validate_call
     def get_similar_trailers(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8530,11 +8530,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8593,9 +8593,9 @@ class LibraryApi:
     @validate_call
     def get_similar_trailers_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8615,11 +8615,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8678,9 +8678,9 @@ class LibraryApi:
     @validate_call
     def get_similar_trailers_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Exclude artist ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Exclude artist ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         _request_timeout: Union[
@@ -8700,11 +8700,11 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param exclude_artist_ids: Exclude artist ids.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
@@ -8848,8 +8848,8 @@ class LibraryApi:
     @validate_call
     def get_special_features(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8867,9 +8867,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8921,8 +8921,8 @@ class LibraryApi:
     @validate_call
     def get_special_features_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8940,9 +8940,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8994,8 +8994,8 @@ class LibraryApi:
     @validate_call
     def get_special_features_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9013,9 +9013,9 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9135,8 +9135,8 @@ class LibraryApi:
     @validate_call
     def get_theme_media(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9157,9 +9157,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9221,8 +9221,8 @@ class LibraryApi:
     @validate_call
     def get_theme_media_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9243,9 +9243,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9307,8 +9307,8 @@ class LibraryApi:
     @validate_call
     def get_theme_media_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9329,9 +9329,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9478,8 +9478,8 @@ class LibraryApi:
     @validate_call
     def get_theme_songs(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9500,9 +9500,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9564,8 +9564,8 @@ class LibraryApi:
     @validate_call
     def get_theme_songs_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9586,9 +9586,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9650,8 +9650,8 @@ class LibraryApi:
     @validate_call
     def get_theme_songs_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9672,9 +9672,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9821,8 +9821,8 @@ class LibraryApi:
     @validate_call
     def get_theme_videos(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9843,9 +9843,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9907,8 +9907,8 @@ class LibraryApi:
     @validate_call
     def get_theme_videos_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -9929,9 +9929,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -9993,8 +9993,8 @@ class LibraryApi:
     @validate_call
     def get_theme_videos_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         inherit_from_parent: Annotated[Optional[StrictBool], Field(description="Optional. Determines whether or not parent items should be searched for theme media.")] = None,
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending, Descending.")] = None,
@@ -10015,9 +10015,9 @@ class LibraryApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param inherit_from_parent: Optional. Determines whether or not parent items should be searched for theme media.
         :type inherit_from_parent: bool
         :param sort_by: Optional. Specify one or more sort orders, comma delimited. Options: Album, AlbumArtist, Artist, Budget, CommunityRating, CriticRating, DateCreated, DatePlayed, PlayCount, PremiereDate, ProductionYear, SortName, Random, Revenue, Runtime.
@@ -11556,7 +11556,7 @@ class LibraryApi:
     @validate_call
     def refresh_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         metadata_refresh_mode: Annotated[Optional[StrictStr], Field(description="(Optional) Specifies the metadata refresh mode.")] = None,
         image_refresh_mode: Annotated[Optional[StrictStr], Field(description="(Optional) Specifies the image refresh mode.")] = None,
         replace_all_metadata: Annotated[Optional[StrictBool], Field(description="(Optional) Determines if metadata should be replaced. Only applicable if mode is FullRefresh.")] = None,
@@ -11579,7 +11579,7 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param metadata_refresh_mode: (Optional) Specifies the metadata refresh mode.
         :type metadata_refresh_mode: MetadataRefreshMode
         :param image_refresh_mode: (Optional) Specifies the image refresh mode.
@@ -11646,7 +11646,7 @@ class LibraryApi:
     @validate_call
     def refresh_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         metadata_refresh_mode: Annotated[Optional[StrictStr], Field(description="(Optional) Specifies the metadata refresh mode.")] = None,
         image_refresh_mode: Annotated[Optional[StrictStr], Field(description="(Optional) Specifies the image refresh mode.")] = None,
         replace_all_metadata: Annotated[Optional[StrictBool], Field(description="(Optional) Determines if metadata should be replaced. Only applicable if mode is FullRefresh.")] = None,
@@ -11669,7 +11669,7 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param metadata_refresh_mode: (Optional) Specifies the metadata refresh mode.
         :type metadata_refresh_mode: MetadataRefreshMode
         :param image_refresh_mode: (Optional) Specifies the image refresh mode.
@@ -11736,7 +11736,7 @@ class LibraryApi:
     @validate_call
     def refresh_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         metadata_refresh_mode: Annotated[Optional[StrictStr], Field(description="(Optional) Specifies the metadata refresh mode.")] = None,
         image_refresh_mode: Annotated[Optional[StrictStr], Field(description="(Optional) Specifies the image refresh mode.")] = None,
         replace_all_metadata: Annotated[Optional[StrictBool], Field(description="(Optional) Determines if metadata should be replaced. Only applicable if mode is FullRefresh.")] = None,
@@ -11759,7 +11759,7 @@ class LibraryApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param metadata_refresh_mode: (Optional) Specifies the metadata refresh mode.
         :type metadata_refresh_mode: MetadataRefreshMode
         :param image_refresh_mode: (Optional) Specifies the image refresh mode.

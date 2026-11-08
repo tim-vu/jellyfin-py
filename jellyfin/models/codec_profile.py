@@ -23,6 +23,7 @@ from jellyfin.models.codec_type import CodecType
 from jellyfin.models.profile_condition import ProfileCondition
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CodecProfile(BaseModel):
     """
@@ -37,7 +38,8 @@ class CodecProfile(BaseModel):
     __properties: ClassVar[List[str]] = ["Type", "Conditions", "ApplyConditions", "Codec", "Container", "SubContainer"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +51,7 @@ class CodecProfile(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -79,15 +80,13 @@ class CodecProfile(BaseModel):
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_item_conditions.to_dict())
+                _items.append(_item_conditions.to_dict() if _item_conditions is not None else None)
             _dict['Conditions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in apply_conditions (list)
         _items = []
         if self.apply_conditions:
             for _item_apply_conditions in self.apply_conditions:
-                if _item_apply_conditions:
-                    _items.append(_item_apply_conditions.to_dict())
+                _items.append(_item_apply_conditions.to_dict() if _item_apply_conditions is not None else None)
             _dict['ApplyConditions'] = _items
         # set to None if codec (nullable) is None
         # and model_fields_set contains the field

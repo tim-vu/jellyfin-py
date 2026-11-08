@@ -19,18 +19,20 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.play_command import PlayCommand
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PlayRequest(BaseModel):
     """
     Class PlayRequest.
     """ # noqa: E501
-    item_ids: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the item ids.", alias="ItemIds")
+    item_ids: Optional[List[UUID]] = Field(default=None, description="Gets or sets the item ids.", alias="ItemIds")
     start_position_ticks: Optional[StrictInt] = Field(default=None, description="Gets or sets the start position ticks that the first item should be played at.", alias="StartPositionTicks")
     play_command: Optional[PlayCommand] = Field(default=None, description="Gets or sets the play command.", alias="PlayCommand")
-    controlling_user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the controlling user identifier.", alias="ControllingUserId")
+    controlling_user_id: Optional[UUID] = Field(default=None, description="Gets or sets the controlling user identifier.", alias="ControllingUserId")
     subtitle_stream_index: Optional[StrictInt] = Field(default=None, alias="SubtitleStreamIndex")
     audio_stream_index: Optional[StrictInt] = Field(default=None, alias="AudioStreamIndex")
     media_source_id: Optional[StrictStr] = Field(default=None, alias="MediaSourceId")
@@ -38,7 +40,8 @@ class PlayRequest(BaseModel):
     __properties: ClassVar[List[str]] = ["ItemIds", "StartPositionTicks", "PlayCommand", "ControllingUserId", "SubtitleStreamIndex", "AudioStreamIndex", "MediaSourceId", "StartIndex"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +53,7 @@ class PlayRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

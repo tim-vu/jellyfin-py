@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.item_fields import ItemFields
 from jellyfin.models.recommendation_dto import RecommendationDto
 
@@ -43,8 +43,8 @@ class MovieApi:
     @validate_call
     def get_movie_recommendations(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. The fields to return.")] = None,
         category_limit: Annotated[Optional[StrictInt], Field(description="The max number of categories to return.")] = None,
         item_limit: Annotated[Optional[StrictInt], Field(description="The max number of items to return per category.")] = None,
@@ -65,9 +65,9 @@ class MovieApi:
 
 
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. The fields to return.
         :type fields: List[ItemFields]
         :param category_limit: The max number of categories to return.
@@ -128,8 +128,8 @@ class MovieApi:
     @validate_call
     def get_movie_recommendations_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. The fields to return.")] = None,
         category_limit: Annotated[Optional[StrictInt], Field(description="The max number of categories to return.")] = None,
         item_limit: Annotated[Optional[StrictInt], Field(description="The max number of items to return per category.")] = None,
@@ -150,9 +150,9 @@ class MovieApi:
 
 
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. The fields to return.
         :type fields: List[ItemFields]
         :param category_limit: The max number of categories to return.
@@ -213,8 +213,8 @@ class MovieApi:
     @validate_call
     def get_movie_recommendations_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. The fields to return.")] = None,
         category_limit: Annotated[Optional[StrictInt], Field(description="The max number of categories to return.")] = None,
         item_limit: Annotated[Optional[StrictInt], Field(description="The max number of items to return per category.")] = None,
@@ -235,9 +235,9 @@ class MovieApi:
 
 
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. The fields to return.
         :type fields: List[ItemFields]
         :param category_limit: The max number of categories to return.

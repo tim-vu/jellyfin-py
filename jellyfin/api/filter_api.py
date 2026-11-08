@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
+from pydantic import Field, StrictBool
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_kind import BaseItemKind
 from jellyfin.models.media_type import MediaType
 from jellyfin.models.query_filters import QueryFilters
@@ -45,8 +45,8 @@ class FilterApi:
     @validate_call
     def get_query_filters(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Is item airing.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional. Is item movie.")] = None,
@@ -72,9 +72,9 @@ class FilterApi:
 
 
         :param user_id: Optional. User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param is_airing: Optional. Is item airing.
@@ -150,8 +150,8 @@ class FilterApi:
     @validate_call
     def get_query_filters_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Is item airing.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional. Is item movie.")] = None,
@@ -177,9 +177,9 @@ class FilterApi:
 
 
         :param user_id: Optional. User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param is_airing: Optional. Is item airing.
@@ -255,8 +255,8 @@ class FilterApi:
     @validate_call
     def get_query_filters_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Is item airing.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional. Is item movie.")] = None,
@@ -282,9 +282,9 @@ class FilterApi:
 
 
         :param user_id: Optional. User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param is_airing: Optional. Is item airing.
@@ -471,8 +471,8 @@ class FilterApi:
     @validate_call
     def get_query_filters_legacy(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Parent id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Parent id.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional. Filter by MediaType. Allows multiple, comma delimited.")] = None,
         _request_timeout: Union[
@@ -492,9 +492,9 @@ class FilterApi:
 
 
         :param user_id: Optional. User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Optional. Parent id.
-        :type parent_id: str
+        :type parent_id: UUID
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param media_types: Optional. Filter by MediaType. Allows multiple, comma delimited.
@@ -552,8 +552,8 @@ class FilterApi:
     @validate_call
     def get_query_filters_legacy_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Parent id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Parent id.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional. Filter by MediaType. Allows multiple, comma delimited.")] = None,
         _request_timeout: Union[
@@ -573,9 +573,9 @@ class FilterApi:
 
 
         :param user_id: Optional. User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Optional. Parent id.
-        :type parent_id: str
+        :type parent_id: UUID
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param media_types: Optional. Filter by MediaType. Allows multiple, comma delimited.
@@ -633,8 +633,8 @@ class FilterApi:
     @validate_call
     def get_query_filters_legacy_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Parent id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Parent id.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional. Filter by MediaType. Allows multiple, comma delimited.")] = None,
         _request_timeout: Union[
@@ -654,9 +654,9 @@ class FilterApi:
 
 
         :param user_id: Optional. User id.
-        :type user_id: str
+        :type user_id: UUID
         :param parent_id: Optional. Parent id.
-        :type parent_id: str
+        :type parent_id: UUID
         :param include_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param media_types: Optional. Filter by MediaType. Allows multiple, comma delimited.

@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -20,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import Any, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.activity_log_entry_query_result import ActivityLogEntryQueryResult
 from jellyfin.models.activity_log_sort_by import ActivityLogSortBy
 from jellyfin.models.branding_options_dto import BrandingOptionsDto
@@ -829,7 +829,7 @@ class SystemApi:
         overview: Annotated[Optional[StrictStr], Field(description="Filter by overview.")] = None,
         short_overview: Annotated[Optional[StrictStr], Field(description="Filter by short overview.")] = None,
         type: Annotated[Optional[StrictStr], Field(description="Filter by type.")] = None,
-        item_id: Annotated[Optional[StrictStr], Field(description="Filter by item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="Filter by item id.")] = None,
         username: Annotated[Optional[StrictStr], Field(description="Filter by username.")] = None,
         severity: Annotated[Optional[StrictStr], Field(description="Filter by log severity.")] = None,
         sort_by: Annotated[Optional[List[ActivityLogSortBy]], Field(description="Specify one or more sort orders. Format: SortBy=Name,Type.")] = None,
@@ -869,7 +869,7 @@ class SystemApi:
         :param type: Filter by type.
         :type type: str
         :param item_id: Filter by item id.
-        :type item_id: str
+        :type item_id: UUID
         :param username: Filter by username.
         :type username: str
         :param severity: Filter by log severity.
@@ -950,7 +950,7 @@ class SystemApi:
         overview: Annotated[Optional[StrictStr], Field(description="Filter by overview.")] = None,
         short_overview: Annotated[Optional[StrictStr], Field(description="Filter by short overview.")] = None,
         type: Annotated[Optional[StrictStr], Field(description="Filter by type.")] = None,
-        item_id: Annotated[Optional[StrictStr], Field(description="Filter by item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="Filter by item id.")] = None,
         username: Annotated[Optional[StrictStr], Field(description="Filter by username.")] = None,
         severity: Annotated[Optional[StrictStr], Field(description="Filter by log severity.")] = None,
         sort_by: Annotated[Optional[List[ActivityLogSortBy]], Field(description="Specify one or more sort orders. Format: SortBy=Name,Type.")] = None,
@@ -990,7 +990,7 @@ class SystemApi:
         :param type: Filter by type.
         :type type: str
         :param item_id: Filter by item id.
-        :type item_id: str
+        :type item_id: UUID
         :param username: Filter by username.
         :type username: str
         :param severity: Filter by log severity.
@@ -1071,7 +1071,7 @@ class SystemApi:
         overview: Annotated[Optional[StrictStr], Field(description="Filter by overview.")] = None,
         short_overview: Annotated[Optional[StrictStr], Field(description="Filter by short overview.")] = None,
         type: Annotated[Optional[StrictStr], Field(description="Filter by type.")] = None,
-        item_id: Annotated[Optional[StrictStr], Field(description="Filter by item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="Filter by item id.")] = None,
         username: Annotated[Optional[StrictStr], Field(description="Filter by username.")] = None,
         severity: Annotated[Optional[StrictStr], Field(description="Filter by log severity.")] = None,
         sort_by: Annotated[Optional[List[ActivityLogSortBy]], Field(description="Specify one or more sort orders. Format: SortBy=Name,Type.")] = None,
@@ -1111,7 +1111,7 @@ class SystemApi:
         :param type: Filter by type.
         :type type: str
         :param item_id: Filter by item id.
-        :type item_id: str
+        :type item_id: UUID
         :param username: Filter by username.
         :type username: str
         :param severity: Filter by log severity.
@@ -1346,7 +1346,7 @@ class SystemApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a log file.
 
 
@@ -1383,7 +1383,7 @@ class SystemApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '403': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -1416,7 +1416,7 @@ class SystemApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a log file.
 
 
@@ -1453,7 +1453,7 @@ class SystemApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '403': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -1523,7 +1523,7 @@ class SystemApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '403': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -1622,7 +1622,7 @@ class SystemApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a named configuration.
 
 
@@ -1659,7 +1659,7 @@ class SystemApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -1691,7 +1691,7 @@ class SystemApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a named configuration.
 
 
@@ -1728,7 +1728,7 @@ class SystemApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -1797,7 +1797,7 @@ class SystemApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -3404,7 +3404,7 @@ class SystemApi:
 
 
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3474,7 +3474,7 @@ class SystemApi:
 
 
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3544,7 +3544,7 @@ class SystemApi:
 
 
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

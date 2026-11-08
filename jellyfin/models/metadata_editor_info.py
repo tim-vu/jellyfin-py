@@ -27,6 +27,7 @@ from jellyfin.models.name_value_pair import NameValuePair
 from jellyfin.models.parental_rating import ParentalRating
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class MetadataEditorInfo(BaseModel):
     """
@@ -41,7 +42,8 @@ class MetadataEditorInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["ParentalRatingOptions", "Countries", "Cultures", "ExternalIdInfos", "ContentType", "ContentTypeOptions"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +55,7 @@ class MetadataEditorInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -83,36 +84,31 @@ class MetadataEditorInfo(BaseModel):
         _items = []
         if self.parental_rating_options:
             for _item_parental_rating_options in self.parental_rating_options:
-                if _item_parental_rating_options:
-                    _items.append(_item_parental_rating_options.to_dict())
+                _items.append(_item_parental_rating_options.to_dict() if _item_parental_rating_options is not None else None)
             _dict['ParentalRatingOptions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in countries (list)
         _items = []
         if self.countries:
             for _item_countries in self.countries:
-                if _item_countries:
-                    _items.append(_item_countries.to_dict())
+                _items.append(_item_countries.to_dict() if _item_countries is not None else None)
             _dict['Countries'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in cultures (list)
         _items = []
         if self.cultures:
             for _item_cultures in self.cultures:
-                if _item_cultures:
-                    _items.append(_item_cultures.to_dict())
+                _items.append(_item_cultures.to_dict() if _item_cultures is not None else None)
             _dict['Cultures'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in external_id_infos (list)
         _items = []
         if self.external_id_infos:
             for _item_external_id_infos in self.external_id_infos:
-                if _item_external_id_infos:
-                    _items.append(_item_external_id_infos.to_dict())
+                _items.append(_item_external_id_infos.to_dict() if _item_external_id_infos is not None else None)
             _dict['ExternalIdInfos'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in content_type_options (list)
         _items = []
         if self.content_type_options:
             for _item_content_type_options in self.content_type_options:
-                if _item_content_type_options:
-                    _items.append(_item_content_type_options.to_dict())
+                _items.append(_item_content_type_options.to_dict() if _item_content_type_options is not None else None)
             _dict['ContentTypeOptions'] = _items
         # set to None if content_type (nullable) is None
         # and model_fields_set contains the field

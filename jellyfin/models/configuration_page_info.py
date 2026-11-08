@@ -19,8 +19,10 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ConfigurationPageInfo(BaseModel):
     """
@@ -31,11 +33,12 @@ class ConfigurationPageInfo(BaseModel):
     menu_section: Optional[StrictStr] = Field(default=None, description="Gets or sets the menu section.", alias="MenuSection")
     menu_icon: Optional[StrictStr] = Field(default=None, description="Gets or sets the menu icon.", alias="MenuIcon")
     display_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the display name.", alias="DisplayName")
-    plugin_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the plugin id.", alias="PluginId")
+    plugin_id: Optional[UUID] = Field(default=None, description="Gets or sets the plugin id.", alias="PluginId")
     __properties: ClassVar[List[str]] = ["Name", "EnableInMainMenu", "MenuSection", "MenuIcon", "DisplayName", "PluginId"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +50,7 @@ class ConfigurationPageInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

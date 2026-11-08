@@ -19,17 +19,19 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.queue_item import QueueItem
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PlaybackStopInfo(BaseModel):
     """
     Class PlaybackStopInfo.
     """ # noqa: E501
     item: Optional[BaseItemDto] = Field(default=None, description="Gets or sets the item.", alias="Item")
-    item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the item identifier.", alias="ItemId")
+    item_id: Optional[UUID] = Field(default=None, description="Gets or sets the item identifier.", alias="ItemId")
     session_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the session id.", alias="SessionId")
     media_source_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the media version identifier.", alias="MediaSourceId")
     position_ticks: Optional[StrictInt] = Field(default=None, description="Gets or sets the position ticks.", alias="PositionTicks")
@@ -42,7 +44,8 @@ class PlaybackStopInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["Item", "ItemId", "SessionId", "MediaSourceId", "PositionTicks", "LiveStreamId", "PlaySessionId", "Failed", "NextMediaType", "PlaylistItemId", "NowPlayingQueue"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -54,8 +57,7 @@ class PlaybackStopInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -87,8 +89,7 @@ class PlaybackStopInfo(BaseModel):
         _items = []
         if self.now_playing_queue:
             for _item_now_playing_queue in self.now_playing_queue:
-                if _item_now_playing_queue:
-                    _items.append(_item_now_playing_queue.to_dict())
+                _items.append(_item_now_playing_queue.to_dict() if _item_now_playing_queue is not None else None)
             _dict['NowPlayingQueue'] = _items
         # set to None if item (nullable) is None
         # and model_fields_set contains the field

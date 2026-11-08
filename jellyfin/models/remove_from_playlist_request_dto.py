@@ -17,22 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class RemoveFromPlaylistRequestDto(BaseModel):
     """
     Class RemoveFromPlaylistRequestDto.
     """ # noqa: E501
-    playlist_item_ids: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the playlist identifiers of the items. Ignored when clearing the playlist.", alias="PlaylistItemIds")
+    playlist_item_ids: Optional[List[UUID]] = Field(default=None, description="Gets or sets the playlist identifiers of the items. Ignored when clearing the playlist.", alias="PlaylistItemIds")
     clear_playlist: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the entire playlist should be cleared.", alias="ClearPlaylist")
     clear_playing_item: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the playing item should be removed as well. Used only when clearing the playlist.", alias="ClearPlayingItem")
     __properties: ClassVar[List[str]] = ["PlaylistItemIds", "ClearPlaylist", "ClearPlayingItem"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -44,8 +47,7 @@ class RemoveFromPlaylistRequestDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.display_preferences_dto import DisplayPreferencesDto
 
 from jellyfin.api_client import ApiClient, RequestSerialized
@@ -44,7 +44,7 @@ class DisplayPreferenceApi:
         self,
         display_preferences_id: Annotated[StrictStr, Field(description="Display preferences id.")],
         client: Annotated[StrictStr, Field(description="Client.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,7 +66,7 @@ class DisplayPreferenceApi:
         :param client: Client. (required)
         :type client: str
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -121,7 +121,7 @@ class DisplayPreferenceApi:
         self,
         display_preferences_id: Annotated[StrictStr, Field(description="Display preferences id.")],
         client: Annotated[StrictStr, Field(description="Client.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -143,7 +143,7 @@ class DisplayPreferenceApi:
         :param client: Client. (required)
         :type client: str
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -198,7 +198,7 @@ class DisplayPreferenceApi:
         self,
         display_preferences_id: Annotated[StrictStr, Field(description="Display preferences id.")],
         client: Annotated[StrictStr, Field(description="Client.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -220,7 +220,7 @@ class DisplayPreferenceApi:
         :param client: Client. (required)
         :type client: str
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -349,7 +349,7 @@ class DisplayPreferenceApi:
         display_preferences_id: Annotated[StrictStr, Field(description="Display preferences id.")],
         client: Annotated[StrictStr, Field(description="Client.")],
         display_preferences_dto: Annotated[DisplayPreferencesDto, Field(description="New Display Preferences object.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -373,7 +373,7 @@ class DisplayPreferenceApi:
         :param display_preferences_dto: New Display Preferences object. (required)
         :type display_preferences_dto: DisplayPreferencesDto
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -430,7 +430,7 @@ class DisplayPreferenceApi:
         display_preferences_id: Annotated[StrictStr, Field(description="Display preferences id.")],
         client: Annotated[StrictStr, Field(description="Client.")],
         display_preferences_dto: Annotated[DisplayPreferencesDto, Field(description="New Display Preferences object.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -454,7 +454,7 @@ class DisplayPreferenceApi:
         :param display_preferences_dto: New Display Preferences object. (required)
         :type display_preferences_dto: DisplayPreferencesDto
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -511,7 +511,7 @@ class DisplayPreferenceApi:
         display_preferences_id: Annotated[StrictStr, Field(description="Display preferences id.")],
         client: Annotated[StrictStr, Field(description="Client.")],
         display_preferences_dto: Annotated[DisplayPreferencesDto, Field(description="New Display Preferences object.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -535,7 +535,7 @@ class DisplayPreferenceApi:
         :param display_preferences_dto: New Display Preferences object. (required)
         :type display_preferences_dto: DisplayPreferencesDto
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

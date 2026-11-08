@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.media_segment_dto_query_result import MediaSegmentDtoQueryResult
 from jellyfin.models.media_segment_type import MediaSegmentType
 
@@ -43,7 +43,7 @@ class MediaSegmentApi:
     @validate_call
     def get_item_segments(
         self,
-        item_id: Annotated[StrictStr, Field(description="The ItemId.")],
+        item_id: Annotated[UUID, Field(description="The ItemId.")],
         include_segment_types: Annotated[Optional[List[MediaSegmentType]], Field(description="Optional filter of requested segment types.")] = None,
         _request_timeout: Union[
             None,
@@ -62,7 +62,7 @@ class MediaSegmentApi:
 
 
         :param item_id: The ItemId. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param include_segment_types: Optional filter of requested segment types.
         :type include_segment_types: List[MediaSegmentType]
         :param _request_timeout: timeout setting for this request. If one
@@ -117,7 +117,7 @@ class MediaSegmentApi:
     @validate_call
     def get_item_segments_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The ItemId.")],
+        item_id: Annotated[UUID, Field(description="The ItemId.")],
         include_segment_types: Annotated[Optional[List[MediaSegmentType]], Field(description="Optional filter of requested segment types.")] = None,
         _request_timeout: Union[
             None,
@@ -136,7 +136,7 @@ class MediaSegmentApi:
 
 
         :param item_id: The ItemId. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param include_segment_types: Optional filter of requested segment types.
         :type include_segment_types: List[MediaSegmentType]
         :param _request_timeout: timeout setting for this request. If one
@@ -191,7 +191,7 @@ class MediaSegmentApi:
     @validate_call
     def get_item_segments_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The ItemId.")],
+        item_id: Annotated[UUID, Field(description="The ItemId.")],
         include_segment_types: Annotated[Optional[List[MediaSegmentType]], Field(description="Optional filter of requested segment types.")] = None,
         _request_timeout: Union[
             None,
@@ -210,7 +210,7 @@ class MediaSegmentApi:
 
 
         :param item_id: The ItemId. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param include_segment_types: Optional filter of requested segment types.
         :type include_segment_types: List[MediaSegmentType]
         :param _request_timeout: timeout setting for this request. If one

@@ -20,11 +20,13 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.day_of_week import DayOfWeek
 from jellyfin.models.day_pattern import DayPattern
 from jellyfin.models.keep_until import KeepUntil
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SeriesTimerInfoDto(BaseModel):
     """
@@ -34,7 +36,7 @@ class SeriesTimerInfoDto(BaseModel):
     type: Optional[StrictStr] = Field(default=None, alias="Type")
     server_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the server identifier.", alias="ServerId")
     external_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the external identifier.", alias="ExternalId")
-    channel_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the channel id of the recording.", alias="ChannelId")
+    channel_id: Optional[UUID] = Field(default=None, description="Gets or sets the channel id of the recording.", alias="ChannelId")
     external_channel_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the external channel identifier.", alias="ExternalChannelId")
     channel_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the channel name of the recording.", alias="ChannelName")
     channel_primary_image_tag: Optional[StrictStr] = Field(default=None, alias="ChannelPrimaryImageTag")
@@ -63,12 +65,13 @@ class SeriesTimerInfoDto(BaseModel):
     image_tags: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Gets or sets the image tags.", alias="ImageTags")
     parent_thumb_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent thumb item id.", alias="ParentThumbItemId")
     parent_thumb_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent thumb image tag.", alias="ParentThumbImageTag")
-    parent_primary_image_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent primary image item identifier.", alias="ParentPrimaryImageItemId")
+    parent_primary_image_item_id: Optional[UUID] = Field(default=None, description="Gets or sets the parent primary image item identifier.", alias="ParentPrimaryImageItemId")
     parent_primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent primary image tag.", alias="ParentPrimaryImageTag")
     __properties: ClassVar[List[str]] = ["Id", "Type", "ServerId", "ExternalId", "ChannelId", "ExternalChannelId", "ChannelName", "ChannelPrimaryImageTag", "ProgramId", "ExternalProgramId", "Name", "Overview", "StartDate", "EndDate", "ServiceName", "Priority", "PrePaddingSeconds", "PostPaddingSeconds", "IsPrePaddingRequired", "ParentBackdropItemId", "ParentBackdropImageTags", "IsPostPaddingRequired", "KeepUntil", "RecordAnyTime", "SkipEpisodesInLibrary", "RecordAnyChannel", "KeepUpTo", "RecordNewOnly", "Days", "DayPattern", "ImageTags", "ParentThumbItemId", "ParentThumbImageTag", "ParentPrimaryImageItemId", "ParentPrimaryImageTag"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -80,8 +83,7 @@ class SeriesTimerInfoDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

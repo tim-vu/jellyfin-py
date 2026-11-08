@@ -17,24 +17,27 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.plugin_info import PluginInfo
 from jellyfin.models.session_message_type import SessionMessageType
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PluginUninstalledMessage(BaseModel):
     """
     Plugin uninstalled message.
     """ # noqa: E501
     data: Optional[PluginInfo] = Field(default=None, description="This is a serializable stub class that is used by the api to provide information about installed plugins.", alias="Data")
-    message_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the message id.", alias="MessageId")
+    message_id: Optional[UUID] = Field(default=None, description="Gets or sets the message id.", alias="MessageId")
     message_type: Optional[SessionMessageType] = Field(default=SessionMessageType.PACKAGEUNINSTALLED, description="The different kinds of messages that are used in the WebSocket api.", alias="MessageType")
     __properties: ClassVar[List[str]] = ["Data", "MessageId", "MessageType"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +49,7 @@ class PluginUninstalledMessage(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -19,15 +19,17 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.device_profile import DeviceProfile
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PlaybackInfoDto(BaseModel):
     """
     Playback info dto.
     """ # noqa: E501
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the playback userId.", alias="UserId")
+    user_id: Optional[UUID] = Field(default=None, description="Gets or sets the playback userId.", alias="UserId")
     max_streaming_bitrate: Optional[StrictInt] = Field(default=None, description="Gets or sets the max streaming bitrate.", alias="MaxStreamingBitrate")
     start_time_ticks: Optional[StrictInt] = Field(default=None, description="Gets or sets the start time in ticks.", alias="StartTimeTicks")
     audio_stream_index: Optional[StrictInt] = Field(default=None, description="Gets or sets the audio stream index.", alias="AudioStreamIndex")
@@ -46,7 +48,8 @@ class PlaybackInfoDto(BaseModel):
     __properties: ClassVar[List[str]] = ["UserId", "MaxStreamingBitrate", "StartTimeTicks", "AudioStreamIndex", "SubtitleStreamIndex", "MaxAudioChannels", "MediaSourceId", "LiveStreamId", "DeviceProfile", "EnableDirectPlay", "EnableDirectStream", "EnableTranscoding", "AllowVideoStreamCopy", "AllowAudioStreamCopy", "AutoOpenLiveStream", "AlwaysBurnInSubtitleWhenTranscoding"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -58,8 +61,7 @@ class PlaybackInfoDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.create_playlist_dto import CreatePlaylistDto
 from jellyfin.models.image_type import ImageType
@@ -50,10 +50,10 @@ class PlaylistApi:
     @validate_call
     def add_item_to_playlist(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Item id, comma delimited.")] = None,
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        ids: Annotated[Optional[List[UUID]], Field(description="Item id, comma delimited.")] = None,
         position: Annotated[Optional[StrictInt], Field(description="Optional. 0-based index where to place the items or at the end if `null`.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The userId.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The userId.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -71,13 +71,13 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param ids: Item id, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param position: Optional. 0-based index where to place the items or at the end if `null`.
         :type position: int
         :param user_id: The userId.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -132,10 +132,10 @@ class PlaylistApi:
     @validate_call
     def add_item_to_playlist_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Item id, comma delimited.")] = None,
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        ids: Annotated[Optional[List[UUID]], Field(description="Item id, comma delimited.")] = None,
         position: Annotated[Optional[StrictInt], Field(description="Optional. 0-based index where to place the items or at the end if `null`.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The userId.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The userId.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -153,13 +153,13 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param ids: Item id, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param position: Optional. 0-based index where to place the items or at the end if `null`.
         :type position: int
         :param user_id: The userId.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -214,10 +214,10 @@ class PlaylistApi:
     @validate_call
     def add_item_to_playlist_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Item id, comma delimited.")] = None,
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        ids: Annotated[Optional[List[UUID]], Field(description="Item id, comma delimited.")] = None,
         position: Annotated[Optional[StrictInt], Field(description="Optional. 0-based index where to place the items or at the end if `null`.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The userId.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The userId.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -235,13 +235,13 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param ids: Item id, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param position: Optional. 0-based index where to place the items or at the end if `null`.
         :type position: int
         :param user_id: The userId.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -376,8 +376,8 @@ class PlaylistApi:
     def create_playlist(
         self,
         name: Annotated[Optional[StrictStr], Field(description="The playlist name.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The item ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="The item ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         media_type: Annotated[Optional[StrictStr], Field(description="The media type.")] = None,
         create_playlist_dto: Annotated[Optional[CreatePlaylistDto], Field(description="The create playlist payload.")] = None,
         _request_timeout: Union[
@@ -400,9 +400,9 @@ class PlaylistApi:
         :param name: The playlist name.
         :type name: str
         :param ids: The item ids.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param media_type: The media type.
         :type media_type: MediaType
         :param create_playlist_dto: The create playlist payload.
@@ -462,8 +462,8 @@ class PlaylistApi:
     def create_playlist_with_http_info(
         self,
         name: Annotated[Optional[StrictStr], Field(description="The playlist name.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The item ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="The item ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         media_type: Annotated[Optional[StrictStr], Field(description="The media type.")] = None,
         create_playlist_dto: Annotated[Optional[CreatePlaylistDto], Field(description="The create playlist payload.")] = None,
         _request_timeout: Union[
@@ -486,9 +486,9 @@ class PlaylistApi:
         :param name: The playlist name.
         :type name: str
         :param ids: The item ids.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param media_type: The media type.
         :type media_type: MediaType
         :param create_playlist_dto: The create playlist payload.
@@ -548,8 +548,8 @@ class PlaylistApi:
     def create_playlist_without_preload_content(
         self,
         name: Annotated[Optional[StrictStr], Field(description="The playlist name.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="The item ids.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="The item ids.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         media_type: Annotated[Optional[StrictStr], Field(description="The media type.")] = None,
         create_playlist_dto: Annotated[Optional[CreatePlaylistDto], Field(description="The create playlist payload.")] = None,
         _request_timeout: Union[
@@ -572,9 +572,9 @@ class PlaylistApi:
         :param name: The playlist name.
         :type name: str
         :param ids: The item ids.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param media_type: The media type.
         :type media_type: MediaType
         :param create_playlist_dto: The create playlist payload.
@@ -732,7 +732,7 @@ class PlaylistApi:
     @validate_call
     def get_playlist(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -750,7 +750,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -802,7 +802,7 @@ class PlaylistApi:
     @validate_call
     def get_playlist_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -820,7 +820,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -872,7 +872,7 @@ class PlaylistApi:
     @validate_call
     def get_playlist_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -890,7 +890,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1005,8 +1005,8 @@ class PlaylistApi:
     @validate_call
     def get_playlist_items(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
@@ -1031,9 +1031,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1107,8 +1107,8 @@ class PlaylistApi:
     @validate_call
     def get_playlist_items_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
@@ -1133,9 +1133,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1209,8 +1209,8 @@ class PlaylistApi:
     @validate_call
     def get_playlist_items_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
@@ -1235,9 +1235,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1416,8 +1416,8 @@ class PlaylistApi:
     @validate_call
     def get_playlist_user(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1435,9 +1435,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1490,8 +1490,8 @@ class PlaylistApi:
     @validate_call
     def get_playlist_user_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1509,9 +1509,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1564,8 +1564,8 @@ class PlaylistApi:
     @validate_call
     def get_playlist_user_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1583,9 +1583,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1704,7 +1704,7 @@ class PlaylistApi:
     @validate_call
     def get_playlist_users(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1722,7 +1722,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1774,7 +1774,7 @@ class PlaylistApi:
     @validate_call
     def get_playlist_users_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1792,7 +1792,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1844,7 +1844,7 @@ class PlaylistApi:
     @validate_call
     def get_playlist_users_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1862,7 +1862,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2571,8 +2571,8 @@ class PlaylistApi:
     @validate_call
     def remove_user_from_playlist(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2590,9 +2590,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2645,8 +2645,8 @@ class PlaylistApi:
     @validate_call
     def remove_user_from_playlist_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2664,9 +2664,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2719,8 +2719,8 @@ class PlaylistApi:
     @validate_call
     def remove_user_from_playlist_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2738,9 +2738,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2859,7 +2859,7 @@ class PlaylistApi:
     @validate_call
     def update_playlist(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         update_playlist_dto: Annotated[UpdatePlaylistDto, Field(description="The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistDto id.")],
         _request_timeout: Union[
             None,
@@ -2878,7 +2878,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param update_playlist_dto: The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistDto id. (required)
         :type update_playlist_dto: UpdatePlaylistDto
         :param _request_timeout: timeout setting for this request. If one
@@ -2933,7 +2933,7 @@ class PlaylistApi:
     @validate_call
     def update_playlist_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         update_playlist_dto: Annotated[UpdatePlaylistDto, Field(description="The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistDto id.")],
         _request_timeout: Union[
             None,
@@ -2952,7 +2952,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param update_playlist_dto: The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistDto id. (required)
         :type update_playlist_dto: UpdatePlaylistDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3007,7 +3007,7 @@ class PlaylistApi:
     @validate_call
     def update_playlist_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
         update_playlist_dto: Annotated[UpdatePlaylistDto, Field(description="The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistDto id.")],
         _request_timeout: Union[
             None,
@@ -3026,7 +3026,7 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param update_playlist_dto: The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistDto id. (required)
         :type update_playlist_dto: UpdatePlaylistDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3162,8 +3162,8 @@ class PlaylistApi:
     @validate_call
     def update_playlist_user(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         update_playlist_user_dto: Annotated[UpdatePlaylistUserDto, Field(description="The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistUserDto.")],
         _request_timeout: Union[
             None,
@@ -3182,9 +3182,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param update_playlist_user_dto: The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistUserDto. (required)
         :type update_playlist_user_dto: UpdatePlaylistUserDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3240,8 +3240,8 @@ class PlaylistApi:
     @validate_call
     def update_playlist_user_with_http_info(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         update_playlist_user_dto: Annotated[UpdatePlaylistUserDto, Field(description="The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistUserDto.")],
         _request_timeout: Union[
             None,
@@ -3260,9 +3260,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param update_playlist_user_dto: The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistUserDto. (required)
         :type update_playlist_user_dto: UpdatePlaylistUserDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3318,8 +3318,8 @@ class PlaylistApi:
     @validate_call
     def update_playlist_user_without_preload_content(
         self,
-        playlist_id: Annotated[StrictStr, Field(description="The playlist id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        playlist_id: Annotated[UUID, Field(description="The playlist id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         update_playlist_user_dto: Annotated[UpdatePlaylistUserDto, Field(description="The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistUserDto.")],
         _request_timeout: Union[
             None,
@@ -3338,9 +3338,9 @@ class PlaylistApi:
 
 
         :param playlist_id: The playlist id. (required)
-        :type playlist_id: str
+        :type playlist_id: UUID
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param update_playlist_user_dto: The Jellyfin.Api.Models.PlaylistDtos.UpdatePlaylistUserDto. (required)
         :type update_playlist_user_dto: UpdatePlaylistUserDto
         :param _request_timeout: timeout setting for this request. If one

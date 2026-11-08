@@ -17,11 +17,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.playlist_user_permissions import PlaylistUserPermissions
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PlaylistDto(BaseModel):
     """
@@ -29,11 +31,12 @@ class PlaylistDto(BaseModel):
     """ # noqa: E501
     open_access: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the playlist is publicly readable.", alias="OpenAccess")
     shares: List[PlaylistUserPermissions] = Field(description="Gets or sets the share permissions.", alias="Shares")
-    item_ids: List[StrictStr] = Field(description="Gets or sets the item ids.", alias="ItemIds")
+    item_ids: List[UUID] = Field(description="Gets or sets the item ids.", alias="ItemIds")
     __properties: ClassVar[List[str]] = ["OpenAccess", "Shares", "ItemIds"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -45,8 +48,7 @@ class PlaylistDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,8 +77,7 @@ class PlaylistDto(BaseModel):
         _items = []
         if self.shares:
             for _item_shares in self.shares:
-                if _item_shares:
-                    _items.append(_item_shares.to_dict())
+                _items.append(_item_shares.to_dict() if _item_shares is not None else None)
             _dict['Shares'] = _items
         return _dict
 

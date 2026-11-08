@@ -23,6 +23,7 @@ from jellyfin.models.listings_provider_info import ListingsProviderInfo
 from jellyfin.models.tuner_host_info import TunerHostInfo
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LiveTvOptions(BaseModel):
     """
@@ -46,7 +47,8 @@ class LiveTvOptions(BaseModel):
     __properties: ClassVar[List[str]] = ["GuideDays", "RecordingPath", "MovieRecordingPath", "SeriesRecordingPath", "EnableRecordingSubfolders", "EnableOriginalAudioWithEncodedRecordings", "TunerHosts", "ListingProviders", "PrePaddingSeconds", "PostPaddingSeconds", "MediaLocationsCreated", "RecordingPostProcessor", "RecordingPostProcessorArguments", "SaveRecordingNFO", "SaveRecordingImages"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -58,8 +60,7 @@ class LiveTvOptions(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -88,15 +89,13 @@ class LiveTvOptions(BaseModel):
         _items = []
         if self.tuner_hosts:
             for _item_tuner_hosts in self.tuner_hosts:
-                if _item_tuner_hosts:
-                    _items.append(_item_tuner_hosts.to_dict())
+                _items.append(_item_tuner_hosts.to_dict() if _item_tuner_hosts is not None else None)
             _dict['TunerHosts'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in listing_providers (list)
         _items = []
         if self.listing_providers:
             for _item_listing_providers in self.listing_providers:
-                if _item_listing_providers:
-                    _items.append(_item_listing_providers.to_dict())
+                _items.append(_item_listing_providers.to_dict() if _item_listing_providers is not None else None)
             _dict['ListingProviders'] = _items
         # set to None if guide_days (nullable) is None
         # and model_fields_set contains the field

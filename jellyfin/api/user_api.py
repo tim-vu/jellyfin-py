@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
+from pydantic import Field, StrictBool
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.create_user_by_name import CreateUserByName
 from jellyfin.models.update_user_password import UpdateUserPassword
 from jellyfin.models.user_configuration import UserConfiguration
@@ -331,7 +331,7 @@ class UserApi:
     @validate_call
     def delete_user(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -349,7 +349,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -401,7 +401,7 @@ class UserApi:
     @validate_call
     def delete_user_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -419,7 +419,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -471,7 +471,7 @@ class UserApi:
     @validate_call
     def delete_user_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -489,7 +489,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1110,7 +1110,7 @@ class UserApi:
     @validate_call
     def get_user_by_id(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1128,7 +1128,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1180,7 +1180,7 @@ class UserApi:
     @validate_call
     def get_user_by_id_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1198,7 +1198,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1250,7 +1250,7 @@ class UserApi:
     @validate_call
     def get_user_by_id_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1268,7 +1268,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1673,7 +1673,7 @@ class UserApi:
     def update_user(
         self,
         user_dto: Annotated[UserDto, Field(description="The updated user model.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1693,7 +1693,7 @@ class UserApi:
         :param user_dto: The updated user model. (required)
         :type user_dto: UserDto
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1747,7 +1747,7 @@ class UserApi:
     def update_user_with_http_info(
         self,
         user_dto: Annotated[UserDto, Field(description="The updated user model.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1767,7 +1767,7 @@ class UserApi:
         :param user_dto: The updated user model. (required)
         :type user_dto: UserDto
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1821,7 +1821,7 @@ class UserApi:
     def update_user_without_preload_content(
         self,
         user_dto: Annotated[UserDto, Field(description="The updated user model.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1841,7 +1841,7 @@ class UserApi:
         :param user_dto: The updated user model. (required)
         :type user_dto: UserDto
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1978,7 +1978,7 @@ class UserApi:
     def update_user_configuration(
         self,
         user_configuration: Annotated[UserConfiguration, Field(description="The new user configuration.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1998,7 +1998,7 @@ class UserApi:
         :param user_configuration: The new user configuration. (required)
         :type user_configuration: UserConfiguration
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2051,7 +2051,7 @@ class UserApi:
     def update_user_configuration_with_http_info(
         self,
         user_configuration: Annotated[UserConfiguration, Field(description="The new user configuration.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2071,7 +2071,7 @@ class UserApi:
         :param user_configuration: The new user configuration. (required)
         :type user_configuration: UserConfiguration
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2124,7 +2124,7 @@ class UserApi:
     def update_user_configuration_without_preload_content(
         self,
         user_configuration: Annotated[UserConfiguration, Field(description="The new user configuration.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2144,7 +2144,7 @@ class UserApi:
         :param user_configuration: The new user configuration. (required)
         :type user_configuration: UserConfiguration
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2280,7 +2280,7 @@ class UserApi:
     def update_user_password(
         self,
         update_user_password: Annotated[UpdateUserPassword, Field(description="The M:Jellyfin.Api.Controllers.UserController.UpdateUserPassword(System.Nullable{System.Guid},Jellyfin.Api.Models.UserDtos.UpdateUserPassword) request.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2300,7 +2300,7 @@ class UserApi:
         :param update_user_password: The M:Jellyfin.Api.Controllers.UserController.UpdateUserPassword(System.Nullable{System.Guid},Jellyfin.Api.Models.UserDtos.UpdateUserPassword) request. (required)
         :type update_user_password: UpdateUserPassword
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2354,7 +2354,7 @@ class UserApi:
     def update_user_password_with_http_info(
         self,
         update_user_password: Annotated[UpdateUserPassword, Field(description="The M:Jellyfin.Api.Controllers.UserController.UpdateUserPassword(System.Nullable{System.Guid},Jellyfin.Api.Models.UserDtos.UpdateUserPassword) request.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2374,7 +2374,7 @@ class UserApi:
         :param update_user_password: The M:Jellyfin.Api.Controllers.UserController.UpdateUserPassword(System.Nullable{System.Guid},Jellyfin.Api.Models.UserDtos.UpdateUserPassword) request. (required)
         :type update_user_password: UpdateUserPassword
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2428,7 +2428,7 @@ class UserApi:
     def update_user_password_without_preload_content(
         self,
         update_user_password: Annotated[UpdateUserPassword, Field(description="The M:Jellyfin.Api.Controllers.UserController.UpdateUserPassword(System.Nullable{System.Guid},Jellyfin.Api.Models.UserDtos.UpdateUserPassword) request.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2448,7 +2448,7 @@ class UserApi:
         :param update_user_password: The M:Jellyfin.Api.Controllers.UserController.UpdateUserPassword(System.Nullable{System.Guid},Jellyfin.Api.Models.UserDtos.UpdateUserPassword) request. (required)
         :type update_user_password: UpdateUserPassword
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2584,7 +2584,7 @@ class UserApi:
     @validate_call
     def update_user_policy(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         user_policy: Annotated[UserPolicy, Field(description="The new user policy.")],
         _request_timeout: Union[
             None,
@@ -2603,7 +2603,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param user_policy: The new user policy. (required)
         :type user_policy: UserPolicy
         :param _request_timeout: timeout setting for this request. If one
@@ -2658,7 +2658,7 @@ class UserApi:
     @validate_call
     def update_user_policy_with_http_info(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         user_policy: Annotated[UserPolicy, Field(description="The new user policy.")],
         _request_timeout: Union[
             None,
@@ -2677,7 +2677,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param user_policy: The new user policy. (required)
         :type user_policy: UserPolicy
         :param _request_timeout: timeout setting for this request. If one
@@ -2732,7 +2732,7 @@ class UserApi:
     @validate_call
     def update_user_policy_without_preload_content(
         self,
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         user_policy: Annotated[UserPolicy, Field(description="The new user policy.")],
         _request_timeout: Union[
             None,
@@ -2751,7 +2751,7 @@ class UserApi:
 
 
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param user_policy: The new user policy. (required)
         :type user_policy: UserPolicy
         :param _request_timeout: timeout setting for this request. If one

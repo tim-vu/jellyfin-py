@@ -19,9 +19,11 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.version_info import VersionInfo
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PackageInfo(BaseModel):
     """
@@ -32,13 +34,14 @@ class PackageInfo(BaseModel):
     overview: Optional[StrictStr] = Field(default=None, description="Gets or sets a short overview of what the plugin does.")
     owner: Optional[StrictStr] = Field(default=None, description="Gets or sets the owner.")
     category: Optional[StrictStr] = Field(default=None, description="Gets or sets the category.")
-    guid: Optional[StrictStr] = Field(default=None, description="Gets or sets the guid of the assembly associated with this plugin. This is used to identify the proper item for automatic updates.")
+    guid: Optional[UUID] = Field(default=None, description="Gets or sets the guid of the assembly associated with this plugin. This is used to identify the proper item for automatic updates.")
     versions: Optional[List[VersionInfo]] = Field(default=None, description="Gets or sets the versions.")
     image_url: Optional[StrictStr] = Field(default=None, description="Gets or sets the image url for the package.", alias="imageUrl")
     __properties: ClassVar[List[str]] = ["name", "description", "overview", "owner", "category", "guid", "versions", "imageUrl"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +53,7 @@ class PackageInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -80,8 +82,7 @@ class PackageInfo(BaseModel):
         _items = []
         if self.versions:
             for _item_versions in self.versions:
-                if _item_versions:
-                    _items.append(_item_versions.to_dict())
+                _items.append(_item_versions.to_dict() if _item_versions is not None else None)
             _dict['versions'] = _items
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field

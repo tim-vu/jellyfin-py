@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 
 from jellyfin.api_client import ApiClient, RequestSerialized
 from jellyfin.api_response import ApiResponse
@@ -41,7 +41,7 @@ class AudioApi:
     @validate_call
     def get_audio_stream(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The audio container.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -102,12 +102,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -283,7 +283,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -300,7 +300,7 @@ class AudioApi:
     @validate_call
     def get_audio_stream_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The audio container.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -361,12 +361,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -542,7 +542,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -559,7 +559,7 @@ class AudioApi:
     @validate_call
     def get_audio_stream_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The audio container.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -625,7 +625,7 @@ class AudioApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -801,7 +801,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1118,7 +1118,7 @@ class AudioApi:
     @validate_call
     def get_audio_stream_by_container(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The audio container.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -1179,12 +1179,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -1360,7 +1360,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1377,7 +1377,7 @@ class AudioApi:
     @validate_call
     def get_audio_stream_by_container_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The audio container.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -1438,12 +1438,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -1619,7 +1619,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1636,7 +1636,7 @@ class AudioApi:
     @validate_call
     def get_audio_stream_by_container_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The audio container.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -1702,7 +1702,7 @@ class AudioApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -1878,7 +1878,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2193,11 +2193,11 @@ class AudioApi:
     @validate_call
     def get_universal_audio_stream(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[List[StrictStr]], Field(description="Optional. The audio container.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if playing an alternate version.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="The device id of the client requesting. Used to stop encoding processes when needed.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. The user id.")] = None,
         audio_codec: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="Optional. The audio codec to transcode to.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of audio channels.")] = None,
         transcoding_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The number of how many audio channels to transcode to.")] = None,
@@ -2223,12 +2223,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: Optional. The audio container.
         :type container: List[str]
         :param media_source_id: The media version id, if playing an alternate version.
@@ -2236,7 +2236,7 @@ class AudioApi:
         :param device_id: The device id of the client requesting. Used to stop encoding processes when needed.
         :type device_id: str
         :param user_id: Optional. The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param audio_codec: Optional. The audio codec to transcode to.
         :type audio_codec: str
         :param max_audio_channels: Optional. The maximum number of audio channels.
@@ -2311,7 +2311,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '302': None,
             '404': "ProblemDetails",
             '503': None,
@@ -2332,11 +2332,11 @@ class AudioApi:
     @validate_call
     def get_universal_audio_stream_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[List[StrictStr]], Field(description="Optional. The audio container.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if playing an alternate version.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="The device id of the client requesting. Used to stop encoding processes when needed.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. The user id.")] = None,
         audio_codec: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="Optional. The audio codec to transcode to.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of audio channels.")] = None,
         transcoding_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The number of how many audio channels to transcode to.")] = None,
@@ -2362,12 +2362,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: Optional. The audio container.
         :type container: List[str]
         :param media_source_id: The media version id, if playing an alternate version.
@@ -2375,7 +2375,7 @@ class AudioApi:
         :param device_id: The device id of the client requesting. Used to stop encoding processes when needed.
         :type device_id: str
         :param user_id: Optional. The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param audio_codec: Optional. The audio codec to transcode to.
         :type audio_codec: str
         :param max_audio_channels: Optional. The maximum number of audio channels.
@@ -2450,7 +2450,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '302': None,
             '404': "ProblemDetails",
             '503': None,
@@ -2471,11 +2471,11 @@ class AudioApi:
     @validate_call
     def get_universal_audio_stream_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[List[StrictStr]], Field(description="Optional. The audio container.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if playing an alternate version.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="The device id of the client requesting. Used to stop encoding processes when needed.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. The user id.")] = None,
         audio_codec: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="Optional. The audio codec to transcode to.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of audio channels.")] = None,
         transcoding_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The number of how many audio channels to transcode to.")] = None,
@@ -2506,7 +2506,7 @@ class AudioApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: Optional. The audio container.
         :type container: List[str]
         :param media_source_id: The media version id, if playing an alternate version.
@@ -2514,7 +2514,7 @@ class AudioApi:
         :param device_id: The device id of the client requesting. Used to stop encoding processes when needed.
         :type device_id: str
         :param user_id: Optional. The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param audio_codec: Optional. The audio codec to transcode to.
         :type audio_codec: str
         :param max_audio_channels: Optional. The maximum number of audio channels.
@@ -2589,7 +2589,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '302': None,
             '404': "ProblemDetails",
             '503': None,
@@ -2760,7 +2760,7 @@ class AudioApi:
     @validate_call
     def head_audio_stream(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The audio container.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -2821,12 +2821,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -3002,7 +3002,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -3019,7 +3019,7 @@ class AudioApi:
     @validate_call
     def head_audio_stream_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The audio container.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -3080,12 +3080,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -3261,7 +3261,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -3278,7 +3278,7 @@ class AudioApi:
     @validate_call
     def head_audio_stream_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The audio container.")] = None,
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -3344,7 +3344,7 @@ class AudioApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container.
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -3520,7 +3520,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -3837,7 +3837,7 @@ class AudioApi:
     @validate_call
     def head_audio_stream_by_container(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The audio container.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -3898,12 +3898,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -4079,7 +4079,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -4096,7 +4096,7 @@ class AudioApi:
     @validate_call
     def head_audio_stream_by_container_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The audio container.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -4157,12 +4157,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -4338,7 +4338,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -4355,7 +4355,7 @@ class AudioApi:
     @validate_call
     def head_audio_stream_by_container_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[str, Field(strict=True, description="The audio container.")],
         static: Annotated[Optional[StrictBool], Field(description="Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.")] = None,
         params: Annotated[Optional[StrictStr], Field(description="The streaming parameters.")] = None,
@@ -4421,7 +4421,7 @@ class AudioApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: The audio container. (required)
         :type container: str
         :param static: Optional. If true, the original file will be streamed statically without any encoding. Use either no url extension or the original file extension. true/false.
@@ -4597,7 +4597,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -4912,11 +4912,11 @@ class AudioApi:
     @validate_call
     def head_universal_audio_stream(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[List[StrictStr]], Field(description="Optional. The audio container.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if playing an alternate version.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="The device id of the client requesting. Used to stop encoding processes when needed.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. The user id.")] = None,
         audio_codec: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="Optional. The audio codec to transcode to.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of audio channels.")] = None,
         transcoding_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The number of how many audio channels to transcode to.")] = None,
@@ -4942,12 +4942,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: Optional. The audio container.
         :type container: List[str]
         :param media_source_id: The media version id, if playing an alternate version.
@@ -4955,7 +4955,7 @@ class AudioApi:
         :param device_id: The device id of the client requesting. Used to stop encoding processes when needed.
         :type device_id: str
         :param user_id: Optional. The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param audio_codec: Optional. The audio codec to transcode to.
         :type audio_codec: str
         :param max_audio_channels: Optional. The maximum number of audio channels.
@@ -5030,7 +5030,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '302': None,
             '404': "ProblemDetails",
             '503': None,
@@ -5051,11 +5051,11 @@ class AudioApi:
     @validate_call
     def head_universal_audio_stream_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[List[StrictStr]], Field(description="Optional. The audio container.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if playing an alternate version.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="The device id of the client requesting. Used to stop encoding processes when needed.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. The user id.")] = None,
         audio_codec: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="Optional. The audio codec to transcode to.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of audio channels.")] = None,
         transcoding_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The number of how many audio channels to transcode to.")] = None,
@@ -5081,12 +5081,12 @@ class AudioApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an audio stream.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: Optional. The audio container.
         :type container: List[str]
         :param media_source_id: The media version id, if playing an alternate version.
@@ -5094,7 +5094,7 @@ class AudioApi:
         :param device_id: The device id of the client requesting. Used to stop encoding processes when needed.
         :type device_id: str
         :param user_id: Optional. The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param audio_codec: Optional. The audio codec to transcode to.
         :type audio_codec: str
         :param max_audio_channels: Optional. The maximum number of audio channels.
@@ -5169,7 +5169,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '302': None,
             '404': "ProblemDetails",
             '503': None,
@@ -5190,11 +5190,11 @@ class AudioApi:
     @validate_call
     def head_universal_audio_stream_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         container: Annotated[Optional[List[StrictStr]], Field(description="Optional. The audio container.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if playing an alternate version.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="The device id of the client requesting. Used to stop encoding processes when needed.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. The user id.")] = None,
         audio_codec: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="Optional. The audio codec to transcode to.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of audio channels.")] = None,
         transcoding_audio_channels: Annotated[Optional[StrictInt], Field(description="Optional. The number of how many audio channels to transcode to.")] = None,
@@ -5225,7 +5225,7 @@ class AudioApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param container: Optional. The audio container.
         :type container: List[str]
         :param media_source_id: The media version id, if playing an alternate version.
@@ -5233,7 +5233,7 @@ class AudioApi:
         :param device_id: The device id of the client requesting. Used to stop encoding processes when needed.
         :type device_id: str
         :param user_id: Optional. The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param audio_codec: Optional. The audio codec to transcode to.
         :type audio_codec: str
         :param max_audio_channels: Optional. The maximum number of audio channels.
@@ -5308,7 +5308,7 @@ class AudioApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '302': None,
             '404': "ProblemDetails",
             '503': None,

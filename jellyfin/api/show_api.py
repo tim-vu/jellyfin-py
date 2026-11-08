@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -20,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.image_type import ImageType
 from jellyfin.models.item_fields import ItemFields
@@ -45,14 +45,14 @@ class ShowApi:
     @validate_call
     def get_episodes(
         self,
-        series_id: Annotated[StrictStr, Field(description="The series id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        series_id: Annotated[UUID, Field(description="The series id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         season: Annotated[Optional[StrictInt], Field(description="Optional filter by season number.")] = None,
-        season_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by season id.")] = None,
+        season_id: Annotated[Optional[UUID], Field(description="Optional. Filter by season id.")] = None,
         is_missing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by items that are missing episodes or not.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
-        start_item_id: Annotated[Optional[StrictStr], Field(description="Optional. Skip through the list until a given item is found.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        start_item_id: Annotated[Optional[UUID], Field(description="Optional. Skip through the list until a given item is found.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional, include image information in output.")] = None,
@@ -77,21 +77,21 @@ class ShowApi:
 
 
         :param series_id: The series id. (required)
-        :type series_id: str
+        :type series_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
         :type fields: List[ItemFields]
         :param season: Optional filter by season number.
         :type season: int
         :param season_id: Optional. Filter by season id.
-        :type season_id: str
+        :type season_id: UUID
         :param is_missing: Optional. Filter by items that are missing episodes or not.
         :type is_missing: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param start_item_id: Optional. Skip through the list until a given item is found.
-        :type start_item_id: str
+        :type start_item_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -171,14 +171,14 @@ class ShowApi:
     @validate_call
     def get_episodes_with_http_info(
         self,
-        series_id: Annotated[StrictStr, Field(description="The series id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        series_id: Annotated[UUID, Field(description="The series id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         season: Annotated[Optional[StrictInt], Field(description="Optional filter by season number.")] = None,
-        season_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by season id.")] = None,
+        season_id: Annotated[Optional[UUID], Field(description="Optional. Filter by season id.")] = None,
         is_missing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by items that are missing episodes or not.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
-        start_item_id: Annotated[Optional[StrictStr], Field(description="Optional. Skip through the list until a given item is found.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        start_item_id: Annotated[Optional[UUID], Field(description="Optional. Skip through the list until a given item is found.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional, include image information in output.")] = None,
@@ -203,21 +203,21 @@ class ShowApi:
 
 
         :param series_id: The series id. (required)
-        :type series_id: str
+        :type series_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
         :type fields: List[ItemFields]
         :param season: Optional filter by season number.
         :type season: int
         :param season_id: Optional. Filter by season id.
-        :type season_id: str
+        :type season_id: UUID
         :param is_missing: Optional. Filter by items that are missing episodes or not.
         :type is_missing: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param start_item_id: Optional. Skip through the list until a given item is found.
-        :type start_item_id: str
+        :type start_item_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -297,14 +297,14 @@ class ShowApi:
     @validate_call
     def get_episodes_without_preload_content(
         self,
-        series_id: Annotated[StrictStr, Field(description="The series id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        series_id: Annotated[UUID, Field(description="The series id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         season: Annotated[Optional[StrictInt], Field(description="Optional filter by season number.")] = None,
-        season_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by season id.")] = None,
+        season_id: Annotated[Optional[UUID], Field(description="Optional. Filter by season id.")] = None,
         is_missing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by items that are missing episodes or not.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
-        start_item_id: Annotated[Optional[StrictStr], Field(description="Optional. Skip through the list until a given item is found.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        start_item_id: Annotated[Optional[UUID], Field(description="Optional. Skip through the list until a given item is found.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional, include image information in output.")] = None,
@@ -329,21 +329,21 @@ class ShowApi:
 
 
         :param series_id: The series id. (required)
-        :type series_id: str
+        :type series_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
         :type fields: List[ItemFields]
         :param season: Optional filter by season number.
         :type season: int
         :param season_id: Optional. Filter by season id.
-        :type season_id: str
+        :type season_id: UUID
         :param is_missing: Optional. Filter by items that are missing episodes or not.
         :type is_missing: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param start_item_id: Optional. Skip through the list until a given item is found.
-        :type start_item_id: str
+        :type start_item_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -558,12 +558,12 @@ class ShowApi:
     @validate_call
     def get_next_up(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id of the user to get the next up episodes for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id of the user to get the next up episodes for.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        series_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by series id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        series_id: Annotated[Optional[UUID], Field(description="Optional. Filter by series id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -589,7 +589,7 @@ class ShowApi:
 
 
         :param user_id: The user id of the user to get the next up episodes for.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -597,9 +597,9 @@ class ShowApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param series_id: Optional. Filter by series id.
-        :type series_id: str
+        :type series_id: UUID
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -679,12 +679,12 @@ class ShowApi:
     @validate_call
     def get_next_up_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id of the user to get the next up episodes for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id of the user to get the next up episodes for.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        series_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by series id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        series_id: Annotated[Optional[UUID], Field(description="Optional. Filter by series id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -710,7 +710,7 @@ class ShowApi:
 
 
         :param user_id: The user id of the user to get the next up episodes for.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -718,9 +718,9 @@ class ShowApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param series_id: Optional. Filter by series id.
-        :type series_id: str
+        :type series_id: UUID
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -800,12 +800,12 @@ class ShowApi:
     @validate_call
     def get_next_up_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id of the user to get the next up episodes for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id of the user to get the next up episodes for.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        series_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by series id.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        series_id: Annotated[Optional[UUID], Field(description="Optional. Filter by series id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -831,7 +831,7 @@ class ShowApi:
 
 
         :param user_id: The user id of the user to get the next up episodes for.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -839,9 +839,9 @@ class ShowApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param series_id: Optional. Filter by series id.
-        :type series_id: str
+        :type series_id: UUID
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -1062,12 +1062,12 @@ class ShowApi:
     @validate_call
     def get_seasons(
         self,
-        series_id: Annotated[StrictStr, Field(description="The series id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        series_id: Annotated[UUID, Field(description="The series id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         is_special_season: Annotated[Optional[StrictBool], Field(description="Optional. Filter by special season.")] = None,
         is_missing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by items that are missing episodes or not.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -1089,9 +1089,9 @@ class ShowApi:
 
 
         :param series_id: The series id. (required)
-        :type series_id: str
+        :type series_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
         :type fields: List[ItemFields]
         :param is_special_season: Optional. Filter by special season.
@@ -1099,7 +1099,7 @@ class ShowApi:
         :param is_missing: Optional. Filter by items that are missing episodes or not.
         :type is_missing: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -1168,12 +1168,12 @@ class ShowApi:
     @validate_call
     def get_seasons_with_http_info(
         self,
-        series_id: Annotated[StrictStr, Field(description="The series id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        series_id: Annotated[UUID, Field(description="The series id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         is_special_season: Annotated[Optional[StrictBool], Field(description="Optional. Filter by special season.")] = None,
         is_missing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by items that are missing episodes or not.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -1195,9 +1195,9 @@ class ShowApi:
 
 
         :param series_id: The series id. (required)
-        :type series_id: str
+        :type series_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
         :type fields: List[ItemFields]
         :param is_special_season: Optional. Filter by special season.
@@ -1205,7 +1205,7 @@ class ShowApi:
         :param is_missing: Optional. Filter by items that are missing episodes or not.
         :type is_missing: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -1274,12 +1274,12 @@ class ShowApi:
     @validate_call
     def get_seasons_without_preload_content(
         self,
-        series_id: Annotated[StrictStr, Field(description="The series id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        series_id: Annotated[UUID, Field(description="The series id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.")] = None,
         is_special_season: Annotated[Optional[StrictBool], Field(description="Optional. Filter by special season.")] = None,
         is_missing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by items that are missing episodes or not.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -1301,9 +1301,9 @@ class ShowApi:
 
 
         :param series_id: The series id. (required)
-        :type series_id: str
+        :type series_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines, TrailerUrls.
         :type fields: List[ItemFields]
         :param is_special_season: Optional. Filter by special season.
@@ -1311,7 +1311,7 @@ class ShowApi:
         :param is_missing: Optional. Filter by items that are missing episodes or not.
         :type is_missing: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -1490,11 +1490,11 @@ class ShowApi:
     @validate_call
     def get_upcoming_episodes(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id of the user to get the upcoming episodes for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id of the user to get the upcoming episodes for.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -1516,7 +1516,7 @@ class ShowApi:
 
 
         :param user_id: The user id of the user to get the upcoming episodes for.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1524,7 +1524,7 @@ class ShowApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -1591,11 +1591,11 @@ class ShowApi:
     @validate_call
     def get_upcoming_episodes_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id of the user to get the upcoming episodes for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id of the user to get the upcoming episodes for.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -1617,7 +1617,7 @@ class ShowApi:
 
 
         :param user_id: The user id of the user to get the upcoming episodes for.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1625,7 +1625,7 @@ class ShowApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -1692,11 +1692,11 @@ class ShowApi:
     @validate_call
     def get_upcoming_episodes_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id of the user to get the upcoming episodes for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id of the user to get the upcoming episodes for.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
@@ -1718,7 +1718,7 @@ class ShowApi:
 
 
         :param user_id: The user id of the user to get the upcoming episodes for.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1726,7 +1726,7 @@ class ShowApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param parent_id: Optional. Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.

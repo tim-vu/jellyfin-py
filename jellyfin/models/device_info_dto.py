@@ -20,9 +20,11 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.client_capabilities_dto import ClientCapabilitiesDto
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DeviceInfoDto(BaseModel):
     """
@@ -35,14 +37,15 @@ class DeviceInfoDto(BaseModel):
     last_user_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the last name of the user.", alias="LastUserName")
     app_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name of the application.", alias="AppName")
     app_version: Optional[StrictStr] = Field(default=None, description="Gets or sets the application version.", alias="AppVersion")
-    last_user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the last user identifier.", alias="LastUserId")
+    last_user_id: Optional[UUID] = Field(default=None, description="Gets or sets the last user identifier.", alias="LastUserId")
     date_last_activity: Optional[datetime] = Field(default=None, description="Gets or sets the date last modified.", alias="DateLastActivity")
     capabilities: Optional[ClientCapabilitiesDto] = Field(default=None, description="Gets or sets the capabilities.", alias="Capabilities")
     icon_url: Optional[StrictStr] = Field(default=None, description="Gets or sets the icon URL.", alias="IconUrl")
     __properties: ClassVar[List[str]] = ["Name", "CustomName", "AccessToken", "Id", "LastUserName", "AppName", "AppVersion", "LastUserId", "DateLastActivity", "Capabilities", "IconUrl"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -54,8 +57,7 @@ class DeviceInfoDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

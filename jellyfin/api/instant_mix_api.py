@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.image_type import ImageType
 from jellyfin.models.item_fields import ItemFields
@@ -44,8 +44,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_album(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -69,9 +69,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -142,8 +142,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_album_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -167,9 +167,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -240,8 +240,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_album_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -265,9 +265,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -438,8 +438,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_artists(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -463,9 +463,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -536,8 +536,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_artists_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -561,9 +561,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -634,8 +634,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_artists_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -659,9 +659,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -832,8 +832,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -857,9 +857,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -930,8 +930,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -955,9 +955,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1028,8 +1028,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1053,9 +1053,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1226,8 +1226,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_music_genre_by_id(
         self,
-        id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1251,9 +1251,9 @@ class InstantMixApi:
 
 
         :param id: The item id. (required)
-        :type id: str
+        :type id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1325,8 +1325,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_music_genre_by_id_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1350,9 +1350,9 @@ class InstantMixApi:
 
 
         :param id: The item id. (required)
-        :type id: str
+        :type id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1424,8 +1424,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_music_genre_by_id_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1449,9 +1449,9 @@ class InstantMixApi:
 
 
         :param id: The item id. (required)
-        :type id: str
+        :type id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1626,7 +1626,7 @@ class InstantMixApi:
     def get_instant_mix_from_music_genre_by_name(
         self,
         name: Annotated[StrictStr, Field(description="The genre name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1652,7 +1652,7 @@ class InstantMixApi:
         :param name: The genre name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1724,7 +1724,7 @@ class InstantMixApi:
     def get_instant_mix_from_music_genre_by_name_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="The genre name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1750,7 +1750,7 @@ class InstantMixApi:
         :param name: The genre name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -1822,7 +1822,7 @@ class InstantMixApi:
     def get_instant_mix_from_music_genre_by_name_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="The genre name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -1848,7 +1848,7 @@ class InstantMixApi:
         :param name: The genre name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -2019,8 +2019,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_playlist(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -2044,9 +2044,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -2117,8 +2117,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_playlist_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -2142,9 +2142,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -2215,8 +2215,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_playlist_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -2240,9 +2240,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -2413,8 +2413,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_song(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -2438,9 +2438,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -2511,8 +2511,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_song_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -2536,9 +2536,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.
@@ -2609,8 +2609,8 @@ class InstantMixApi:
     @validate_call
     def get_instant_mix_from_song_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
@@ -2634,9 +2634,9 @@ class InstantMixApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param fields: Optional. Specify additional fields of information to return in the output.

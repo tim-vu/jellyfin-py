@@ -20,19 +20,21 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.image_type import ImageType
 from jellyfin.models.item_fields import ItemFields
 from jellyfin.models.item_sort_by import ItemSortBy
 from jellyfin.models.sort_order import SortOrder
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class GetProgramsDto(BaseModel):
     """
     Get programs dto.
     """ # noqa: E501
-    channel_ids: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the channels to return guide information for.", alias="ChannelIds")
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets optional. Filter by user id.", alias="UserId")
+    channel_ids: Optional[List[UUID]] = Field(default=None, description="Gets or sets the channels to return guide information for.", alias="ChannelIds")
+    user_id: Optional[UUID] = Field(default=None, description="Gets or sets optional. Filter by user id.", alias="UserId")
     min_start_date: Optional[datetime] = Field(default=None, description="Gets or sets the minimum premiere start date.", alias="MinStartDate")
     has_aired: Optional[StrictBool] = Field(default=None, description="Gets or sets filter by programs that have completed airing, or not.", alias="HasAired")
     is_airing: Optional[StrictBool] = Field(default=None, description="Gets or sets filter by programs that are currently airing, or not.", alias="IsAiring")
@@ -49,19 +51,20 @@ class GetProgramsDto(BaseModel):
     sort_by: Optional[List[ItemSortBy]] = Field(default=None, description="Gets or sets specify one or more sort orders, comma delimited. Options: Name, StartDate.", alias="SortBy")
     sort_order: Optional[List[SortOrder]] = Field(default=None, description="Gets or sets sort order.", alias="SortOrder")
     genres: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the genres to return guide information for.", alias="Genres")
-    genre_ids: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the genre ids to return guide information for.", alias="GenreIds")
+    genre_ids: Optional[List[UUID]] = Field(default=None, description="Gets or sets the genre ids to return guide information for.", alias="GenreIds")
     enable_images: Optional[StrictBool] = Field(default=None, description="Gets or sets include image information in output.", alias="EnableImages")
     enable_total_record_count: Optional[StrictBool] = Field(default=True, description="Gets or sets a value indicating whether retrieve total record count.", alias="EnableTotalRecordCount")
     image_type_limit: Optional[StrictInt] = Field(default=None, description="Gets or sets the max number of images to return, per image type.", alias="ImageTypeLimit")
     enable_image_types: Optional[List[ImageType]] = Field(default=None, description="Gets or sets the image types to include in the output.", alias="EnableImageTypes")
     enable_user_data: Optional[StrictBool] = Field(default=None, description="Gets or sets include user data.", alias="EnableUserData")
     series_timer_id: Optional[StrictStr] = Field(default=None, description="Gets or sets filter by series timer id.", alias="SeriesTimerId")
-    library_series_id: Optional[StrictStr] = Field(default=None, description="Gets or sets filter by library series id.", alias="LibrarySeriesId")
+    library_series_id: Optional[UUID] = Field(default=None, description="Gets or sets filter by library series id.", alias="LibrarySeriesId")
     fields: Optional[List[ItemFields]] = Field(default=None, description="Gets or sets specify additional fields of information to return in the output.", alias="Fields")
     __properties: ClassVar[List[str]] = ["ChannelIds", "UserId", "MinStartDate", "HasAired", "IsAiring", "MaxStartDate", "MinEndDate", "MaxEndDate", "IsMovie", "IsSeries", "IsNews", "IsKids", "IsSports", "StartIndex", "Limit", "SortBy", "SortOrder", "Genres", "GenreIds", "EnableImages", "EnableTotalRecordCount", "ImageTypeLimit", "EnableImageTypes", "EnableUserData", "SeriesTimerId", "LibrarySeriesId", "Fields"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -73,8 +76,7 @@ class GetProgramsDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -18,10 +18,12 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ReadyRequestDto(BaseModel):
     """
@@ -30,11 +32,12 @@ class ReadyRequestDto(BaseModel):
     when: Optional[datetime] = Field(default=None, description="Gets or sets when the request has been made by the client.", alias="When")
     position_ticks: Optional[StrictInt] = Field(default=None, description="Gets or sets the position ticks.", alias="PositionTicks")
     is_playing: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the client playback is unpaused.", alias="IsPlaying")
-    playlist_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the playlist item identifier of the playing item.", alias="PlaylistItemId")
+    playlist_item_id: Optional[UUID] = Field(default=None, description="Gets or sets the playlist item identifier of the playing item.", alias="PlaylistItemId")
     __properties: ClassVar[List[str]] = ["When", "PositionTicks", "IsPlaying", "PlaylistItemId"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +49,7 @@ class ReadyRequestDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

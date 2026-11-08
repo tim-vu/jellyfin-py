@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBytes, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.lyric_dto import LyricDto
 from jellyfin.models.remote_lyric_info_dto import RemoteLyricInfoDto
 
@@ -43,7 +43,7 @@ class LyricApi:
     @validate_call
     def delete_lyrics(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,7 +61,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -113,7 +113,7 @@ class LyricApi:
     @validate_call
     def delete_lyrics_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,7 +131,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -183,7 +183,7 @@ class LyricApi:
     @validate_call
     def delete_lyrics_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -201,7 +201,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -316,7 +316,7 @@ class LyricApi:
     @validate_call
     def download_remote_lyrics(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         lyric_id: Annotated[StrictStr, Field(description="The lyric id.")],
         _request_timeout: Union[
             None,
@@ -335,7 +335,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param lyric_id: The lyric id. (required)
         :type lyric_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -390,7 +390,7 @@ class LyricApi:
     @validate_call
     def download_remote_lyrics_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         lyric_id: Annotated[StrictStr, Field(description="The lyric id.")],
         _request_timeout: Union[
             None,
@@ -409,7 +409,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param lyric_id: The lyric id. (required)
         :type lyric_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -464,7 +464,7 @@ class LyricApi:
     @validate_call
     def download_remote_lyrics_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         lyric_id: Annotated[StrictStr, Field(description="The lyric id.")],
         _request_timeout: Union[
             None,
@@ -483,7 +483,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param lyric_id: The lyric id. (required)
         :type lyric_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -604,7 +604,7 @@ class LyricApi:
     @validate_call
     def get_lyrics(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -622,7 +622,7 @@ class LyricApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,7 +674,7 @@ class LyricApi:
     @validate_call
     def get_lyrics_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -692,7 +692,7 @@ class LyricApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -744,7 +744,7 @@ class LyricApi:
     @validate_call
     def get_lyrics_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -762,7 +762,7 @@ class LyricApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1150,7 +1150,7 @@ class LyricApi:
     @validate_call
     def search_remote_lyrics(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1168,7 +1168,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1220,7 +1220,7 @@ class LyricApi:
     @validate_call
     def search_remote_lyrics_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1238,7 +1238,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1290,7 +1290,7 @@ class LyricApi:
     @validate_call
     def search_remote_lyrics_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1308,7 +1308,7 @@ class LyricApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1423,7 +1423,7 @@ class LyricApi:
     @validate_call
     def upload_lyrics(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item the lyric belongs to.")],
+        item_id: Annotated[UUID, Field(description="The item the lyric belongs to.")],
         file_name: Annotated[StrictStr, Field(description="Name of the file being uploaded.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
@@ -1443,11 +1443,11 @@ class LyricApi:
 
 
         :param item_id: The item the lyric belongs to. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param file_name: Name of the file being uploaded. (required)
         :type file_name: str
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1502,7 +1502,7 @@ class LyricApi:
     @validate_call
     def upload_lyrics_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item the lyric belongs to.")],
+        item_id: Annotated[UUID, Field(description="The item the lyric belongs to.")],
         file_name: Annotated[StrictStr, Field(description="Name of the file being uploaded.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
@@ -1522,11 +1522,11 @@ class LyricApi:
 
 
         :param item_id: The item the lyric belongs to. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param file_name: Name of the file being uploaded. (required)
         :type file_name: str
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1581,7 +1581,7 @@ class LyricApi:
     @validate_call
     def upload_lyrics_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item the lyric belongs to.")],
+        item_id: Annotated[UUID, Field(description="The item the lyric belongs to.")],
         file_name: Annotated[StrictStr, Field(description="Name of the file being uploaded.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
@@ -1601,11 +1601,11 @@ class LyricApi:
 
 
         :param item_id: The item the lyric belongs to. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param file_name: Name of the file being uploaded. (required)
         :type file_name: str
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

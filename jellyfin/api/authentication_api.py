@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.authenticate_user_by_name import AuthenticateUserByName
 from jellyfin.models.authentication_info_query_result import AuthenticationInfoQueryResult
 from jellyfin.models.authentication_result import AuthenticationResult
@@ -611,7 +611,7 @@ class AuthenticationApi:
     def authorize_quick_connect(
         self,
         code: Annotated[StrictStr, Field(description="Quick connect code to authorize.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user the authorize. Access to the requested user is required.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user the authorize. Access to the requested user is required.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -631,7 +631,7 @@ class AuthenticationApi:
         :param code: Quick connect code to authorize. (required)
         :type code: str
         :param user_id: The user the authorize. Access to the requested user is required.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -684,7 +684,7 @@ class AuthenticationApi:
     def authorize_quick_connect_with_http_info(
         self,
         code: Annotated[StrictStr, Field(description="Quick connect code to authorize.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user the authorize. Access to the requested user is required.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user the authorize. Access to the requested user is required.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -704,7 +704,7 @@ class AuthenticationApi:
         :param code: Quick connect code to authorize. (required)
         :type code: str
         :param user_id: The user the authorize. Access to the requested user is required.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -757,7 +757,7 @@ class AuthenticationApi:
     def authorize_quick_connect_without_preload_content(
         self,
         code: Annotated[StrictStr, Field(description="Quick connect code to authorize.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user the authorize. Access to the requested user is required.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user the authorize. Access to the requested user is required.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -777,7 +777,7 @@ class AuthenticationApi:
         :param code: Quick connect code to authorize. (required)
         :type code: str
         :param user_id: The user the authorize. Access to the requested user is required.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

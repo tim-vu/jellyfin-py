@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.play_method import PlayMethod
 from jellyfin.models.playback_order import PlaybackOrder
@@ -26,6 +27,7 @@ from jellyfin.models.queue_item import QueueItem
 from jellyfin.models.repeat_mode import RepeatMode
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PlaybackProgressInfo(BaseModel):
     """
@@ -33,7 +35,7 @@ class PlaybackProgressInfo(BaseModel):
     """ # noqa: E501
     can_seek: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this instance can seek.", alias="CanSeek")
     item: Optional[BaseItemDto] = Field(default=None, description="Gets or sets the item.", alias="Item")
-    item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the item identifier.", alias="ItemId")
+    item_id: Optional[UUID] = Field(default=None, description="Gets or sets the item identifier.", alias="ItemId")
     session_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the session id.", alias="SessionId")
     media_source_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the media version identifier.", alias="MediaSourceId")
     audio_stream_index: Optional[StrictInt] = Field(default=None, description="Gets or sets the index of the audio stream.", alias="AudioStreamIndex")
@@ -55,7 +57,8 @@ class PlaybackProgressInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["CanSeek", "Item", "ItemId", "SessionId", "MediaSourceId", "AudioStreamIndex", "SubtitleStreamIndex", "IsPaused", "IsMuted", "PositionTicks", "PlaybackStartTimeTicks", "VolumeLevel", "Brightness", "AspectRatio", "PlayMethod", "LiveStreamId", "PlaySessionId", "RepeatMode", "PlaybackOrder", "NowPlayingQueue", "PlaylistItemId"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -67,8 +70,7 @@ class PlaybackProgressInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -100,8 +102,7 @@ class PlaybackProgressInfo(BaseModel):
         _items = []
         if self.now_playing_queue:
             for _item_now_playing_queue in self.now_playing_queue:
-                if _item_now_playing_queue:
-                    _items.append(_item_now_playing_queue.to_dict())
+                _items.append(_item_now_playing_queue.to_dict() if _item_now_playing_queue is not None else None)
             _dict['NowPlayingQueue'] = _items
         # set to None if item (nullable) is None
         # and model_fields_set contains the field

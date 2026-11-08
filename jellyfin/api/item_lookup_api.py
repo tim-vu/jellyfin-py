@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
+from pydantic import Field, StrictBool
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.album_info_remote_search_query import AlbumInfoRemoteSearchQuery
 from jellyfin.models.artist_info_remote_search_query import ArtistInfoRemoteSearchQuery
 from jellyfin.models.book_info_remote_search_query import BookInfoRemoteSearchQuery
@@ -52,7 +52,7 @@ class ItemLookupApi:
     @validate_call
     def apply_search_criteria(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         remote_search_result: Annotated[RemoteSearchResult, Field(description="The remote search result.")],
         replace_all_images: Annotated[Optional[StrictBool], Field(description="Optional. Whether or not to replace all images. Default: True.")] = None,
         _request_timeout: Union[
@@ -72,7 +72,7 @@ class ItemLookupApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param remote_search_result: The remote search result. (required)
         :type remote_search_result: RemoteSearchResult
         :param replace_all_images: Optional. Whether or not to replace all images. Default: True.
@@ -130,7 +130,7 @@ class ItemLookupApi:
     @validate_call
     def apply_search_criteria_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         remote_search_result: Annotated[RemoteSearchResult, Field(description="The remote search result.")],
         replace_all_images: Annotated[Optional[StrictBool], Field(description="Optional. Whether or not to replace all images. Default: True.")] = None,
         _request_timeout: Union[
@@ -150,7 +150,7 @@ class ItemLookupApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param remote_search_result: The remote search result. (required)
         :type remote_search_result: RemoteSearchResult
         :param replace_all_images: Optional. Whether or not to replace all images. Default: True.
@@ -208,7 +208,7 @@ class ItemLookupApi:
     @validate_call
     def apply_search_criteria_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         remote_search_result: Annotated[RemoteSearchResult, Field(description="The remote search result.")],
         replace_all_images: Annotated[Optional[StrictBool], Field(description="Optional. Whether or not to replace all images. Default: True.")] = None,
         _request_timeout: Union[
@@ -228,7 +228,7 @@ class ItemLookupApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param remote_search_result: The remote search result. (required)
         :type remote_search_result: RemoteSearchResult
         :param replace_all_images: Optional. Whether or not to replace all images. Default: True.
@@ -942,7 +942,7 @@ class ItemLookupApi:
     @validate_call
     def get_external_id_infos(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -960,7 +960,7 @@ class ItemLookupApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1012,7 +1012,7 @@ class ItemLookupApi:
     @validate_call
     def get_external_id_infos_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1030,7 +1030,7 @@ class ItemLookupApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1082,7 +1082,7 @@ class ItemLookupApi:
     @validate_call
     def get_external_id_infos_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1100,7 +1100,7 @@ class ItemLookupApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

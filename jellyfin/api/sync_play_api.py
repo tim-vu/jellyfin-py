@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field
 from typing import List
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.buffer_request_dto import BufferRequestDto
 from jellyfin.models.group_info_dto import GroupInfoDto
 from jellyfin.models.ignore_wait_request_dto import IgnoreWaitRequestDto
@@ -628,7 +628,7 @@ class SyncPlayApi:
     @validate_call
     def sync_play_get_group(
         self,
-        id: Annotated[StrictStr, Field(description="The id of the group.")],
+        id: Annotated[UUID, Field(description="The id of the group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -646,7 +646,7 @@ class SyncPlayApi:
 
 
         :param id: The id of the group. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -698,7 +698,7 @@ class SyncPlayApi:
     @validate_call
     def sync_play_get_group_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The id of the group.")],
+        id: Annotated[UUID, Field(description="The id of the group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,7 +716,7 @@ class SyncPlayApi:
 
 
         :param id: The id of the group. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -768,7 +768,7 @@ class SyncPlayApi:
     @validate_call
     def sync_play_get_group_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The id of the group.")],
+        id: Annotated[UUID, Field(description="The id of the group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -786,7 +786,7 @@ class SyncPlayApi:
 
 
         :param id: The id of the group. (required)
-        :type id: str
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

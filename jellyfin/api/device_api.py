@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.device_info_dto import DeviceInfoDto
 from jellyfin.models.device_info_dto_query_result import DeviceInfoDtoQueryResult
 from jellyfin.models.device_options_dto import DeviceOptionsDto
@@ -870,7 +870,7 @@ class DeviceApi:
     @validate_call
     def get_devices(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Gets or sets the user identifier.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Gets or sets the user identifier.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -888,7 +888,7 @@ class DeviceApi:
 
 
         :param user_id: Gets or sets the user identifier.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -939,7 +939,7 @@ class DeviceApi:
     @validate_call
     def get_devices_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Gets or sets the user identifier.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Gets or sets the user identifier.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -957,7 +957,7 @@ class DeviceApi:
 
 
         :param user_id: Gets or sets the user identifier.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1008,7 +1008,7 @@ class DeviceApi:
     @validate_call
     def get_devices_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Gets or sets the user identifier.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Gets or sets the user identifier.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1026,7 +1026,7 @@ class DeviceApi:
 
 
         :param user_id: Gets or sets the user identifier.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

@@ -23,6 +23,7 @@ from jellyfin.models.cast_receiver_application import CastReceiverApplication
 from jellyfin.models.installation_info import InstallationInfo
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SystemInfo(BaseModel):
     """
@@ -58,7 +59,8 @@ class SystemInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["LocalAddress", "ServerName", "Version", "ProductName", "OperatingSystem", "Id", "StartupWizardCompleted", "OperatingSystemDisplayName", "PackageName", "HasPendingRestart", "IsShuttingDown", "SupportsLibraryMonitor", "WebSocketPortNumber", "CompletedInstallations", "CanSelfRestart", "CanLaunchWebBrowser", "ProgramDataPath", "WebPath", "ItemsByNamePath", "CachePath", "LogPath", "InternalMetadataPath", "TranscodingTempPath", "CastReceiverApplications", "HasUpdateAvailable", "EncoderLocation", "SystemArchitecture"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -70,8 +72,7 @@ class SystemInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -100,15 +101,13 @@ class SystemInfo(BaseModel):
         _items = []
         if self.completed_installations:
             for _item_completed_installations in self.completed_installations:
-                if _item_completed_installations:
-                    _items.append(_item_completed_installations.to_dict())
+                _items.append(_item_completed_installations.to_dict() if _item_completed_installations is not None else None)
             _dict['CompletedInstallations'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in cast_receiver_applications (list)
         _items = []
         if self.cast_receiver_applications:
             for _item_cast_receiver_applications in self.cast_receiver_applications:
-                if _item_cast_receiver_applications:
-                    _items.append(_item_cast_receiver_applications.to_dict())
+                _items.append(_item_cast_receiver_applications.to_dict() if _item_cast_receiver_applications is not None else None)
             _dict['CastReceiverApplications'] = _items
         # set to None if local_address (nullable) is None
         # and model_fields_set contains the field
@@ -247,8 +246,8 @@ class SystemInfo(BaseModel):
             "TranscodingTempPath": obj.get("TranscodingTempPath"),
             "CastReceiverApplications": [CastReceiverApplication.from_dict(_item) for _item in obj["CastReceiverApplications"]] if obj.get("CastReceiverApplications") is not None else None,
             "HasUpdateAvailable": obj.get("HasUpdateAvailable") if obj.get("HasUpdateAvailable") is not None else False,
-            "EncoderLocation": obj.get("EncoderLocation") if obj.get("EncoderLocation") is not None else 'System',
-            "SystemArchitecture": obj.get("SystemArchitecture") if obj.get("SystemArchitecture") is not None else 'X64'
+            "EncoderLocation": obj.get("EncoderLocation") if "EncoderLocation" in obj else 'System',
+            "SystemArchitecture": obj.get("SystemArchitecture") if "SystemArchitecture" in obj else 'X64'
         })
         return _obj
 

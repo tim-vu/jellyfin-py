@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictInt
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.base_item_kind import BaseItemKind
 from jellyfin.models.media_type import MediaType
@@ -44,7 +44,7 @@ class SuggestionApi:
     @validate_call
     def get_suggestions(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         media_type: Annotated[Optional[List[MediaType]], Field(description="The media types.")] = None,
         type: Annotated[Optional[List[BaseItemKind]], Field(description="The type.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The start index.")] = None,
@@ -67,7 +67,7 @@ class SuggestionApi:
 
 
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param media_type: The media types.
         :type media_type: List[MediaType]
         :param type: The type.
@@ -133,7 +133,7 @@ class SuggestionApi:
     @validate_call
     def get_suggestions_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         media_type: Annotated[Optional[List[MediaType]], Field(description="The media types.")] = None,
         type: Annotated[Optional[List[BaseItemKind]], Field(description="The type.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The start index.")] = None,
@@ -156,7 +156,7 @@ class SuggestionApi:
 
 
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param media_type: The media types.
         :type media_type: List[MediaType]
         :param type: The type.
@@ -222,7 +222,7 @@ class SuggestionApi:
     @validate_call
     def get_suggestions_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         media_type: Annotated[Optional[List[MediaType]], Field(description="The media types.")] = None,
         type: Annotated[Optional[List[BaseItemKind]], Field(description="The type.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The start index.")] = None,
@@ -245,7 +245,7 @@ class SuggestionApi:
 
 
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param media_type: The media types.
         :type media_type: List[MediaType]
         :param type: The type.

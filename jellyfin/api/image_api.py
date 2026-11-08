@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBytes, StrictFloat, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.image_info import ImageInfo
 
 from jellyfin.api_client import ApiClient, RequestSerialized
@@ -294,7 +294,7 @@ class ImageApi:
     @validate_call
     def delete_item_image(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[Optional[StrictInt], Field(description="The image index.")] = None,
         _request_timeout: Union[
@@ -314,7 +314,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: The image index.
@@ -372,7 +372,7 @@ class ImageApi:
     @validate_call
     def delete_item_image_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[Optional[StrictInt], Field(description="The image index.")] = None,
         _request_timeout: Union[
@@ -392,7 +392,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: The image index.
@@ -450,7 +450,7 @@ class ImageApi:
     @validate_call
     def delete_item_image_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[Optional[StrictInt], Field(description="The image index.")] = None,
         _request_timeout: Union[
@@ -470,7 +470,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: The image index.
@@ -599,7 +599,7 @@ class ImageApi:
     @validate_call
     def delete_item_image_by_index(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="The image index.")],
         _request_timeout: Union[
@@ -619,7 +619,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: The image index. (required)
@@ -677,7 +677,7 @@ class ImageApi:
     @validate_call
     def delete_item_image_by_index_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="The image index.")],
         _request_timeout: Union[
@@ -697,7 +697,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: The image index. (required)
@@ -755,7 +755,7 @@ class ImageApi:
     @validate_call
     def delete_item_image_by_index_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="The image index.")],
         _request_timeout: Union[
@@ -775,7 +775,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: The image index. (required)
@@ -902,7 +902,7 @@ class ImageApi:
     @validate_call
     def delete_user_image(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -920,7 +920,7 @@ class ImageApi:
 
 
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -971,7 +971,7 @@ class ImageApi:
     @validate_call
     def delete_user_image_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -989,7 +989,7 @@ class ImageApi:
 
 
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1040,7 +1040,7 @@ class ImageApi:
     @validate_call
     def delete_user_image_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1058,7 +1058,7 @@ class ImageApi:
 
 
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1203,7 +1203,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get artist image by name.
 
 
@@ -1288,7 +1288,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1335,7 +1335,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get artist image by name.
 
 
@@ -1420,7 +1420,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1552,7 +1552,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1738,7 +1738,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get genre image by name.
 
 
@@ -1823,7 +1823,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1870,7 +1870,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get genre image by name.
 
 
@@ -1955,7 +1955,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -2087,7 +2087,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -2275,7 +2275,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get genre image by name.
 
 
@@ -2360,7 +2360,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -2407,7 +2407,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get genre image by name.
 
 
@@ -2492,7 +2492,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -2624,7 +2624,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -2781,7 +2781,7 @@ class ImageApi:
     @validate_call
     def get_item_image(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
         max_height: Annotated[Optional[StrictInt], Field(description="The maximum image height to return.")] = None,
@@ -2810,12 +2810,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return.
@@ -2895,7 +2895,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -2913,7 +2913,7 @@ class ImageApi:
     @validate_call
     def get_item_image_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
         max_height: Annotated[Optional[StrictInt], Field(description="The maximum image height to return.")] = None,
@@ -2942,12 +2942,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return.
@@ -3027,7 +3027,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -3045,7 +3045,7 @@ class ImageApi:
     @validate_call
     def get_item_image_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
         max_height: Annotated[Optional[StrictInt], Field(description="The maximum image height to return.")] = None,
@@ -3079,7 +3079,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return.
@@ -3159,7 +3159,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -3318,7 +3318,7 @@ class ImageApi:
     @validate_call
     def get_item_image2(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[StrictInt, Field(description="The maximum image width to return.")],
         max_height: Annotated[StrictInt, Field(description="The maximum image height to return.")],
@@ -3347,12 +3347,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return. (required)
@@ -3432,7 +3432,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -3450,7 +3450,7 @@ class ImageApi:
     @validate_call
     def get_item_image2_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[StrictInt, Field(description="The maximum image width to return.")],
         max_height: Annotated[StrictInt, Field(description="The maximum image height to return.")],
@@ -3479,12 +3479,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return. (required)
@@ -3564,7 +3564,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -3582,7 +3582,7 @@ class ImageApi:
     @validate_call
     def get_item_image2_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[StrictInt, Field(description="The maximum image width to return.")],
         max_height: Annotated[StrictInt, Field(description="The maximum image height to return.")],
@@ -3616,7 +3616,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return. (required)
@@ -3696,7 +3696,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -3841,7 +3841,7 @@ class ImageApi:
     @validate_call
     def get_item_image_by_index(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Image index.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
@@ -3870,12 +3870,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Image index. (required)
@@ -3955,7 +3955,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -3973,7 +3973,7 @@ class ImageApi:
     @validate_call
     def get_item_image_by_index_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Image index.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
@@ -4002,12 +4002,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Image index. (required)
@@ -4087,7 +4087,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -4105,7 +4105,7 @@ class ImageApi:
     @validate_call
     def get_item_image_by_index_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Image index.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
@@ -4139,7 +4139,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Image index. (required)
@@ -4219,7 +4219,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -4376,7 +4376,7 @@ class ImageApi:
     @validate_call
     def get_item_image_infos(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4394,7 +4394,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4446,7 +4446,7 @@ class ImageApi:
     @validate_call
     def get_item_image_infos_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4464,7 +4464,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4516,7 +4516,7 @@ class ImageApi:
     @validate_call
     def get_item_image_infos_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4534,7 +4534,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4678,7 +4678,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get music genre image by name.
 
 
@@ -4763,7 +4763,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -4810,7 +4810,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get music genre image by name.
 
 
@@ -4895,7 +4895,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5027,7 +5027,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5215,7 +5215,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get music genre image by name.
 
 
@@ -5300,7 +5300,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5347,7 +5347,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get music genre image by name.
 
 
@@ -5432,7 +5432,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5564,7 +5564,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5750,7 +5750,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get person image by name.
 
 
@@ -5835,7 +5835,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5882,7 +5882,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get person image by name.
 
 
@@ -5967,7 +5967,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -6099,7 +6099,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -6287,7 +6287,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get person image by name.
 
 
@@ -6372,7 +6372,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -6419,7 +6419,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get person image by name.
 
 
@@ -6504,7 +6504,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -6636,7 +6636,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -6807,7 +6807,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Generates or gets the splashscreen.
 
 
@@ -6847,7 +6847,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -6878,7 +6878,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Generates or gets the splashscreen.
 
 
@@ -6918,7 +6918,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -6989,7 +6989,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -7102,7 +7102,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get studio image by name.
 
 
@@ -7187,7 +7187,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -7234,7 +7234,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get studio image by name.
 
 
@@ -7319,7 +7319,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -7451,7 +7451,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -7639,7 +7639,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get studio image by name.
 
 
@@ -7724,7 +7724,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -7771,7 +7771,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get studio image by name.
 
 
@@ -7856,7 +7856,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -7988,7 +7988,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -8145,7 +8145,7 @@ class ImageApi:
     @validate_call
     def get_user_image(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         tag: Annotated[Optional[StrictStr], Field(description="Optional. Supply the cache tag from the item object to receive strong caching headers.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="Determines the output format of the image - original,gif,jpg,png.")] = None,
         _request_timeout: Union[
@@ -8160,12 +8160,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get user profile image.
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param tag: Optional. Supply the cache tag from the item object to receive strong caching headers.
         :type tag: str
         :param format: Determines the output format of the image - original,gif,jpg,png.
@@ -8203,7 +8203,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '400': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -8222,7 +8222,7 @@ class ImageApi:
     @validate_call
     def get_user_image_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         tag: Annotated[Optional[StrictStr], Field(description="Optional. Supply the cache tag from the item object to receive strong caching headers.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="Determines the output format of the image - original,gif,jpg,png.")] = None,
         _request_timeout: Union[
@@ -8237,12 +8237,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get user profile image.
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param tag: Optional. Supply the cache tag from the item object to receive strong caching headers.
         :type tag: str
         :param format: Determines the output format of the image - original,gif,jpg,png.
@@ -8280,7 +8280,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '400': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -8299,7 +8299,7 @@ class ImageApi:
     @validate_call
     def get_user_image_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         tag: Annotated[Optional[StrictStr], Field(description="Optional. Supply the cache tag from the item object to receive strong caching headers.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="Determines the output format of the image - original,gif,jpg,png.")] = None,
         _request_timeout: Union[
@@ -8319,7 +8319,7 @@ class ImageApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param tag: Optional. Supply the cache tag from the item object to receive strong caching headers.
         :type tag: str
         :param format: Determines the output format of the image - original,gif,jpg,png.
@@ -8357,7 +8357,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '400': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -8480,7 +8480,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get artist image by name.
 
 
@@ -8565,7 +8565,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -8612,7 +8612,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get artist image by name.
 
 
@@ -8697,7 +8697,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -8829,7 +8829,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -9015,7 +9015,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get genre image by name.
 
 
@@ -9100,7 +9100,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -9147,7 +9147,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get genre image by name.
 
 
@@ -9232,7 +9232,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -9364,7 +9364,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -9552,7 +9552,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get genre image by name.
 
 
@@ -9637,7 +9637,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -9684,7 +9684,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get genre image by name.
 
 
@@ -9769,7 +9769,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -9901,7 +9901,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -10058,7 +10058,7 @@ class ImageApi:
     @validate_call
     def head_item_image(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
         max_height: Annotated[Optional[StrictInt], Field(description="The maximum image height to return.")] = None,
@@ -10087,12 +10087,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return.
@@ -10172,7 +10172,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -10190,7 +10190,7 @@ class ImageApi:
     @validate_call
     def head_item_image_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
         max_height: Annotated[Optional[StrictInt], Field(description="The maximum image height to return.")] = None,
@@ -10219,12 +10219,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return.
@@ -10304,7 +10304,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -10322,7 +10322,7 @@ class ImageApi:
     @validate_call
     def head_item_image_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
         max_height: Annotated[Optional[StrictInt], Field(description="The maximum image height to return.")] = None,
@@ -10356,7 +10356,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return.
@@ -10436,7 +10436,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -10595,7 +10595,7 @@ class ImageApi:
     @validate_call
     def head_item_image2(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[StrictInt, Field(description="The maximum image width to return.")],
         max_height: Annotated[StrictInt, Field(description="The maximum image height to return.")],
@@ -10624,12 +10624,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return. (required)
@@ -10709,7 +10709,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -10727,7 +10727,7 @@ class ImageApi:
     @validate_call
     def head_item_image2_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[StrictInt, Field(description="The maximum image width to return.")],
         max_height: Annotated[StrictInt, Field(description="The maximum image height to return.")],
@@ -10756,12 +10756,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return. (required)
@@ -10841,7 +10841,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -10859,7 +10859,7 @@ class ImageApi:
     @validate_call
     def head_item_image2_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         max_width: Annotated[StrictInt, Field(description="The maximum image width to return.")],
         max_height: Annotated[StrictInt, Field(description="The maximum image height to return.")],
@@ -10893,7 +10893,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param max_width: The maximum image width to return. (required)
@@ -10973,7 +10973,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -11118,7 +11118,7 @@ class ImageApi:
     @validate_call
     def head_item_image_by_index(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Image index.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
@@ -11147,12 +11147,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Image index. (required)
@@ -11232,7 +11232,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -11250,7 +11250,7 @@ class ImageApi:
     @validate_call
     def head_item_image_by_index_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Image index.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
@@ -11279,12 +11279,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the item's image.
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Image index. (required)
@@ -11364,7 +11364,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -11382,7 +11382,7 @@ class ImageApi:
     @validate_call
     def head_item_image_by_index_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Image index.")],
         max_width: Annotated[Optional[StrictInt], Field(description="The maximum image width to return.")] = None,
@@ -11416,7 +11416,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Image index. (required)
@@ -11496,7 +11496,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -11682,7 +11682,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get music genre image by name.
 
 
@@ -11767,7 +11767,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -11814,7 +11814,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get music genre image by name.
 
 
@@ -11899,7 +11899,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -12031,7 +12031,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -12219,7 +12219,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get music genre image by name.
 
 
@@ -12304,7 +12304,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -12351,7 +12351,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get music genre image by name.
 
 
@@ -12436,7 +12436,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -12568,7 +12568,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -12754,7 +12754,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get person image by name.
 
 
@@ -12839,7 +12839,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -12886,7 +12886,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get person image by name.
 
 
@@ -12971,7 +12971,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -13103,7 +13103,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -13291,7 +13291,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get person image by name.
 
 
@@ -13376,7 +13376,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -13423,7 +13423,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get person image by name.
 
 
@@ -13508,7 +13508,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -13640,7 +13640,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -13826,7 +13826,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get studio image by name.
 
 
@@ -13911,7 +13911,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -13958,7 +13958,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get studio image by name.
 
 
@@ -14043,7 +14043,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -14175,7 +14175,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -14363,7 +14363,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get studio image by name.
 
 
@@ -14448,7 +14448,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -14495,7 +14495,7 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get studio image by name.
 
 
@@ -14580,7 +14580,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -14712,7 +14712,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -14869,7 +14869,7 @@ class ImageApi:
     @validate_call
     def head_user_image(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         tag: Annotated[Optional[StrictStr], Field(description="Optional. Supply the cache tag from the item object to receive strong caching headers.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="Determines the output format of the image - original,gif,jpg,png.")] = None,
         _request_timeout: Union[
@@ -14884,12 +14884,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Get user profile image.
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param tag: Optional. Supply the cache tag from the item object to receive strong caching headers.
         :type tag: str
         :param format: Determines the output format of the image - original,gif,jpg,png.
@@ -14927,7 +14927,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '400': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -14946,7 +14946,7 @@ class ImageApi:
     @validate_call
     def head_user_image_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         tag: Annotated[Optional[StrictStr], Field(description="Optional. Supply the cache tag from the item object to receive strong caching headers.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="Determines the output format of the image - original,gif,jpg,png.")] = None,
         _request_timeout: Union[
@@ -14961,12 +14961,12 @@ class ImageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Get user profile image.
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param tag: Optional. Supply the cache tag from the item object to receive strong caching headers.
         :type tag: str
         :param format: Determines the output format of the image - original,gif,jpg,png.
@@ -15004,7 +15004,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '400': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -15023,7 +15023,7 @@ class ImageApi:
     @validate_call
     def head_user_image_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         tag: Annotated[Optional[StrictStr], Field(description="Optional. Supply the cache tag from the item object to receive strong caching headers.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="Determines the output format of the image - original,gif,jpg,png.")] = None,
         _request_timeout: Union[
@@ -15043,7 +15043,7 @@ class ImageApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param tag: Optional. Supply the cache tag from the item object to receive strong caching headers.
         :type tag: str
         :param format: Determines the output format of the image - original,gif,jpg,png.
@@ -15081,7 +15081,7 @@ class ImageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '400': "ProblemDetails",
             '404': "ProblemDetails",
             '503': None,
@@ -15175,7 +15175,7 @@ class ImageApi:
     @validate_call
     def post_user_image(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
             None,
@@ -15194,9 +15194,9 @@ class ImageApi:
 
 
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15250,7 +15250,7 @@ class ImageApi:
     @validate_call
     def post_user_image_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
             None,
@@ -15269,9 +15269,9 @@ class ImageApi:
 
 
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15325,7 +15325,7 @@ class ImageApi:
     @validate_call
     def post_user_image_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
             None,
@@ -15344,9 +15344,9 @@ class ImageApi:
 
 
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15489,7 +15489,7 @@ class ImageApi:
     @validate_call
     def set_item_image(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
@@ -15509,11 +15509,11 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15568,7 +15568,7 @@ class ImageApi:
     @validate_call
     def set_item_image_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
@@ -15588,11 +15588,11 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15647,7 +15647,7 @@ class ImageApi:
     @validate_call
     def set_item_image_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
@@ -15667,11 +15667,11 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15816,7 +15816,7 @@ class ImageApi:
     @validate_call
     def set_item_image_by_index(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="(Unused) Image index.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
@@ -15837,13 +15837,13 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: (Unused) Image index. (required)
         :type image_index: int
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15899,7 +15899,7 @@ class ImageApi:
     @validate_call
     def set_item_image_by_index_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="(Unused) Image index.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
@@ -15920,13 +15920,13 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: (Unused) Image index. (required)
         :type image_index: int
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15982,7 +15982,7 @@ class ImageApi:
     @validate_call
     def set_item_image_by_index_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="(Unused) Image index.")],
         body: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
@@ -16003,13 +16003,13 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: (Unused) Image index. (required)
         :type image_index: int
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16158,7 +16158,7 @@ class ImageApi:
     @validate_call
     def update_item_image_index(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Old image index.")],
         new_index: Annotated[StrictInt, Field(description="New image index.")],
@@ -16179,7 +16179,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Old image index. (required)
@@ -16240,7 +16240,7 @@ class ImageApi:
     @validate_call
     def update_item_image_index_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Old image index.")],
         new_index: Annotated[StrictInt, Field(description="New image index.")],
@@ -16261,7 +16261,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Old image index. (required)
@@ -16322,7 +16322,7 @@ class ImageApi:
     @validate_call
     def update_item_image_index_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
+        item_id: Annotated[UUID, Field(description="Item id.")],
         image_type: Annotated[StrictStr, Field(description="Image type.")],
         image_index: Annotated[StrictInt, Field(description="Old image index.")],
         new_index: Annotated[StrictInt, Field(description="New image index.")],
@@ -16343,7 +16343,7 @@ class ImageApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param image_type: Image type. (required)
         :type image_type: ImageType
         :param image_index: Old image index. (required)
@@ -16496,7 +16496,7 @@ class ImageApi:
 
 
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16566,7 +16566,7 @@ class ImageApi:
 
 
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16636,7 +16636,7 @@ class ImageApi:
 
 
         :param body:
-        :type body: bytearray
+        :type body: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

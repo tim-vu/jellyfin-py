@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from jellyfin.models.image_option import ImageOption
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TypeOptions(BaseModel):
     """
@@ -38,7 +39,8 @@ class TypeOptions(BaseModel):
     __properties: ClassVar[List[str]] = ["Type", "MetadataFetchers", "MetadataFetcherOrder", "ImageFetchers", "ImageFetcherOrder", "ImageOptions", "SimilarItemProviders", "SimilarItemProviderOrder"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +52,7 @@ class TypeOptions(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -80,8 +81,7 @@ class TypeOptions(BaseModel):
         _items = []
         if self.image_options:
             for _item_image_options in self.image_options:
-                if _item_image_options:
-                    _items.append(_item_image_options.to_dict())
+                _items.append(_item_image_options.to_dict() if _item_image_options is not None else None)
             _dict['ImageOptions'] = _items
         # set to None if type (nullable) is None
         # and model_fields_set contains the field

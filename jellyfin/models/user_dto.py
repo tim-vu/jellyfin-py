@@ -20,10 +20,12 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from jellyfin.models.user_configuration import UserConfiguration
 from jellyfin.models.user_policy import UserPolicy
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class UserDto(BaseModel):
     """
@@ -32,7 +34,7 @@ class UserDto(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name.", alias="Name")
     server_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the server identifier.", alias="ServerId")
     server_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name of the server. This is not used by the server and is for client-side usage only.", alias="ServerName")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the id.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the id.", alias="Id")
     primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the primary image tag.", alias="PrimaryImageTag")
     has_password: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this instance has password.", alias="HasPassword")
     has_configured_password: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this instance has configured password.", alias="HasConfiguredPassword")
@@ -46,7 +48,8 @@ class UserDto(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "ServerId", "ServerName", "Id", "PrimaryImageTag", "HasPassword", "HasConfiguredPassword", "HasConfiguredEasyPassword", "EnableAutoLogin", "LastLoginDate", "LastActivityDate", "Configuration", "Policy", "PrimaryImageAspectRatio"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -58,8 +61,7 @@ class UserDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

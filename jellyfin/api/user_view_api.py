@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
+from pydantic import Field, StrictBool
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.collection_type import CollectionType
 from jellyfin.models.special_view_option_dto import SpecialViewOptionDto
@@ -44,7 +44,7 @@ class UserViewApi:
     @validate_call
     def get_grouping_options(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -62,7 +62,7 @@ class UserViewApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -114,7 +114,7 @@ class UserViewApi:
     @validate_call
     def get_grouping_options_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,7 +132,7 @@ class UserViewApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -184,7 +184,7 @@ class UserViewApi:
     @validate_call
     def get_grouping_options_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -202,7 +202,7 @@ class UserViewApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -319,7 +319,7 @@ class UserViewApi:
     @validate_call
     def get_user_views(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         include_external_content: Annotated[Optional[StrictBool], Field(description="Whether or not to include external views such as channels or live tv.")] = None,
         preset_views: Annotated[Optional[List[CollectionType]], Field(description="Preset views.")] = None,
         include_hidden: Annotated[Optional[StrictBool], Field(description="Whether or not to include hidden content.")] = None,
@@ -340,7 +340,7 @@ class UserViewApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param include_external_content: Whether or not to include external views such as channels or live tv.
         :type include_external_content: bool
         :param preset_views: Preset views.
@@ -400,7 +400,7 @@ class UserViewApi:
     @validate_call
     def get_user_views_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         include_external_content: Annotated[Optional[StrictBool], Field(description="Whether or not to include external views such as channels or live tv.")] = None,
         preset_views: Annotated[Optional[List[CollectionType]], Field(description="Preset views.")] = None,
         include_hidden: Annotated[Optional[StrictBool], Field(description="Whether or not to include hidden content.")] = None,
@@ -421,7 +421,7 @@ class UserViewApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param include_external_content: Whether or not to include external views such as channels or live tv.
         :type include_external_content: bool
         :param preset_views: Preset views.
@@ -481,7 +481,7 @@ class UserViewApi:
     @validate_call
     def get_user_views_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         include_external_content: Annotated[Optional[StrictBool], Field(description="Whether or not to include external views such as channels or live tv.")] = None,
         preset_views: Annotated[Optional[List[CollectionType]], Field(description="Preset views.")] = None,
         include_hidden: Annotated[Optional[StrictBool], Field(description="Whether or not to include hidden content.")] = None,
@@ -502,7 +502,7 @@ class UserViewApi:
 
 
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param include_external_content: Whether or not to include external views such as channels or live tv.
         :type include_external_content: bool
         :param preset_views: Preset views.

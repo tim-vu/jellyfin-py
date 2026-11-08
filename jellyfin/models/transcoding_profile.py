@@ -26,6 +26,7 @@ from jellyfin.models.profile_condition import ProfileCondition
 from jellyfin.models.transcode_seek_info import TranscodeSeekInfo
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TranscodingProfile(BaseModel):
     """
@@ -51,7 +52,8 @@ class TranscodingProfile(BaseModel):
     __properties: ClassVar[List[str]] = ["Container", "Type", "VideoCodec", "AudioCodec", "Protocol", "EstimateContentLength", "EnableMpegtsM2TsMode", "TranscodeSeekInfo", "CopyTimestamps", "Context", "EnableSubtitlesInManifest", "MaxAudioChannels", "MinSegments", "SegmentLength", "BreakOnNonKeyFrames", "Conditions", "EnableAudioVbrEncoding"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -63,8 +65,7 @@ class TranscodingProfile(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -93,8 +94,7 @@ class TranscodingProfile(BaseModel):
         _items = []
         if self.conditions:
             for _item_conditions in self.conditions:
-                if _item_conditions:
-                    _items.append(_item_conditions.to_dict())
+                _items.append(_item_conditions.to_dict() if _item_conditions is not None else None)
             _dict['Conditions'] = _items
         # set to None if max_audio_channels (nullable) is None
         # and model_fields_set contains the field
@@ -132,7 +132,7 @@ class TranscodingProfile(BaseModel):
             "MaxAudioChannels": obj.get("MaxAudioChannels"),
             "MinSegments": obj.get("MinSegments") if obj.get("MinSegments") is not None else 0,
             "SegmentLength": obj.get("SegmentLength") if obj.get("SegmentLength") is not None else 0,
-            "BreakOnNonKeyFrames": obj.get("BreakOnNonKeyFrames") if obj.get("BreakOnNonKeyFrames") is not None else False,
+            "BreakOnNonKeyFrames": obj.get("BreakOnNonKeyFrames") if "BreakOnNonKeyFrames" in obj else False,
             "Conditions": [ProfileCondition.from_dict(_item) for _item in obj["Conditions"]] if obj.get("Conditions") is not None else None,
             "EnableAudioVbrEncoding": obj.get("EnableAudioVbrEncoding") if obj.get("EnableAudioVbrEncoding") is not None else True
         })

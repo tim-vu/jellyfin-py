@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.image_type import ImageType
@@ -47,7 +47,7 @@ class PersonApi:
     def get_person(
         self,
         name: Annotated[StrictStr, Field(description="Person name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,7 +67,7 @@ class PersonApi:
         :param name: Person name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -121,7 +121,7 @@ class PersonApi:
     def get_person_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="Person name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,7 +141,7 @@ class PersonApi:
         :param name: Person name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -195,7 +195,7 @@ class PersonApi:
     def get_person_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="Person name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -215,7 +215,7 @@ class PersonApi:
         :param name: Person name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -350,9 +350,9 @@ class PersonApi:
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         exclude_person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified results will be filtered to exclude those containing the specified PersonType. Allows multiple, comma-delimited.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified results will be filtered to include only those containing the specified PersonType. Allows multiple, comma-delimited.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific library. Omit to use the root.")] = None,
-        appears_in_item_id: Annotated[Optional[StrictStr], Field(description="Optional. If specified, person results will be filtered on items related to said persons.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific library. Omit to use the root.")] = None,
+        appears_in_item_id: Annotated[Optional[UUID], Field(description="Optional. If specified, person results will be filtered on items related to said persons.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional, include image information in output.")] = None,
         _request_timeout: Union[
             None,
@@ -399,11 +399,11 @@ class PersonApi:
         :param person_types: Optional. If specified results will be filtered to include only those containing the specified PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param parent_id: Optional. Specify this to localize the search to a specific library. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param appears_in_item_id: Optional. If specified, person results will be filtered on items related to said persons.
-        :type appears_in_item_id: str
+        :type appears_in_item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param enable_images: Optional, include image information in output.
         :type enable_images: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -487,9 +487,9 @@ class PersonApi:
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         exclude_person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified results will be filtered to exclude those containing the specified PersonType. Allows multiple, comma-delimited.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified results will be filtered to include only those containing the specified PersonType. Allows multiple, comma-delimited.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific library. Omit to use the root.")] = None,
-        appears_in_item_id: Annotated[Optional[StrictStr], Field(description="Optional. If specified, person results will be filtered on items related to said persons.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific library. Omit to use the root.")] = None,
+        appears_in_item_id: Annotated[Optional[UUID], Field(description="Optional. If specified, person results will be filtered on items related to said persons.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional, include image information in output.")] = None,
         _request_timeout: Union[
             None,
@@ -536,11 +536,11 @@ class PersonApi:
         :param person_types: Optional. If specified results will be filtered to include only those containing the specified PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param parent_id: Optional. Specify this to localize the search to a specific library. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param appears_in_item_id: Optional. If specified, person results will be filtered on items related to said persons.
-        :type appears_in_item_id: str
+        :type appears_in_item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param enable_images: Optional, include image information in output.
         :type enable_images: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -624,9 +624,9 @@ class PersonApi:
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         exclude_person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified results will be filtered to exclude those containing the specified PersonType. Allows multiple, comma-delimited.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified results will be filtered to include only those containing the specified PersonType. Allows multiple, comma-delimited.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Specify this to localize the search to a specific library. Omit to use the root.")] = None,
-        appears_in_item_id: Annotated[Optional[StrictStr], Field(description="Optional. If specified, person results will be filtered on items related to said persons.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Specify this to localize the search to a specific library. Omit to use the root.")] = None,
+        appears_in_item_id: Annotated[Optional[UUID], Field(description="Optional. If specified, person results will be filtered on items related to said persons.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional, include image information in output.")] = None,
         _request_timeout: Union[
             None,
@@ -673,11 +673,11 @@ class PersonApi:
         :param person_types: Optional. If specified results will be filtered to include only those containing the specified PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param parent_id: Optional. Specify this to localize the search to a specific library. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param appears_in_item_id: Optional. If specified, person results will be filtered on items related to said persons.
-        :type appears_in_item_id: str
+        :type appears_in_item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param enable_images: Optional, include image information in output.
         :type enable_images: bool
         :param _request_timeout: timeout setting for this request. If one
