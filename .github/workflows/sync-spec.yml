@@ -35,7 +35,7 @@ jobs:
           else
             printf 'chore(deps): refresh Jellyfin %s spec\n' "$version" > "$RUNNER_TEMP/message"
           fi
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         if: steps.spec.outputs.changed == 'true'
         with:
           branch: feature/code-generation
