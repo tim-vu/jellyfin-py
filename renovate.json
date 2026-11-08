@@ -13,6 +13,11 @@
   ],
   "packageRules": [
     {
+      "description": "setup-python's python-version is a CI choice, not a dependency to chase.",
+      "matchDepNames": ["python"],
+      "enabled": false
+    },
+    {
       "description": "Generator bumps change the generated code but not the Jellyfin version: no release on their own.",
       "matchManagers": ["custom.regex", "github-actions"],
       "semanticCommitType": "chore",

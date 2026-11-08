@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,6 +24,9 @@ jobs:
 
   up-to-date:
     # Guards against hand-edits: the committed tree must equal generator output.
+    # Skipped on Renovate branches: regenerate.yml commits their output after
+    # this workflow has started, and that commit does not retrigger CI.
+    if: ${{ !startsWith(github.head_ref, 'renovate/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
