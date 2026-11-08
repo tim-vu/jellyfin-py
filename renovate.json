@@ -1,11 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "enabledManagers": ["custom.regex", "github-actions"],
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": [
+    "custom.regex",
+    "github-actions"
+  ],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^versions\\.env$/"],
+      "managerFilePatterns": [
+        "/^versions\\.env$/"
+      ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\nGENERATOR_VERSION=(?<currentValue>\\S+)"
       ]
@@ -14,14 +21,31 @@
   "packageRules": [
     {
       "description": "setup-python's python-version is a CI choice, not a dependency to chase.",
-      "matchDepNames": ["python"],
+      "matchDepNames": [
+        "python"
+      ],
       "enabled": false
     },
     {
       "description": "Generator bumps change the generated code but not the Jellyfin version: no release on their own.",
-      "matchManagers": ["custom.regex", "github-actions"],
+      "matchManagers": [
+        "custom.regex",
+        "github-actions"
+      ],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps"
+    },
+    {
+      "description": "Automerge non-major GitHub Actions updates once CI passes. Majors and generator bumps stay manual: generated output is not re-tested after regenerate.yml commits.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "automerge": true
     }
   ]
 }
