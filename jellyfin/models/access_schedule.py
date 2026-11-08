@@ -17,25 +17,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from jellyfin.models.dynamic_day_of_week import DynamicDayOfWeek
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class AccessSchedule(BaseModel):
     """
     An entity representing a user's access schedule.
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="Gets the id of this instance.", alias="Id")
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets the id of the associated user.", alias="UserId")
+    user_id: Optional[UUID] = Field(default=None, description="Gets the id of the associated user.", alias="UserId")
     day_of_week: Optional[DynamicDayOfWeek] = Field(default=None, description="Gets or sets the day of week.", alias="DayOfWeek")
     start_hour: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Gets or sets the start hour.", alias="StartHour")
     end_hour: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Gets or sets the end hour.", alias="EndHour")
     __properties: ClassVar[List[str]] = ["Id", "UserId", "DayOfWeek", "StartHour", "EndHour"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +50,7 @@ class AccessSchedule(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

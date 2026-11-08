@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.font_file import FontFile
 from jellyfin.models.remote_subtitle_info import RemoteSubtitleInfo
 from jellyfin.models.upload_subtitle_dto import UploadSubtitleDto
@@ -44,7 +44,7 @@ class SubtitleApi:
     @validate_call
     def delete_subtitle(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         index: Annotated[StrictInt, Field(description="The index of the subtitle file.")],
         _request_timeout: Union[
             None,
@@ -63,7 +63,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param index: The index of the subtitle file. (required)
         :type index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -118,7 +118,7 @@ class SubtitleApi:
     @validate_call
     def delete_subtitle_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         index: Annotated[StrictInt, Field(description="The index of the subtitle file.")],
         _request_timeout: Union[
             None,
@@ -137,7 +137,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param index: The index of the subtitle file. (required)
         :type index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -192,7 +192,7 @@ class SubtitleApi:
     @validate_call
     def delete_subtitle_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         index: Annotated[StrictInt, Field(description="The index of the subtitle file.")],
         _request_timeout: Union[
             None,
@@ -211,7 +211,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param index: The index of the subtitle file. (required)
         :type index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -332,7 +332,7 @@ class SubtitleApi:
     @validate_call
     def download_remote_subtitles(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         subtitle_id: Annotated[StrictStr, Field(description="The subtitle id.")],
         _request_timeout: Union[
             None,
@@ -351,7 +351,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param subtitle_id: The subtitle id. (required)
         :type subtitle_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -406,7 +406,7 @@ class SubtitleApi:
     @validate_call
     def download_remote_subtitles_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         subtitle_id: Annotated[StrictStr, Field(description="The subtitle id.")],
         _request_timeout: Union[
             None,
@@ -425,7 +425,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param subtitle_id: The subtitle id. (required)
         :type subtitle_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -480,7 +480,7 @@ class SubtitleApi:
     @validate_call
     def download_remote_subtitles_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         subtitle_id: Annotated[StrictStr, Field(description="The subtitle id.")],
         _request_timeout: Union[
             None,
@@ -499,7 +499,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param subtitle_id: The subtitle id. (required)
         :type subtitle_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -633,7 +633,7 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a fallback font file.
 
 
@@ -670,7 +670,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -702,7 +702,7 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a fallback font file.
 
 
@@ -739,7 +739,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -808,7 +808,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -1156,7 +1156,7 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets the remote subtitles.
 
 
@@ -1193,7 +1193,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -1225,7 +1225,7 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets the remote subtitles.
 
 
@@ -1262,7 +1262,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -1331,7 +1331,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -1411,11 +1411,11 @@ class SubtitleApi:
     @validate_call
     def get_subtitle(
         self,
-        route_item_id: Annotated[StrictStr, Field(description="The (route) item id.")],
+        route_item_id: Annotated[UUID, Field(description="The (route) item id.")],
         route_media_source_id: Annotated[StrictStr, Field(description="The (route) media source id.")],
         route_index: Annotated[StrictInt, Field(description="The (route) subtitle stream index.")],
         route_format: Annotated[StrictStr, Field(description="The (route) format of the returned subtitle.")],
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media source id.")] = None,
         index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="The format of the returned subtitle.")] = None,
@@ -1435,12 +1435,12 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets subtitles in a specified format.
 
 
         :param route_item_id: The (route) item id. (required)
-        :type route_item_id: str
+        :type route_item_id: UUID
         :param route_media_source_id: The (route) media source id. (required)
         :type route_media_source_id: str
         :param route_index: The (route) subtitle stream index. (required)
@@ -1448,7 +1448,7 @@ class SubtitleApi:
         :param route_format: The (route) format of the returned subtitle. (required)
         :type route_format: str
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param media_source_id: The media source id.
         :type media_source_id: str
         :param index: The subtitle stream index.
@@ -1505,7 +1505,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1522,11 +1522,11 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_with_http_info(
         self,
-        route_item_id: Annotated[StrictStr, Field(description="The (route) item id.")],
+        route_item_id: Annotated[UUID, Field(description="The (route) item id.")],
         route_media_source_id: Annotated[StrictStr, Field(description="The (route) media source id.")],
         route_index: Annotated[StrictInt, Field(description="The (route) subtitle stream index.")],
         route_format: Annotated[StrictStr, Field(description="The (route) format of the returned subtitle.")],
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media source id.")] = None,
         index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="The format of the returned subtitle.")] = None,
@@ -1546,12 +1546,12 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets subtitles in a specified format.
 
 
         :param route_item_id: The (route) item id. (required)
-        :type route_item_id: str
+        :type route_item_id: UUID
         :param route_media_source_id: The (route) media source id. (required)
         :type route_media_source_id: str
         :param route_index: The (route) subtitle stream index. (required)
@@ -1559,7 +1559,7 @@ class SubtitleApi:
         :param route_format: The (route) format of the returned subtitle. (required)
         :type route_format: str
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param media_source_id: The media source id.
         :type media_source_id: str
         :param index: The subtitle stream index.
@@ -1616,7 +1616,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1633,11 +1633,11 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_without_preload_content(
         self,
-        route_item_id: Annotated[StrictStr, Field(description="The (route) item id.")],
+        route_item_id: Annotated[UUID, Field(description="The (route) item id.")],
         route_media_source_id: Annotated[StrictStr, Field(description="The (route) media source id.")],
         route_index: Annotated[StrictInt, Field(description="The (route) subtitle stream index.")],
         route_format: Annotated[StrictStr, Field(description="The (route) format of the returned subtitle.")],
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media source id.")] = None,
         index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         format: Annotated[Optional[StrictStr], Field(description="The format of the returned subtitle.")] = None,
@@ -1662,7 +1662,7 @@ class SubtitleApi:
 
 
         :param route_item_id: The (route) item id. (required)
-        :type route_item_id: str
+        :type route_item_id: UUID
         :param route_media_source_id: The (route) media source id. (required)
         :type route_media_source_id: str
         :param route_index: The (route) subtitle stream index. (required)
@@ -1670,7 +1670,7 @@ class SubtitleApi:
         :param route_format: The (route) format of the returned subtitle. (required)
         :type route_format: str
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param media_source_id: The media source id.
         :type media_source_id: str
         :param index: The subtitle stream index.
@@ -1727,7 +1727,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -1853,7 +1853,7 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_playlist(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         index: Annotated[StrictInt, Field(description="The subtitle stream index.")],
         media_source_id: Annotated[StrictStr, Field(description="The media source id.")],
         segment_length: Annotated[StrictInt, Field(description="The subtitle segment length.")],
@@ -1869,12 +1869,12 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an HLS subtitle playlist.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param index: The subtitle stream index. (required)
         :type index: int
         :param media_source_id: The media source id. (required)
@@ -1915,7 +1915,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -1935,7 +1935,7 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_playlist_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         index: Annotated[StrictInt, Field(description="The subtitle stream index.")],
         media_source_id: Annotated[StrictStr, Field(description="The media source id.")],
         segment_length: Annotated[StrictInt, Field(description="The subtitle segment length.")],
@@ -1951,12 +1951,12 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an HLS subtitle playlist.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param index: The subtitle stream index. (required)
         :type index: int
         :param media_source_id: The media source id. (required)
@@ -1997,7 +1997,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -2017,7 +2017,7 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_playlist_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         index: Annotated[StrictInt, Field(description="The subtitle stream index.")],
         media_source_id: Annotated[StrictStr, Field(description="The media source id.")],
         segment_length: Annotated[StrictInt, Field(description="The subtitle segment length.")],
@@ -2038,7 +2038,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param index: The subtitle stream index. (required)
         :type index: int
         :param media_source_id: The media source id. (required)
@@ -2079,7 +2079,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -2174,12 +2174,12 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_with_ticks(
         self,
-        route_item_id: Annotated[StrictStr, Field(description="The (route) item id.")],
+        route_item_id: Annotated[UUID, Field(description="The (route) item id.")],
         route_media_source_id: Annotated[StrictStr, Field(description="The (route) media source id.")],
         route_index: Annotated[StrictInt, Field(description="The (route) subtitle stream index.")],
         route_start_position_ticks: Annotated[StrictInt, Field(description="The (route) start position of the subtitle in ticks.")],
         route_format: Annotated[StrictStr, Field(description="The (route) format of the returned subtitle.")],
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media source id.")] = None,
         index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         start_position_ticks: Annotated[Optional[StrictInt], Field(description="The start position of the subtitle in ticks.")] = None,
@@ -2199,12 +2199,12 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets subtitles in a specified format.
 
 
         :param route_item_id: The (route) item id. (required)
-        :type route_item_id: str
+        :type route_item_id: UUID
         :param route_media_source_id: The (route) media source id. (required)
         :type route_media_source_id: str
         :param route_index: The (route) subtitle stream index. (required)
@@ -2214,7 +2214,7 @@ class SubtitleApi:
         :param route_format: The (route) format of the returned subtitle. (required)
         :type route_format: str
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param media_source_id: The media source id.
         :type media_source_id: str
         :param index: The subtitle stream index.
@@ -2272,7 +2272,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2289,12 +2289,12 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_with_ticks_with_http_info(
         self,
-        route_item_id: Annotated[StrictStr, Field(description="The (route) item id.")],
+        route_item_id: Annotated[UUID, Field(description="The (route) item id.")],
         route_media_source_id: Annotated[StrictStr, Field(description="The (route) media source id.")],
         route_index: Annotated[StrictInt, Field(description="The (route) subtitle stream index.")],
         route_start_position_ticks: Annotated[StrictInt, Field(description="The (route) start position of the subtitle in ticks.")],
         route_format: Annotated[StrictStr, Field(description="The (route) format of the returned subtitle.")],
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media source id.")] = None,
         index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         start_position_ticks: Annotated[Optional[StrictInt], Field(description="The start position of the subtitle in ticks.")] = None,
@@ -2314,12 +2314,12 @@ class SubtitleApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets subtitles in a specified format.
 
 
         :param route_item_id: The (route) item id. (required)
-        :type route_item_id: str
+        :type route_item_id: UUID
         :param route_media_source_id: The (route) media source id. (required)
         :type route_media_source_id: str
         :param route_index: The (route) subtitle stream index. (required)
@@ -2329,7 +2329,7 @@ class SubtitleApi:
         :param route_format: The (route) format of the returned subtitle. (required)
         :type route_format: str
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param media_source_id: The media source id.
         :type media_source_id: str
         :param index: The subtitle stream index.
@@ -2387,7 +2387,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2404,12 +2404,12 @@ class SubtitleApi:
     @validate_call
     def get_subtitle_with_ticks_without_preload_content(
         self,
-        route_item_id: Annotated[StrictStr, Field(description="The (route) item id.")],
+        route_item_id: Annotated[UUID, Field(description="The (route) item id.")],
         route_media_source_id: Annotated[StrictStr, Field(description="The (route) media source id.")],
         route_index: Annotated[StrictInt, Field(description="The (route) subtitle stream index.")],
         route_start_position_ticks: Annotated[StrictInt, Field(description="The (route) start position of the subtitle in ticks.")],
         route_format: Annotated[StrictStr, Field(description="The (route) format of the returned subtitle.")],
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="The media source id.")] = None,
         index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         start_position_ticks: Annotated[Optional[StrictInt], Field(description="The start position of the subtitle in ticks.")] = None,
@@ -2434,7 +2434,7 @@ class SubtitleApi:
 
 
         :param route_item_id: The (route) item id. (required)
-        :type route_item_id: str
+        :type route_item_id: UUID
         :param route_media_source_id: The (route) media source id. (required)
         :type route_media_source_id: str
         :param route_index: The (route) subtitle stream index. (required)
@@ -2444,7 +2444,7 @@ class SubtitleApi:
         :param route_format: The (route) format of the returned subtitle. (required)
         :type route_format: str
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param media_source_id: The media source id.
         :type media_source_id: str
         :param index: The subtitle stream index.
@@ -2502,7 +2502,7 @@ class SubtitleApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
         }
         response_data = self.api_client.call_api(
@@ -2631,7 +2631,7 @@ class SubtitleApi:
     @validate_call
     def search_remote_subtitles(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         language: Annotated[StrictStr, Field(description="The language of the subtitles.")],
         is_perfect_match: Annotated[Optional[StrictBool], Field(description="Optional. Only show subtitles which are a perfect match.")] = None,
         _request_timeout: Union[
@@ -2651,7 +2651,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param language: The language of the subtitles. (required)
         :type language: str
         :param is_perfect_match: Optional. Only show subtitles which are a perfect match.
@@ -2709,7 +2709,7 @@ class SubtitleApi:
     @validate_call
     def search_remote_subtitles_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         language: Annotated[StrictStr, Field(description="The language of the subtitles.")],
         is_perfect_match: Annotated[Optional[StrictBool], Field(description="Optional. Only show subtitles which are a perfect match.")] = None,
         _request_timeout: Union[
@@ -2729,7 +2729,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param language: The language of the subtitles. (required)
         :type language: str
         :param is_perfect_match: Optional. Only show subtitles which are a perfect match.
@@ -2787,7 +2787,7 @@ class SubtitleApi:
     @validate_call
     def search_remote_subtitles_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         language: Annotated[StrictStr, Field(description="The language of the subtitles.")],
         is_perfect_match: Annotated[Optional[StrictBool], Field(description="Optional. Only show subtitles which are a perfect match.")] = None,
         _request_timeout: Union[
@@ -2807,7 +2807,7 @@ class SubtitleApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param language: The language of the subtitles. (required)
         :type language: str
         :param is_perfect_match: Optional. Only show subtitles which are a perfect match.
@@ -2936,7 +2936,7 @@ class SubtitleApi:
     @validate_call
     def upload_subtitle(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item the subtitle belongs to.")],
+        item_id: Annotated[UUID, Field(description="The item the subtitle belongs to.")],
         upload_subtitle_dto: Annotated[UploadSubtitleDto, Field(description="The request body.")],
         _request_timeout: Union[
             None,
@@ -2955,7 +2955,7 @@ class SubtitleApi:
 
 
         :param item_id: The item the subtitle belongs to. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param upload_subtitle_dto: The request body. (required)
         :type upload_subtitle_dto: UploadSubtitleDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3010,7 +3010,7 @@ class SubtitleApi:
     @validate_call
     def upload_subtitle_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item the subtitle belongs to.")],
+        item_id: Annotated[UUID, Field(description="The item the subtitle belongs to.")],
         upload_subtitle_dto: Annotated[UploadSubtitleDto, Field(description="The request body.")],
         _request_timeout: Union[
             None,
@@ -3029,7 +3029,7 @@ class SubtitleApi:
 
 
         :param item_id: The item the subtitle belongs to. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param upload_subtitle_dto: The request body. (required)
         :type upload_subtitle_dto: UploadSubtitleDto
         :param _request_timeout: timeout setting for this request. If one
@@ -3084,7 +3084,7 @@ class SubtitleApi:
     @validate_call
     def upload_subtitle_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item the subtitle belongs to.")],
+        item_id: Annotated[UUID, Field(description="The item the subtitle belongs to.")],
         upload_subtitle_dto: Annotated[UploadSubtitleDto, Field(description="The request body.")],
         _request_timeout: Union[
             None,
@@ -3103,7 +3103,7 @@ class SubtitleApi:
 
 
         :param item_id: The item the subtitle belongs to. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param upload_subtitle_dto: The request body. (required)
         :type upload_subtitle_dto: UploadSubtitleDto
         :param _request_timeout: timeout setting for this request. If one

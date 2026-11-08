@@ -16,421 +16,839 @@
 
 __version__ = "12.4.0" # x-release-please-version
 
+# Define package exports
+__all__ = [
+    "ArtistApi",
+    "AudioApi",
+    "AuthenticationApi",
+    "BackupApi",
+    "BrandingApi",
+    "ChannelApi",
+    "CollectionApi",
+    "DeviceApi",
+    "DisplayPreferenceApi",
+    "EnvironmentApi",
+    "FilterApi",
+    "GenreApi",
+    "ImageApi",
+    "InstantMixApi",
+    "ItemLookupApi",
+    "ItemUpdateApi",
+    "LibraryApi",
+    "LibraryStructureApi",
+    "LiveTvApi",
+    "LocalizationApi",
+    "LyricApi",
+    "MediaInfoApi",
+    "MediaSegmentApi",
+    "MovieApi",
+    "MusicGenreApi",
+    "PersonApi",
+    "PlaylistApi",
+    "PluginApi",
+    "RemoteImageApi",
+    "ScheduledTaskApi",
+    "SearchApi",
+    "SessionApi",
+    "ShowApi",
+    "StartupApi",
+    "StudioApi",
+    "SubtitleApi",
+    "SuggestionApi",
+    "SyncPlayApi",
+    "SystemApi",
+    "TrailerApi",
+    "TrickPlayApi",
+    "UserApi",
+    "UserDataApi",
+    "UserViewApi",
+    "VideoApi",
+    "YearApi",
+    "ApiResponse",
+    "ApiClient",
+    "Configuration",
+    "OpenApiException",
+    "ApiTypeError",
+    "ApiValueError",
+    "ApiKeyError",
+    "ApiAttributeError",
+    "ApiException",
+    "AccessSchedule",
+    "ActivityLogEntry",
+    "ActivityLogEntryMessage",
+    "ActivityLogEntryQueryResult",
+    "ActivityLogEntryStartMessage",
+    "ActivityLogEntryStopMessage",
+    "ActivityLogSortBy",
+    "AddVirtualFolderDto",
+    "AlbumInfo",
+    "AlbumInfoRemoteSearchQuery",
+    "AllThemeMediaResult",
+    "ArtistInfo",
+    "ArtistInfoRemoteSearchQuery",
+    "AudioSpatialFormat",
+    "AuthenticateUserByName",
+    "AuthenticationInfo",
+    "AuthenticationInfoQueryResult",
+    "AuthenticationResult",
+    "BackupManifestDto",
+    "BackupOptionsDto",
+    "BackupRestoreRequestDto",
+    "BaseItemDto",
+    "BaseItemDtoImageBlurHashes",
+    "BaseItemDtoQueryResult",
+    "BaseItemKind",
+    "BaseItemPerson",
+    "BaseItemPersonImageBlurHashes",
+    "BookInfo",
+    "BookInfoRemoteSearchQuery",
+    "BoxSetInfo",
+    "BoxSetInfoRemoteSearchQuery",
+    "BrandingOptionsDto",
+    "BufferRequestDto",
+    "CastReceiverApplication",
+    "ChannelFeatures",
+    "ChannelItemSortField",
+    "ChannelMappingOptionsDto",
+    "ChannelMediaContentType",
+    "ChannelMediaType",
+    "ChannelType",
+    "ChapterInfo",
+    "ClientCapabilitiesDto",
+    "ClientLogDocumentResponseDto",
+    "CodecProfile",
+    "CodecType",
+    "CollectionCreationResult",
+    "CollectionType",
+    "CollectionTypeOptions",
+    "ConfigurationPageInfo",
+    "ContainerProfile",
+    "CountryInfo",
+    "CreatePlaylistDto",
+    "CreateUserByName",
+    "CultureDto",
+    "CustomDatabaseOption",
+    "CustomDatabaseOptions",
+    "DatabaseConfigurationOptions",
+    "DatabaseLockingBehaviorTypes",
+    "DayOfWeek",
+    "DayPattern",
+    "DefaultDirectoryBrowserInfoDto",
+    "DeinterlaceMethod",
+    "DeviceInfoDto",
+    "DeviceInfoDtoQueryResult",
+    "DeviceOptionsDto",
+    "DeviceProfile",
+    "DirectPlayProfile",
+    "DisplayPreferencesDto",
+    "DlnaProfileType",
+    "DownMixStereoAlgorithms",
+    "DynamicDayOfWeek",
+    "EmbeddedSubtitleOptions",
+    "EncoderPreset",
+    "EncodingContext",
+    "EncodingOptions",
+    "EndPointInfo",
+    "ExternalIdInfo",
+    "ExternalIdMediaType",
+    "ExternalUrl",
+    "ExtraType",
+    "FileSystemEntryInfo",
+    "FileSystemEntryType",
+    "FolderStorageDto",
+    "FontFile",
+    "ForceKeepAliveMessage",
+    "ForgotPasswordAction",
+    "ForgotPasswordDto",
+    "ForgotPasswordPinDto",
+    "ForgotPasswordResult",
+    "GeneralCommand",
+    "GeneralCommandMessage",
+    "GeneralCommandType",
+    "GetProgramsDto",
+    "GroupInfoDto",
+    "GroupQueueMode",
+    "GroupRepeatMode",
+    "GroupShuffleMode",
+    "GroupStateType",
+    "GroupStateUpdate",
+    "GroupUpdate",
+    "GroupUpdateType",
+    "GuideInfo",
+    "HardwareAccelerationType",
+    "HlsAudioSeekStrategy",
+    "IPlugin",
+    "IgnoreWaitRequestDto",
+    "ImageFormat",
+    "ImageInfo",
+    "ImageOption",
+    "ImageOrientation",
+    "ImageProviderInfo",
+    "ImageResolution",
+    "ImageSavingConvention",
+    "ImageType",
+    "InboundKeepAliveMessage",
+    "InboundWebSocketMessage",
+    "InstallationInfo",
+    "IsoType",
+    "ItemCounts",
+    "ItemFields",
+    "ItemFilter",
+    "ItemSortBy",
+    "JoinGroupRequestDto",
+    "KeepUntil",
+    "LibraryChangedMessage",
+    "LibraryOptionInfoDto",
+    "LibraryOptions",
+    "LibraryOptionsResultDto",
+    "LibraryStorageDto",
+    "LibraryTypeOptionsDto",
+    "LibraryUpdateInfo",
+    "ListingsProviderInfo",
+    "LiveStreamResponse",
+    "LiveTvInfo",
+    "LiveTvOptions",
+    "LiveTvServiceInfo",
+    "LiveTvServiceStatus",
+    "LocalizationOption",
+    "LocationType",
+    "LogFile",
+    "LogLevel",
+    "LyricDto",
+    "LyricLine",
+    "LyricLineCue",
+    "LyricMetadata",
+    "MediaAttachment",
+    "MediaPathDto",
+    "MediaPathInfo",
+    "MediaProtocol",
+    "MediaSegmentDto",
+    "MediaSegmentDtoQueryResult",
+    "MediaSegmentType",
+    "MediaSourceInfo",
+    "MediaSourceType",
+    "MediaStream",
+    "MediaStreamProtocol",
+    "MediaStreamType",
+    "MediaType",
+    "MediaUpdateInfoDto",
+    "MediaUpdateInfoPathDto",
+    "MediaUrl",
+    "MessageCommand",
+    "MetadataConfiguration",
+    "MetadataEditorInfo",
+    "MetadataField",
+    "MetadataOptions",
+    "MetadataRefreshMode",
+    "MovePlaylistItemRequestDto",
+    "MovieInfo",
+    "MovieInfoRemoteSearchQuery",
+    "MusicVideoInfo",
+    "MusicVideoInfoRemoteSearchQuery",
+    "NameGuidPair",
+    "NameIdPair",
+    "NameValuePair",
+    "NetworkConfiguration",
+    "NewGroupRequestDto",
+    "NextItemRequestDto",
+    "OpenLiveStreamDto",
+    "OutboundKeepAliveMessage",
+    "OutboundWebSocketMessage",
+    "PackageInfo",
+    "ParentalRating",
+    "ParentalRatingScore",
+    "PathSubstitution",
+    "PersonKind",
+    "PersonLookupInfo",
+    "PersonLookupInfoRemoteSearchQuery",
+    "PinRedeemResult",
+    "PingRequestDto",
+    "PlayAccess",
+    "PlayCommand",
+    "PlayMessage",
+    "PlayMethod",
+    "PlayQueueUpdate",
+    "PlayQueueUpdateReason",
+    "PlayRequest",
+    "PlayRequestDto",
+    "PlaybackErrorCode",
+    "PlaybackInfoDto",
+    "PlaybackInfoResponse",
+    "PlaybackOrder",
+    "PlaybackProgressInfo",
+    "PlaybackRequestType",
+    "PlaybackStartInfo",
+    "PlaybackStopInfo",
+    "PlayerStateInfo",
+    "PlaylistCreationResult",
+    "PlaylistDto",
+    "PlaylistUserPermissions",
+    "PlaystateCommand",
+    "PlaystateMessage",
+    "PlaystateRequest",
+    "PluginInfo",
+    "PluginInstallationCancelledMessage",
+    "PluginInstallationCompletedMessage",
+    "PluginInstallationFailedMessage",
+    "PluginInstallingMessage",
+    "PluginStatus",
+    "PluginUninstalledMessage",
+    "PreviousItemRequestDto",
+    "ProblemDetails",
+    "ProcessPriorityClass",
+    "ProfileCondition",
+    "ProfileConditionType",
+    "ProfileConditionValue",
+    "ProgramAudio",
+    "PublicSystemInfo",
+    "QueryFilters",
+    "QueryFiltersLegacy",
+    "QueueItem",
+    "QueueRequestDto",
+    "QuickConnectDto",
+    "QuickConnectResult",
+    "RatingType",
+    "ReadyRequestDto",
+    "RecommendationDto",
+    "RecommendationType",
+    "RecordingStatus",
+    "RefreshProgressMessage",
+    "RemoteImageInfo",
+    "RemoteImageResult",
+    "RemoteLyricInfoDto",
+    "RemoteSearchResult",
+    "RemoteSubtitleInfo",
+    "RemoveFromPlaylistRequestDto",
+    "RepeatMode",
+    "RepositoryInfo",
+    "RestartRequiredMessage",
+    "ScheduledTaskEndedMessage",
+    "ScheduledTasksInfoMessage",
+    "ScheduledTasksInfoStartMessage",
+    "ScheduledTasksInfoStopMessage",
+    "ScrollDirection",
+    "SearchHint",
+    "SearchHintResult",
+    "SeekRequestDto",
+    "SendCommand",
+    "SendCommandType",
+    "SeriesInfo",
+    "SeriesInfoRemoteSearchQuery",
+    "SeriesStatus",
+    "SeriesTimerCancelledMessage",
+    "SeriesTimerCreatedMessage",
+    "SeriesTimerInfoDto",
+    "SeriesTimerInfoDtoQueryResult",
+    "ServerConfiguration",
+    "ServerDiscoveryInfo",
+    "ServerRestartingMessage",
+    "ServerShuttingDownMessage",
+    "SessionInfoDto",
+    "SessionMessageType",
+    "SessionUserInfo",
+    "SessionsMessage",
+    "SessionsStartMessage",
+    "SessionsStopMessage",
+    "SetChannelMappingDto",
+    "SetPlaylistItemRequestDto",
+    "SetRepeatModeRequestDto",
+    "SetShuffleModeRequestDto",
+    "SongInfo",
+    "SortOrder",
+    "SpecialViewOptionDto",
+    "StartupConfigurationDto",
+    "StartupRemoteAccessDto",
+    "StartupUserDto",
+    "SubtitleDeliveryMethod",
+    "SubtitlePlaybackMode",
+    "SubtitleProfile",
+    "SyncPlayCommandMessage",
+    "SyncPlayGroupDoesNotExistUpdate",
+    "SyncPlayGroupJoinedUpdate",
+    "SyncPlayGroupLeftUpdate",
+    "SyncPlayGroupUpdateMessage",
+    "SyncPlayLibraryAccessDeniedUpdate",
+    "SyncPlayNotInGroupUpdate",
+    "SyncPlayPlayQueueUpdate",
+    "SyncPlayQueueItem",
+    "SyncPlayStateUpdate",
+    "SyncPlayUserAccessType",
+    "SyncPlayUserJoinedUpdate",
+    "SyncPlayUserLeftUpdate",
+    "SystemInfo",
+    "SystemStorageDto",
+    "TaskCompletionStatus",
+    "TaskInfo",
+    "TaskResult",
+    "TaskState",
+    "TaskTriggerInfo",
+    "TaskTriggerInfoType",
+    "ThemeMediaResult",
+    "TimerCancelledMessage",
+    "TimerCreatedMessage",
+    "TimerEventInfo",
+    "TimerInfoDto",
+    "TimerInfoDtoQueryResult",
+    "TonemappingAlgorithm",
+    "TonemappingMode",
+    "TonemappingRange",
+    "TrailerInfo",
+    "TrailerInfoRemoteSearchQuery",
+    "TranscodeReason",
+    "TranscodeSeekInfo",
+    "TranscodingInfo",
+    "TranscodingProfile",
+    "TransportStreamTimestamp",
+    "TrickplayInfoDto",
+    "TrickplayOptions",
+    "TrickplayScanBehavior",
+    "TunerChannelMapping",
+    "TunerHostInfo",
+    "TypeOptions",
+    "UnratedItem",
+    "UpdateLibraryOptionsDto",
+    "UpdateMediaPathRequestDto",
+    "UpdatePlaylistDto",
+    "UpdatePlaylistUserDto",
+    "UpdateUserItemDataDto",
+    "UpdateUserPassword",
+    "UploadSubtitleDto",
+    "UserConfiguration",
+    "UserDataChangeInfo",
+    "UserDataChangedMessage",
+    "UserDeletedMessage",
+    "UserDto",
+    "UserItemDataDto",
+    "UserPolicy",
+    "UserUpdatedMessage",
+    "UtcTimeResponse",
+    "ValidatePathDto",
+    "VersionInfo",
+    "Video3DFormat",
+    "VideoRange",
+    "VideoRangeType",
+    "VideoType",
+    "VirtualFolderInfo",
+    "WebSocketMessage",
+    "XbmcMetadataOptions",
+]
+
 # import apis into sdk package
-from jellyfin.api.artist_api import ArtistApi
-from jellyfin.api.audio_api import AudioApi
-from jellyfin.api.authentication_api import AuthenticationApi
-from jellyfin.api.backup_api import BackupApi
-from jellyfin.api.branding_api import BrandingApi
-from jellyfin.api.channel_api import ChannelApi
-from jellyfin.api.collection_api import CollectionApi
-from jellyfin.api.device_api import DeviceApi
-from jellyfin.api.display_preference_api import DisplayPreferenceApi
-from jellyfin.api.environment_api import EnvironmentApi
-from jellyfin.api.filter_api import FilterApi
-from jellyfin.api.genre_api import GenreApi
-from jellyfin.api.image_api import ImageApi
-from jellyfin.api.instant_mix_api import InstantMixApi
-from jellyfin.api.item_lookup_api import ItemLookupApi
-from jellyfin.api.item_update_api import ItemUpdateApi
-from jellyfin.api.library_api import LibraryApi
-from jellyfin.api.library_structure_api import LibraryStructureApi
-from jellyfin.api.live_tv_api import LiveTvApi
-from jellyfin.api.localization_api import LocalizationApi
-from jellyfin.api.lyric_api import LyricApi
-from jellyfin.api.media_info_api import MediaInfoApi
-from jellyfin.api.media_segment_api import MediaSegmentApi
-from jellyfin.api.movie_api import MovieApi
-from jellyfin.api.music_genre_api import MusicGenreApi
-from jellyfin.api.person_api import PersonApi
-from jellyfin.api.playlist_api import PlaylistApi
-from jellyfin.api.plugin_api import PluginApi
-from jellyfin.api.remote_image_api import RemoteImageApi
-from jellyfin.api.scheduled_task_api import ScheduledTaskApi
-from jellyfin.api.search_api import SearchApi
-from jellyfin.api.session_api import SessionApi
-from jellyfin.api.show_api import ShowApi
-from jellyfin.api.startup_api import StartupApi
-from jellyfin.api.studio_api import StudioApi
-from jellyfin.api.subtitle_api import SubtitleApi
-from jellyfin.api.suggestion_api import SuggestionApi
-from jellyfin.api.sync_play_api import SyncPlayApi
-from jellyfin.api.system_api import SystemApi
-from jellyfin.api.trailer_api import TrailerApi
-from jellyfin.api.trick_play_api import TrickPlayApi
-from jellyfin.api.user_api import UserApi
-from jellyfin.api.user_data_api import UserDataApi
-from jellyfin.api.user_view_api import UserViewApi
-from jellyfin.api.video_api import VideoApi
-from jellyfin.api.year_api import YearApi
+from jellyfin.api.artist_api import ArtistApi as ArtistApi
+from jellyfin.api.audio_api import AudioApi as AudioApi
+from jellyfin.api.authentication_api import AuthenticationApi as AuthenticationApi
+from jellyfin.api.backup_api import BackupApi as BackupApi
+from jellyfin.api.branding_api import BrandingApi as BrandingApi
+from jellyfin.api.channel_api import ChannelApi as ChannelApi
+from jellyfin.api.collection_api import CollectionApi as CollectionApi
+from jellyfin.api.device_api import DeviceApi as DeviceApi
+from jellyfin.api.display_preference_api import DisplayPreferenceApi as DisplayPreferenceApi
+from jellyfin.api.environment_api import EnvironmentApi as EnvironmentApi
+from jellyfin.api.filter_api import FilterApi as FilterApi
+from jellyfin.api.genre_api import GenreApi as GenreApi
+from jellyfin.api.image_api import ImageApi as ImageApi
+from jellyfin.api.instant_mix_api import InstantMixApi as InstantMixApi
+from jellyfin.api.item_lookup_api import ItemLookupApi as ItemLookupApi
+from jellyfin.api.item_update_api import ItemUpdateApi as ItemUpdateApi
+from jellyfin.api.library_api import LibraryApi as LibraryApi
+from jellyfin.api.library_structure_api import LibraryStructureApi as LibraryStructureApi
+from jellyfin.api.live_tv_api import LiveTvApi as LiveTvApi
+from jellyfin.api.localization_api import LocalizationApi as LocalizationApi
+from jellyfin.api.lyric_api import LyricApi as LyricApi
+from jellyfin.api.media_info_api import MediaInfoApi as MediaInfoApi
+from jellyfin.api.media_segment_api import MediaSegmentApi as MediaSegmentApi
+from jellyfin.api.movie_api import MovieApi as MovieApi
+from jellyfin.api.music_genre_api import MusicGenreApi as MusicGenreApi
+from jellyfin.api.person_api import PersonApi as PersonApi
+from jellyfin.api.playlist_api import PlaylistApi as PlaylistApi
+from jellyfin.api.plugin_api import PluginApi as PluginApi
+from jellyfin.api.remote_image_api import RemoteImageApi as RemoteImageApi
+from jellyfin.api.scheduled_task_api import ScheduledTaskApi as ScheduledTaskApi
+from jellyfin.api.search_api import SearchApi as SearchApi
+from jellyfin.api.session_api import SessionApi as SessionApi
+from jellyfin.api.show_api import ShowApi as ShowApi
+from jellyfin.api.startup_api import StartupApi as StartupApi
+from jellyfin.api.studio_api import StudioApi as StudioApi
+from jellyfin.api.subtitle_api import SubtitleApi as SubtitleApi
+from jellyfin.api.suggestion_api import SuggestionApi as SuggestionApi
+from jellyfin.api.sync_play_api import SyncPlayApi as SyncPlayApi
+from jellyfin.api.system_api import SystemApi as SystemApi
+from jellyfin.api.trailer_api import TrailerApi as TrailerApi
+from jellyfin.api.trick_play_api import TrickPlayApi as TrickPlayApi
+from jellyfin.api.user_api import UserApi as UserApi
+from jellyfin.api.user_data_api import UserDataApi as UserDataApi
+from jellyfin.api.user_view_api import UserViewApi as UserViewApi
+from jellyfin.api.video_api import VideoApi as VideoApi
+from jellyfin.api.year_api import YearApi as YearApi
 
 # import ApiClient
-from jellyfin.api_response import ApiResponse
-from jellyfin.api_client import ApiClient
-from jellyfin.configuration import Configuration
-from jellyfin.exceptions import OpenApiException
-from jellyfin.exceptions import ApiTypeError
-from jellyfin.exceptions import ApiValueError
-from jellyfin.exceptions import ApiKeyError
-from jellyfin.exceptions import ApiAttributeError
-from jellyfin.exceptions import ApiException
+from jellyfin.api_response import ApiResponse as ApiResponse
+from jellyfin.api_client import ApiClient as ApiClient
+from jellyfin.configuration import Configuration as Configuration
+from jellyfin.exceptions import OpenApiException as OpenApiException
+from jellyfin.exceptions import ApiTypeError as ApiTypeError
+from jellyfin.exceptions import ApiValueError as ApiValueError
+from jellyfin.exceptions import ApiKeyError as ApiKeyError
+from jellyfin.exceptions import ApiAttributeError as ApiAttributeError
+from jellyfin.exceptions import ApiException as ApiException
 
 # import models into sdk package
-from jellyfin.models.access_schedule import AccessSchedule
-from jellyfin.models.activity_log_entry import ActivityLogEntry
-from jellyfin.models.activity_log_entry_message import ActivityLogEntryMessage
-from jellyfin.models.activity_log_entry_query_result import ActivityLogEntryQueryResult
-from jellyfin.models.activity_log_entry_start_message import ActivityLogEntryStartMessage
-from jellyfin.models.activity_log_entry_stop_message import ActivityLogEntryStopMessage
-from jellyfin.models.activity_log_sort_by import ActivityLogSortBy
-from jellyfin.models.add_virtual_folder_dto import AddVirtualFolderDto
-from jellyfin.models.album_info import AlbumInfo
-from jellyfin.models.album_info_remote_search_query import AlbumInfoRemoteSearchQuery
-from jellyfin.models.all_theme_media_result import AllThemeMediaResult
-from jellyfin.models.artist_info import ArtistInfo
-from jellyfin.models.artist_info_remote_search_query import ArtistInfoRemoteSearchQuery
-from jellyfin.models.audio_spatial_format import AudioSpatialFormat
-from jellyfin.models.authenticate_user_by_name import AuthenticateUserByName
-from jellyfin.models.authentication_info import AuthenticationInfo
-from jellyfin.models.authentication_info_query_result import AuthenticationInfoQueryResult
-from jellyfin.models.authentication_result import AuthenticationResult
-from jellyfin.models.backup_manifest_dto import BackupManifestDto
-from jellyfin.models.backup_options_dto import BackupOptionsDto
-from jellyfin.models.backup_restore_request_dto import BackupRestoreRequestDto
-from jellyfin.models.base_item_dto import BaseItemDto
-from jellyfin.models.base_item_dto_image_blur_hashes import BaseItemDtoImageBlurHashes
-from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
-from jellyfin.models.base_item_kind import BaseItemKind
-from jellyfin.models.base_item_person import BaseItemPerson
-from jellyfin.models.base_item_person_image_blur_hashes import BaseItemPersonImageBlurHashes
-from jellyfin.models.book_info import BookInfo
-from jellyfin.models.book_info_remote_search_query import BookInfoRemoteSearchQuery
-from jellyfin.models.box_set_info import BoxSetInfo
-from jellyfin.models.box_set_info_remote_search_query import BoxSetInfoRemoteSearchQuery
-from jellyfin.models.branding_options_dto import BrandingOptionsDto
-from jellyfin.models.buffer_request_dto import BufferRequestDto
-from jellyfin.models.cast_receiver_application import CastReceiverApplication
-from jellyfin.models.channel_features import ChannelFeatures
-from jellyfin.models.channel_item_sort_field import ChannelItemSortField
-from jellyfin.models.channel_mapping_options_dto import ChannelMappingOptionsDto
-from jellyfin.models.channel_media_content_type import ChannelMediaContentType
-from jellyfin.models.channel_media_type import ChannelMediaType
-from jellyfin.models.channel_type import ChannelType
-from jellyfin.models.chapter_info import ChapterInfo
-from jellyfin.models.client_capabilities_dto import ClientCapabilitiesDto
-from jellyfin.models.client_log_document_response_dto import ClientLogDocumentResponseDto
-from jellyfin.models.codec_profile import CodecProfile
-from jellyfin.models.codec_type import CodecType
-from jellyfin.models.collection_creation_result import CollectionCreationResult
-from jellyfin.models.collection_type import CollectionType
-from jellyfin.models.collection_type_options import CollectionTypeOptions
-from jellyfin.models.configuration_page_info import ConfigurationPageInfo
-from jellyfin.models.container_profile import ContainerProfile
-from jellyfin.models.country_info import CountryInfo
-from jellyfin.models.create_playlist_dto import CreatePlaylistDto
-from jellyfin.models.create_user_by_name import CreateUserByName
-from jellyfin.models.culture_dto import CultureDto
-from jellyfin.models.custom_database_option import CustomDatabaseOption
-from jellyfin.models.custom_database_options import CustomDatabaseOptions
-from jellyfin.models.database_configuration_options import DatabaseConfigurationOptions
-from jellyfin.models.database_locking_behavior_types import DatabaseLockingBehaviorTypes
-from jellyfin.models.day_of_week import DayOfWeek
-from jellyfin.models.day_pattern import DayPattern
-from jellyfin.models.default_directory_browser_info_dto import DefaultDirectoryBrowserInfoDto
-from jellyfin.models.deinterlace_method import DeinterlaceMethod
-from jellyfin.models.device_info_dto import DeviceInfoDto
-from jellyfin.models.device_info_dto_query_result import DeviceInfoDtoQueryResult
-from jellyfin.models.device_options_dto import DeviceOptionsDto
-from jellyfin.models.device_profile import DeviceProfile
-from jellyfin.models.direct_play_profile import DirectPlayProfile
-from jellyfin.models.display_preferences_dto import DisplayPreferencesDto
-from jellyfin.models.dlna_profile_type import DlnaProfileType
-from jellyfin.models.down_mix_stereo_algorithms import DownMixStereoAlgorithms
-from jellyfin.models.dynamic_day_of_week import DynamicDayOfWeek
-from jellyfin.models.embedded_subtitle_options import EmbeddedSubtitleOptions
-from jellyfin.models.encoder_preset import EncoderPreset
-from jellyfin.models.encoding_context import EncodingContext
-from jellyfin.models.encoding_options import EncodingOptions
-from jellyfin.models.end_point_info import EndPointInfo
-from jellyfin.models.external_id_info import ExternalIdInfo
-from jellyfin.models.external_id_media_type import ExternalIdMediaType
-from jellyfin.models.external_url import ExternalUrl
-from jellyfin.models.extra_type import ExtraType
-from jellyfin.models.file_system_entry_info import FileSystemEntryInfo
-from jellyfin.models.file_system_entry_type import FileSystemEntryType
-from jellyfin.models.folder_storage_dto import FolderStorageDto
-from jellyfin.models.font_file import FontFile
-from jellyfin.models.force_keep_alive_message import ForceKeepAliveMessage
-from jellyfin.models.forgot_password_action import ForgotPasswordAction
-from jellyfin.models.forgot_password_dto import ForgotPasswordDto
-from jellyfin.models.forgot_password_pin_dto import ForgotPasswordPinDto
-from jellyfin.models.forgot_password_result import ForgotPasswordResult
-from jellyfin.models.general_command import GeneralCommand
-from jellyfin.models.general_command_message import GeneralCommandMessage
-from jellyfin.models.general_command_type import GeneralCommandType
-from jellyfin.models.get_programs_dto import GetProgramsDto
-from jellyfin.models.group_info_dto import GroupInfoDto
-from jellyfin.models.group_queue_mode import GroupQueueMode
-from jellyfin.models.group_repeat_mode import GroupRepeatMode
-from jellyfin.models.group_shuffle_mode import GroupShuffleMode
-from jellyfin.models.group_state_type import GroupStateType
-from jellyfin.models.group_state_update import GroupStateUpdate
-from jellyfin.models.group_update import GroupUpdate
-from jellyfin.models.group_update_type import GroupUpdateType
-from jellyfin.models.guide_info import GuideInfo
-from jellyfin.models.hardware_acceleration_type import HardwareAccelerationType
-from jellyfin.models.hls_audio_seek_strategy import HlsAudioSeekStrategy
-from jellyfin.models.i_plugin import IPlugin
-from jellyfin.models.ignore_wait_request_dto import IgnoreWaitRequestDto
-from jellyfin.models.image_format import ImageFormat
-from jellyfin.models.image_info import ImageInfo
-from jellyfin.models.image_option import ImageOption
-from jellyfin.models.image_orientation import ImageOrientation
-from jellyfin.models.image_provider_info import ImageProviderInfo
-from jellyfin.models.image_resolution import ImageResolution
-from jellyfin.models.image_saving_convention import ImageSavingConvention
-from jellyfin.models.image_type import ImageType
-from jellyfin.models.inbound_keep_alive_message import InboundKeepAliveMessage
-from jellyfin.models.inbound_web_socket_message import InboundWebSocketMessage
-from jellyfin.models.installation_info import InstallationInfo
-from jellyfin.models.iso_type import IsoType
-from jellyfin.models.item_counts import ItemCounts
-from jellyfin.models.item_fields import ItemFields
-from jellyfin.models.item_filter import ItemFilter
-from jellyfin.models.item_sort_by import ItemSortBy
-from jellyfin.models.join_group_request_dto import JoinGroupRequestDto
-from jellyfin.models.keep_until import KeepUntil
-from jellyfin.models.library_changed_message import LibraryChangedMessage
-from jellyfin.models.library_option_info_dto import LibraryOptionInfoDto
-from jellyfin.models.library_options import LibraryOptions
-from jellyfin.models.library_options_result_dto import LibraryOptionsResultDto
-from jellyfin.models.library_storage_dto import LibraryStorageDto
-from jellyfin.models.library_type_options_dto import LibraryTypeOptionsDto
-from jellyfin.models.library_update_info import LibraryUpdateInfo
-from jellyfin.models.listings_provider_info import ListingsProviderInfo
-from jellyfin.models.live_stream_response import LiveStreamResponse
-from jellyfin.models.live_tv_info import LiveTvInfo
-from jellyfin.models.live_tv_options import LiveTvOptions
-from jellyfin.models.live_tv_service_info import LiveTvServiceInfo
-from jellyfin.models.live_tv_service_status import LiveTvServiceStatus
-from jellyfin.models.localization_option import LocalizationOption
-from jellyfin.models.location_type import LocationType
-from jellyfin.models.log_file import LogFile
-from jellyfin.models.log_level import LogLevel
-from jellyfin.models.lyric_dto import LyricDto
-from jellyfin.models.lyric_line import LyricLine
-from jellyfin.models.lyric_line_cue import LyricLineCue
-from jellyfin.models.lyric_metadata import LyricMetadata
-from jellyfin.models.media_attachment import MediaAttachment
-from jellyfin.models.media_path_dto import MediaPathDto
-from jellyfin.models.media_path_info import MediaPathInfo
-from jellyfin.models.media_protocol import MediaProtocol
-from jellyfin.models.media_segment_dto import MediaSegmentDto
-from jellyfin.models.media_segment_dto_query_result import MediaSegmentDtoQueryResult
-from jellyfin.models.media_segment_type import MediaSegmentType
-from jellyfin.models.media_source_info import MediaSourceInfo
-from jellyfin.models.media_source_type import MediaSourceType
-from jellyfin.models.media_stream import MediaStream
-from jellyfin.models.media_stream_protocol import MediaStreamProtocol
-from jellyfin.models.media_stream_type import MediaStreamType
-from jellyfin.models.media_type import MediaType
-from jellyfin.models.media_update_info_dto import MediaUpdateInfoDto
-from jellyfin.models.media_update_info_path_dto import MediaUpdateInfoPathDto
-from jellyfin.models.media_url import MediaUrl
-from jellyfin.models.message_command import MessageCommand
-from jellyfin.models.metadata_configuration import MetadataConfiguration
-from jellyfin.models.metadata_editor_info import MetadataEditorInfo
-from jellyfin.models.metadata_field import MetadataField
-from jellyfin.models.metadata_options import MetadataOptions
-from jellyfin.models.metadata_refresh_mode import MetadataRefreshMode
-from jellyfin.models.move_playlist_item_request_dto import MovePlaylistItemRequestDto
-from jellyfin.models.movie_info import MovieInfo
-from jellyfin.models.movie_info_remote_search_query import MovieInfoRemoteSearchQuery
-from jellyfin.models.music_video_info import MusicVideoInfo
-from jellyfin.models.music_video_info_remote_search_query import MusicVideoInfoRemoteSearchQuery
-from jellyfin.models.name_guid_pair import NameGuidPair
-from jellyfin.models.name_id_pair import NameIdPair
-from jellyfin.models.name_value_pair import NameValuePair
-from jellyfin.models.network_configuration import NetworkConfiguration
-from jellyfin.models.new_group_request_dto import NewGroupRequestDto
-from jellyfin.models.next_item_request_dto import NextItemRequestDto
-from jellyfin.models.open_live_stream_dto import OpenLiveStreamDto
-from jellyfin.models.outbound_keep_alive_message import OutboundKeepAliveMessage
-from jellyfin.models.outbound_web_socket_message import OutboundWebSocketMessage
-from jellyfin.models.package_info import PackageInfo
-from jellyfin.models.parental_rating import ParentalRating
-from jellyfin.models.parental_rating_score import ParentalRatingScore
-from jellyfin.models.path_substitution import PathSubstitution
-from jellyfin.models.person_kind import PersonKind
-from jellyfin.models.person_lookup_info import PersonLookupInfo
-from jellyfin.models.person_lookup_info_remote_search_query import PersonLookupInfoRemoteSearchQuery
-from jellyfin.models.pin_redeem_result import PinRedeemResult
-from jellyfin.models.ping_request_dto import PingRequestDto
-from jellyfin.models.play_access import PlayAccess
-from jellyfin.models.play_command import PlayCommand
-from jellyfin.models.play_message import PlayMessage
-from jellyfin.models.play_method import PlayMethod
-from jellyfin.models.play_queue_update import PlayQueueUpdate
-from jellyfin.models.play_queue_update_reason import PlayQueueUpdateReason
-from jellyfin.models.play_request import PlayRequest
-from jellyfin.models.play_request_dto import PlayRequestDto
-from jellyfin.models.playback_error_code import PlaybackErrorCode
-from jellyfin.models.playback_info_dto import PlaybackInfoDto
-from jellyfin.models.playback_info_response import PlaybackInfoResponse
-from jellyfin.models.playback_order import PlaybackOrder
-from jellyfin.models.playback_progress_info import PlaybackProgressInfo
-from jellyfin.models.playback_request_type import PlaybackRequestType
-from jellyfin.models.playback_start_info import PlaybackStartInfo
-from jellyfin.models.playback_stop_info import PlaybackStopInfo
-from jellyfin.models.player_state_info import PlayerStateInfo
-from jellyfin.models.playlist_creation_result import PlaylistCreationResult
-from jellyfin.models.playlist_dto import PlaylistDto
-from jellyfin.models.playlist_user_permissions import PlaylistUserPermissions
-from jellyfin.models.playstate_command import PlaystateCommand
-from jellyfin.models.playstate_message import PlaystateMessage
-from jellyfin.models.playstate_request import PlaystateRequest
-from jellyfin.models.plugin_info import PluginInfo
-from jellyfin.models.plugin_installation_cancelled_message import PluginInstallationCancelledMessage
-from jellyfin.models.plugin_installation_completed_message import PluginInstallationCompletedMessage
-from jellyfin.models.plugin_installation_failed_message import PluginInstallationFailedMessage
-from jellyfin.models.plugin_installing_message import PluginInstallingMessage
-from jellyfin.models.plugin_status import PluginStatus
-from jellyfin.models.plugin_uninstalled_message import PluginUninstalledMessage
-from jellyfin.models.previous_item_request_dto import PreviousItemRequestDto
-from jellyfin.models.problem_details import ProblemDetails
-from jellyfin.models.process_priority_class import ProcessPriorityClass
-from jellyfin.models.profile_condition import ProfileCondition
-from jellyfin.models.profile_condition_type import ProfileConditionType
-from jellyfin.models.profile_condition_value import ProfileConditionValue
-from jellyfin.models.program_audio import ProgramAudio
-from jellyfin.models.public_system_info import PublicSystemInfo
-from jellyfin.models.query_filters import QueryFilters
-from jellyfin.models.query_filters_legacy import QueryFiltersLegacy
-from jellyfin.models.queue_item import QueueItem
-from jellyfin.models.queue_request_dto import QueueRequestDto
-from jellyfin.models.quick_connect_dto import QuickConnectDto
-from jellyfin.models.quick_connect_result import QuickConnectResult
-from jellyfin.models.rating_type import RatingType
-from jellyfin.models.ready_request_dto import ReadyRequestDto
-from jellyfin.models.recommendation_dto import RecommendationDto
-from jellyfin.models.recommendation_type import RecommendationType
-from jellyfin.models.recording_status import RecordingStatus
-from jellyfin.models.refresh_progress_message import RefreshProgressMessage
-from jellyfin.models.remote_image_info import RemoteImageInfo
-from jellyfin.models.remote_image_result import RemoteImageResult
-from jellyfin.models.remote_lyric_info_dto import RemoteLyricInfoDto
-from jellyfin.models.remote_search_result import RemoteSearchResult
-from jellyfin.models.remote_subtitle_info import RemoteSubtitleInfo
-from jellyfin.models.remove_from_playlist_request_dto import RemoveFromPlaylistRequestDto
-from jellyfin.models.repeat_mode import RepeatMode
-from jellyfin.models.repository_info import RepositoryInfo
-from jellyfin.models.restart_required_message import RestartRequiredMessage
-from jellyfin.models.scheduled_task_ended_message import ScheduledTaskEndedMessage
-from jellyfin.models.scheduled_tasks_info_message import ScheduledTasksInfoMessage
-from jellyfin.models.scheduled_tasks_info_start_message import ScheduledTasksInfoStartMessage
-from jellyfin.models.scheduled_tasks_info_stop_message import ScheduledTasksInfoStopMessage
-from jellyfin.models.scroll_direction import ScrollDirection
-from jellyfin.models.search_hint import SearchHint
-from jellyfin.models.search_hint_result import SearchHintResult
-from jellyfin.models.seek_request_dto import SeekRequestDto
-from jellyfin.models.send_command import SendCommand
-from jellyfin.models.send_command_type import SendCommandType
-from jellyfin.models.series_info import SeriesInfo
-from jellyfin.models.series_info_remote_search_query import SeriesInfoRemoteSearchQuery
-from jellyfin.models.series_status import SeriesStatus
-from jellyfin.models.series_timer_cancelled_message import SeriesTimerCancelledMessage
-from jellyfin.models.series_timer_created_message import SeriesTimerCreatedMessage
-from jellyfin.models.series_timer_info_dto import SeriesTimerInfoDto
-from jellyfin.models.series_timer_info_dto_query_result import SeriesTimerInfoDtoQueryResult
-from jellyfin.models.server_configuration import ServerConfiguration
-from jellyfin.models.server_discovery_info import ServerDiscoveryInfo
-from jellyfin.models.server_restarting_message import ServerRestartingMessage
-from jellyfin.models.server_shutting_down_message import ServerShuttingDownMessage
-from jellyfin.models.session_info_dto import SessionInfoDto
-from jellyfin.models.session_message_type import SessionMessageType
-from jellyfin.models.session_user_info import SessionUserInfo
-from jellyfin.models.sessions_message import SessionsMessage
-from jellyfin.models.sessions_start_message import SessionsStartMessage
-from jellyfin.models.sessions_stop_message import SessionsStopMessage
-from jellyfin.models.set_channel_mapping_dto import SetChannelMappingDto
-from jellyfin.models.set_playlist_item_request_dto import SetPlaylistItemRequestDto
-from jellyfin.models.set_repeat_mode_request_dto import SetRepeatModeRequestDto
-from jellyfin.models.set_shuffle_mode_request_dto import SetShuffleModeRequestDto
-from jellyfin.models.song_info import SongInfo
-from jellyfin.models.sort_order import SortOrder
-from jellyfin.models.special_view_option_dto import SpecialViewOptionDto
-from jellyfin.models.startup_configuration_dto import StartupConfigurationDto
-from jellyfin.models.startup_remote_access_dto import StartupRemoteAccessDto
-from jellyfin.models.startup_user_dto import StartupUserDto
-from jellyfin.models.subtitle_delivery_method import SubtitleDeliveryMethod
-from jellyfin.models.subtitle_playback_mode import SubtitlePlaybackMode
-from jellyfin.models.subtitle_profile import SubtitleProfile
-from jellyfin.models.sync_play_command_message import SyncPlayCommandMessage
-from jellyfin.models.sync_play_group_does_not_exist_update import SyncPlayGroupDoesNotExistUpdate
-from jellyfin.models.sync_play_group_joined_update import SyncPlayGroupJoinedUpdate
-from jellyfin.models.sync_play_group_left_update import SyncPlayGroupLeftUpdate
-from jellyfin.models.sync_play_group_update_message import SyncPlayGroupUpdateMessage
-from jellyfin.models.sync_play_library_access_denied_update import SyncPlayLibraryAccessDeniedUpdate
-from jellyfin.models.sync_play_not_in_group_update import SyncPlayNotInGroupUpdate
-from jellyfin.models.sync_play_play_queue_update import SyncPlayPlayQueueUpdate
-from jellyfin.models.sync_play_queue_item import SyncPlayQueueItem
-from jellyfin.models.sync_play_state_update import SyncPlayStateUpdate
-from jellyfin.models.sync_play_user_access_type import SyncPlayUserAccessType
-from jellyfin.models.sync_play_user_joined_update import SyncPlayUserJoinedUpdate
-from jellyfin.models.sync_play_user_left_update import SyncPlayUserLeftUpdate
-from jellyfin.models.system_info import SystemInfo
-from jellyfin.models.system_storage_dto import SystemStorageDto
-from jellyfin.models.task_completion_status import TaskCompletionStatus
-from jellyfin.models.task_info import TaskInfo
-from jellyfin.models.task_result import TaskResult
-from jellyfin.models.task_state import TaskState
-from jellyfin.models.task_trigger_info import TaskTriggerInfo
-from jellyfin.models.task_trigger_info_type import TaskTriggerInfoType
-from jellyfin.models.theme_media_result import ThemeMediaResult
-from jellyfin.models.timer_cancelled_message import TimerCancelledMessage
-from jellyfin.models.timer_created_message import TimerCreatedMessage
-from jellyfin.models.timer_event_info import TimerEventInfo
-from jellyfin.models.timer_info_dto import TimerInfoDto
-from jellyfin.models.timer_info_dto_query_result import TimerInfoDtoQueryResult
-from jellyfin.models.tonemapping_algorithm import TonemappingAlgorithm
-from jellyfin.models.tonemapping_mode import TonemappingMode
-from jellyfin.models.tonemapping_range import TonemappingRange
-from jellyfin.models.trailer_info import TrailerInfo
-from jellyfin.models.trailer_info_remote_search_query import TrailerInfoRemoteSearchQuery
-from jellyfin.models.transcode_reason import TranscodeReason
-from jellyfin.models.transcode_seek_info import TranscodeSeekInfo
-from jellyfin.models.transcoding_info import TranscodingInfo
-from jellyfin.models.transcoding_profile import TranscodingProfile
-from jellyfin.models.transport_stream_timestamp import TransportStreamTimestamp
-from jellyfin.models.trickplay_info_dto import TrickplayInfoDto
-from jellyfin.models.trickplay_options import TrickplayOptions
-from jellyfin.models.trickplay_scan_behavior import TrickplayScanBehavior
-from jellyfin.models.tuner_channel_mapping import TunerChannelMapping
-from jellyfin.models.tuner_host_info import TunerHostInfo
-from jellyfin.models.type_options import TypeOptions
-from jellyfin.models.unrated_item import UnratedItem
-from jellyfin.models.update_library_options_dto import UpdateLibraryOptionsDto
-from jellyfin.models.update_media_path_request_dto import UpdateMediaPathRequestDto
-from jellyfin.models.update_playlist_dto import UpdatePlaylistDto
-from jellyfin.models.update_playlist_user_dto import UpdatePlaylistUserDto
-from jellyfin.models.update_user_item_data_dto import UpdateUserItemDataDto
-from jellyfin.models.update_user_password import UpdateUserPassword
-from jellyfin.models.upload_subtitle_dto import UploadSubtitleDto
-from jellyfin.models.user_configuration import UserConfiguration
-from jellyfin.models.user_data_change_info import UserDataChangeInfo
-from jellyfin.models.user_data_changed_message import UserDataChangedMessage
-from jellyfin.models.user_deleted_message import UserDeletedMessage
-from jellyfin.models.user_dto import UserDto
-from jellyfin.models.user_item_data_dto import UserItemDataDto
-from jellyfin.models.user_policy import UserPolicy
-from jellyfin.models.user_updated_message import UserUpdatedMessage
-from jellyfin.models.utc_time_response import UtcTimeResponse
-from jellyfin.models.validate_path_dto import ValidatePathDto
-from jellyfin.models.version_info import VersionInfo
-from jellyfin.models.video3_d_format import Video3DFormat
-from jellyfin.models.video_range import VideoRange
-from jellyfin.models.video_range_type import VideoRangeType
-from jellyfin.models.video_type import VideoType
-from jellyfin.models.virtual_folder_info import VirtualFolderInfo
-from jellyfin.models.web_socket_message import WebSocketMessage
-from jellyfin.models.xbmc_metadata_options import XbmcMetadataOptions
+from jellyfin.models.access_schedule import AccessSchedule as AccessSchedule
+from jellyfin.models.activity_log_entry import ActivityLogEntry as ActivityLogEntry
+from jellyfin.models.activity_log_entry_message import ActivityLogEntryMessage as ActivityLogEntryMessage
+from jellyfin.models.activity_log_entry_query_result import ActivityLogEntryQueryResult as ActivityLogEntryQueryResult
+from jellyfin.models.activity_log_entry_start_message import ActivityLogEntryStartMessage as ActivityLogEntryStartMessage
+from jellyfin.models.activity_log_entry_stop_message import ActivityLogEntryStopMessage as ActivityLogEntryStopMessage
+from jellyfin.models.activity_log_sort_by import ActivityLogSortBy as ActivityLogSortBy
+from jellyfin.models.add_virtual_folder_dto import AddVirtualFolderDto as AddVirtualFolderDto
+from jellyfin.models.album_info import AlbumInfo as AlbumInfo
+from jellyfin.models.album_info_remote_search_query import AlbumInfoRemoteSearchQuery as AlbumInfoRemoteSearchQuery
+from jellyfin.models.all_theme_media_result import AllThemeMediaResult as AllThemeMediaResult
+from jellyfin.models.artist_info import ArtistInfo as ArtistInfo
+from jellyfin.models.artist_info_remote_search_query import ArtistInfoRemoteSearchQuery as ArtistInfoRemoteSearchQuery
+from jellyfin.models.audio_spatial_format import AudioSpatialFormat as AudioSpatialFormat
+from jellyfin.models.authenticate_user_by_name import AuthenticateUserByName as AuthenticateUserByName
+from jellyfin.models.authentication_info import AuthenticationInfo as AuthenticationInfo
+from jellyfin.models.authentication_info_query_result import AuthenticationInfoQueryResult as AuthenticationInfoQueryResult
+from jellyfin.models.authentication_result import AuthenticationResult as AuthenticationResult
+from jellyfin.models.backup_manifest_dto import BackupManifestDto as BackupManifestDto
+from jellyfin.models.backup_options_dto import BackupOptionsDto as BackupOptionsDto
+from jellyfin.models.backup_restore_request_dto import BackupRestoreRequestDto as BackupRestoreRequestDto
+from jellyfin.models.base_item_dto import BaseItemDto as BaseItemDto
+from jellyfin.models.base_item_dto_image_blur_hashes import BaseItemDtoImageBlurHashes as BaseItemDtoImageBlurHashes
+from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult as BaseItemDtoQueryResult
+from jellyfin.models.base_item_kind import BaseItemKind as BaseItemKind
+from jellyfin.models.base_item_person import BaseItemPerson as BaseItemPerson
+from jellyfin.models.base_item_person_image_blur_hashes import BaseItemPersonImageBlurHashes as BaseItemPersonImageBlurHashes
+from jellyfin.models.book_info import BookInfo as BookInfo
+from jellyfin.models.book_info_remote_search_query import BookInfoRemoteSearchQuery as BookInfoRemoteSearchQuery
+from jellyfin.models.box_set_info import BoxSetInfo as BoxSetInfo
+from jellyfin.models.box_set_info_remote_search_query import BoxSetInfoRemoteSearchQuery as BoxSetInfoRemoteSearchQuery
+from jellyfin.models.branding_options_dto import BrandingOptionsDto as BrandingOptionsDto
+from jellyfin.models.buffer_request_dto import BufferRequestDto as BufferRequestDto
+from jellyfin.models.cast_receiver_application import CastReceiverApplication as CastReceiverApplication
+from jellyfin.models.channel_features import ChannelFeatures as ChannelFeatures
+from jellyfin.models.channel_item_sort_field import ChannelItemSortField as ChannelItemSortField
+from jellyfin.models.channel_mapping_options_dto import ChannelMappingOptionsDto as ChannelMappingOptionsDto
+from jellyfin.models.channel_media_content_type import ChannelMediaContentType as ChannelMediaContentType
+from jellyfin.models.channel_media_type import ChannelMediaType as ChannelMediaType
+from jellyfin.models.channel_type import ChannelType as ChannelType
+from jellyfin.models.chapter_info import ChapterInfo as ChapterInfo
+from jellyfin.models.client_capabilities_dto import ClientCapabilitiesDto as ClientCapabilitiesDto
+from jellyfin.models.client_log_document_response_dto import ClientLogDocumentResponseDto as ClientLogDocumentResponseDto
+from jellyfin.models.codec_profile import CodecProfile as CodecProfile
+from jellyfin.models.codec_type import CodecType as CodecType
+from jellyfin.models.collection_creation_result import CollectionCreationResult as CollectionCreationResult
+from jellyfin.models.collection_type import CollectionType as CollectionType
+from jellyfin.models.collection_type_options import CollectionTypeOptions as CollectionTypeOptions
+from jellyfin.models.configuration_page_info import ConfigurationPageInfo as ConfigurationPageInfo
+from jellyfin.models.container_profile import ContainerProfile as ContainerProfile
+from jellyfin.models.country_info import CountryInfo as CountryInfo
+from jellyfin.models.create_playlist_dto import CreatePlaylistDto as CreatePlaylistDto
+from jellyfin.models.create_user_by_name import CreateUserByName as CreateUserByName
+from jellyfin.models.culture_dto import CultureDto as CultureDto
+from jellyfin.models.custom_database_option import CustomDatabaseOption as CustomDatabaseOption
+from jellyfin.models.custom_database_options import CustomDatabaseOptions as CustomDatabaseOptions
+from jellyfin.models.database_configuration_options import DatabaseConfigurationOptions as DatabaseConfigurationOptions
+from jellyfin.models.database_locking_behavior_types import DatabaseLockingBehaviorTypes as DatabaseLockingBehaviorTypes
+from jellyfin.models.day_of_week import DayOfWeek as DayOfWeek
+from jellyfin.models.day_pattern import DayPattern as DayPattern
+from jellyfin.models.default_directory_browser_info_dto import DefaultDirectoryBrowserInfoDto as DefaultDirectoryBrowserInfoDto
+from jellyfin.models.deinterlace_method import DeinterlaceMethod as DeinterlaceMethod
+from jellyfin.models.device_info_dto import DeviceInfoDto as DeviceInfoDto
+from jellyfin.models.device_info_dto_query_result import DeviceInfoDtoQueryResult as DeviceInfoDtoQueryResult
+from jellyfin.models.device_options_dto import DeviceOptionsDto as DeviceOptionsDto
+from jellyfin.models.device_profile import DeviceProfile as DeviceProfile
+from jellyfin.models.direct_play_profile import DirectPlayProfile as DirectPlayProfile
+from jellyfin.models.display_preferences_dto import DisplayPreferencesDto as DisplayPreferencesDto
+from jellyfin.models.dlna_profile_type import DlnaProfileType as DlnaProfileType
+from jellyfin.models.down_mix_stereo_algorithms import DownMixStereoAlgorithms as DownMixStereoAlgorithms
+from jellyfin.models.dynamic_day_of_week import DynamicDayOfWeek as DynamicDayOfWeek
+from jellyfin.models.embedded_subtitle_options import EmbeddedSubtitleOptions as EmbeddedSubtitleOptions
+from jellyfin.models.encoder_preset import EncoderPreset as EncoderPreset
+from jellyfin.models.encoding_context import EncodingContext as EncodingContext
+from jellyfin.models.encoding_options import EncodingOptions as EncodingOptions
+from jellyfin.models.end_point_info import EndPointInfo as EndPointInfo
+from jellyfin.models.external_id_info import ExternalIdInfo as ExternalIdInfo
+from jellyfin.models.external_id_media_type import ExternalIdMediaType as ExternalIdMediaType
+from jellyfin.models.external_url import ExternalUrl as ExternalUrl
+from jellyfin.models.extra_type import ExtraType as ExtraType
+from jellyfin.models.file_system_entry_info import FileSystemEntryInfo as FileSystemEntryInfo
+from jellyfin.models.file_system_entry_type import FileSystemEntryType as FileSystemEntryType
+from jellyfin.models.folder_storage_dto import FolderStorageDto as FolderStorageDto
+from jellyfin.models.font_file import FontFile as FontFile
+from jellyfin.models.force_keep_alive_message import ForceKeepAliveMessage as ForceKeepAliveMessage
+from jellyfin.models.forgot_password_action import ForgotPasswordAction as ForgotPasswordAction
+from jellyfin.models.forgot_password_dto import ForgotPasswordDto as ForgotPasswordDto
+from jellyfin.models.forgot_password_pin_dto import ForgotPasswordPinDto as ForgotPasswordPinDto
+from jellyfin.models.forgot_password_result import ForgotPasswordResult as ForgotPasswordResult
+from jellyfin.models.general_command import GeneralCommand as GeneralCommand
+from jellyfin.models.general_command_message import GeneralCommandMessage as GeneralCommandMessage
+from jellyfin.models.general_command_type import GeneralCommandType as GeneralCommandType
+from jellyfin.models.get_programs_dto import GetProgramsDto as GetProgramsDto
+from jellyfin.models.group_info_dto import GroupInfoDto as GroupInfoDto
+from jellyfin.models.group_queue_mode import GroupQueueMode as GroupQueueMode
+from jellyfin.models.group_repeat_mode import GroupRepeatMode as GroupRepeatMode
+from jellyfin.models.group_shuffle_mode import GroupShuffleMode as GroupShuffleMode
+from jellyfin.models.group_state_type import GroupStateType as GroupStateType
+from jellyfin.models.group_state_update import GroupStateUpdate as GroupStateUpdate
+from jellyfin.models.group_update import GroupUpdate as GroupUpdate
+from jellyfin.models.group_update_type import GroupUpdateType as GroupUpdateType
+from jellyfin.models.guide_info import GuideInfo as GuideInfo
+from jellyfin.models.hardware_acceleration_type import HardwareAccelerationType as HardwareAccelerationType
+from jellyfin.models.hls_audio_seek_strategy import HlsAudioSeekStrategy as HlsAudioSeekStrategy
+from jellyfin.models.i_plugin import IPlugin as IPlugin
+from jellyfin.models.ignore_wait_request_dto import IgnoreWaitRequestDto as IgnoreWaitRequestDto
+from jellyfin.models.image_format import ImageFormat as ImageFormat
+from jellyfin.models.image_info import ImageInfo as ImageInfo
+from jellyfin.models.image_option import ImageOption as ImageOption
+from jellyfin.models.image_orientation import ImageOrientation as ImageOrientation
+from jellyfin.models.image_provider_info import ImageProviderInfo as ImageProviderInfo
+from jellyfin.models.image_resolution import ImageResolution as ImageResolution
+from jellyfin.models.image_saving_convention import ImageSavingConvention as ImageSavingConvention
+from jellyfin.models.image_type import ImageType as ImageType
+from jellyfin.models.inbound_keep_alive_message import InboundKeepAliveMessage as InboundKeepAliveMessage
+from jellyfin.models.inbound_web_socket_message import InboundWebSocketMessage as InboundWebSocketMessage
+from jellyfin.models.installation_info import InstallationInfo as InstallationInfo
+from jellyfin.models.iso_type import IsoType as IsoType
+from jellyfin.models.item_counts import ItemCounts as ItemCounts
+from jellyfin.models.item_fields import ItemFields as ItemFields
+from jellyfin.models.item_filter import ItemFilter as ItemFilter
+from jellyfin.models.item_sort_by import ItemSortBy as ItemSortBy
+from jellyfin.models.join_group_request_dto import JoinGroupRequestDto as JoinGroupRequestDto
+from jellyfin.models.keep_until import KeepUntil as KeepUntil
+from jellyfin.models.library_changed_message import LibraryChangedMessage as LibraryChangedMessage
+from jellyfin.models.library_option_info_dto import LibraryOptionInfoDto as LibraryOptionInfoDto
+from jellyfin.models.library_options import LibraryOptions as LibraryOptions
+from jellyfin.models.library_options_result_dto import LibraryOptionsResultDto as LibraryOptionsResultDto
+from jellyfin.models.library_storage_dto import LibraryStorageDto as LibraryStorageDto
+from jellyfin.models.library_type_options_dto import LibraryTypeOptionsDto as LibraryTypeOptionsDto
+from jellyfin.models.library_update_info import LibraryUpdateInfo as LibraryUpdateInfo
+from jellyfin.models.listings_provider_info import ListingsProviderInfo as ListingsProviderInfo
+from jellyfin.models.live_stream_response import LiveStreamResponse as LiveStreamResponse
+from jellyfin.models.live_tv_info import LiveTvInfo as LiveTvInfo
+from jellyfin.models.live_tv_options import LiveTvOptions as LiveTvOptions
+from jellyfin.models.live_tv_service_info import LiveTvServiceInfo as LiveTvServiceInfo
+from jellyfin.models.live_tv_service_status import LiveTvServiceStatus as LiveTvServiceStatus
+from jellyfin.models.localization_option import LocalizationOption as LocalizationOption
+from jellyfin.models.location_type import LocationType as LocationType
+from jellyfin.models.log_file import LogFile as LogFile
+from jellyfin.models.log_level import LogLevel as LogLevel
+from jellyfin.models.lyric_dto import LyricDto as LyricDto
+from jellyfin.models.lyric_line import LyricLine as LyricLine
+from jellyfin.models.lyric_line_cue import LyricLineCue as LyricLineCue
+from jellyfin.models.lyric_metadata import LyricMetadata as LyricMetadata
+from jellyfin.models.media_attachment import MediaAttachment as MediaAttachment
+from jellyfin.models.media_path_dto import MediaPathDto as MediaPathDto
+from jellyfin.models.media_path_info import MediaPathInfo as MediaPathInfo
+from jellyfin.models.media_protocol import MediaProtocol as MediaProtocol
+from jellyfin.models.media_segment_dto import MediaSegmentDto as MediaSegmentDto
+from jellyfin.models.media_segment_dto_query_result import MediaSegmentDtoQueryResult as MediaSegmentDtoQueryResult
+from jellyfin.models.media_segment_type import MediaSegmentType as MediaSegmentType
+from jellyfin.models.media_source_info import MediaSourceInfo as MediaSourceInfo
+from jellyfin.models.media_source_type import MediaSourceType as MediaSourceType
+from jellyfin.models.media_stream import MediaStream as MediaStream
+from jellyfin.models.media_stream_protocol import MediaStreamProtocol as MediaStreamProtocol
+from jellyfin.models.media_stream_type import MediaStreamType as MediaStreamType
+from jellyfin.models.media_type import MediaType as MediaType
+from jellyfin.models.media_update_info_dto import MediaUpdateInfoDto as MediaUpdateInfoDto
+from jellyfin.models.media_update_info_path_dto import MediaUpdateInfoPathDto as MediaUpdateInfoPathDto
+from jellyfin.models.media_url import MediaUrl as MediaUrl
+from jellyfin.models.message_command import MessageCommand as MessageCommand
+from jellyfin.models.metadata_configuration import MetadataConfiguration as MetadataConfiguration
+from jellyfin.models.metadata_editor_info import MetadataEditorInfo as MetadataEditorInfo
+from jellyfin.models.metadata_field import MetadataField as MetadataField
+from jellyfin.models.metadata_options import MetadataOptions as MetadataOptions
+from jellyfin.models.metadata_refresh_mode import MetadataRefreshMode as MetadataRefreshMode
+from jellyfin.models.move_playlist_item_request_dto import MovePlaylistItemRequestDto as MovePlaylistItemRequestDto
+from jellyfin.models.movie_info import MovieInfo as MovieInfo
+from jellyfin.models.movie_info_remote_search_query import MovieInfoRemoteSearchQuery as MovieInfoRemoteSearchQuery
+from jellyfin.models.music_video_info import MusicVideoInfo as MusicVideoInfo
+from jellyfin.models.music_video_info_remote_search_query import MusicVideoInfoRemoteSearchQuery as MusicVideoInfoRemoteSearchQuery
+from jellyfin.models.name_guid_pair import NameGuidPair as NameGuidPair
+from jellyfin.models.name_id_pair import NameIdPair as NameIdPair
+from jellyfin.models.name_value_pair import NameValuePair as NameValuePair
+from jellyfin.models.network_configuration import NetworkConfiguration as NetworkConfiguration
+from jellyfin.models.new_group_request_dto import NewGroupRequestDto as NewGroupRequestDto
+from jellyfin.models.next_item_request_dto import NextItemRequestDto as NextItemRequestDto
+from jellyfin.models.open_live_stream_dto import OpenLiveStreamDto as OpenLiveStreamDto
+from jellyfin.models.outbound_keep_alive_message import OutboundKeepAliveMessage as OutboundKeepAliveMessage
+from jellyfin.models.outbound_web_socket_message import OutboundWebSocketMessage as OutboundWebSocketMessage
+from jellyfin.models.package_info import PackageInfo as PackageInfo
+from jellyfin.models.parental_rating import ParentalRating as ParentalRating
+from jellyfin.models.parental_rating_score import ParentalRatingScore as ParentalRatingScore
+from jellyfin.models.path_substitution import PathSubstitution as PathSubstitution
+from jellyfin.models.person_kind import PersonKind as PersonKind
+from jellyfin.models.person_lookup_info import PersonLookupInfo as PersonLookupInfo
+from jellyfin.models.person_lookup_info_remote_search_query import PersonLookupInfoRemoteSearchQuery as PersonLookupInfoRemoteSearchQuery
+from jellyfin.models.pin_redeem_result import PinRedeemResult as PinRedeemResult
+from jellyfin.models.ping_request_dto import PingRequestDto as PingRequestDto
+from jellyfin.models.play_access import PlayAccess as PlayAccess
+from jellyfin.models.play_command import PlayCommand as PlayCommand
+from jellyfin.models.play_message import PlayMessage as PlayMessage
+from jellyfin.models.play_method import PlayMethod as PlayMethod
+from jellyfin.models.play_queue_update import PlayQueueUpdate as PlayQueueUpdate
+from jellyfin.models.play_queue_update_reason import PlayQueueUpdateReason as PlayQueueUpdateReason
+from jellyfin.models.play_request import PlayRequest as PlayRequest
+from jellyfin.models.play_request_dto import PlayRequestDto as PlayRequestDto
+from jellyfin.models.playback_error_code import PlaybackErrorCode as PlaybackErrorCode
+from jellyfin.models.playback_info_dto import PlaybackInfoDto as PlaybackInfoDto
+from jellyfin.models.playback_info_response import PlaybackInfoResponse as PlaybackInfoResponse
+from jellyfin.models.playback_order import PlaybackOrder as PlaybackOrder
+from jellyfin.models.playback_progress_info import PlaybackProgressInfo as PlaybackProgressInfo
+from jellyfin.models.playback_request_type import PlaybackRequestType as PlaybackRequestType
+from jellyfin.models.playback_start_info import PlaybackStartInfo as PlaybackStartInfo
+from jellyfin.models.playback_stop_info import PlaybackStopInfo as PlaybackStopInfo
+from jellyfin.models.player_state_info import PlayerStateInfo as PlayerStateInfo
+from jellyfin.models.playlist_creation_result import PlaylistCreationResult as PlaylistCreationResult
+from jellyfin.models.playlist_dto import PlaylistDto as PlaylistDto
+from jellyfin.models.playlist_user_permissions import PlaylistUserPermissions as PlaylistUserPermissions
+from jellyfin.models.playstate_command import PlaystateCommand as PlaystateCommand
+from jellyfin.models.playstate_message import PlaystateMessage as PlaystateMessage
+from jellyfin.models.playstate_request import PlaystateRequest as PlaystateRequest
+from jellyfin.models.plugin_info import PluginInfo as PluginInfo
+from jellyfin.models.plugin_installation_cancelled_message import PluginInstallationCancelledMessage as PluginInstallationCancelledMessage
+from jellyfin.models.plugin_installation_completed_message import PluginInstallationCompletedMessage as PluginInstallationCompletedMessage
+from jellyfin.models.plugin_installation_failed_message import PluginInstallationFailedMessage as PluginInstallationFailedMessage
+from jellyfin.models.plugin_installing_message import PluginInstallingMessage as PluginInstallingMessage
+from jellyfin.models.plugin_status import PluginStatus as PluginStatus
+from jellyfin.models.plugin_uninstalled_message import PluginUninstalledMessage as PluginUninstalledMessage
+from jellyfin.models.previous_item_request_dto import PreviousItemRequestDto as PreviousItemRequestDto
+from jellyfin.models.problem_details import ProblemDetails as ProblemDetails
+from jellyfin.models.process_priority_class import ProcessPriorityClass as ProcessPriorityClass
+from jellyfin.models.profile_condition import ProfileCondition as ProfileCondition
+from jellyfin.models.profile_condition_type import ProfileConditionType as ProfileConditionType
+from jellyfin.models.profile_condition_value import ProfileConditionValue as ProfileConditionValue
+from jellyfin.models.program_audio import ProgramAudio as ProgramAudio
+from jellyfin.models.public_system_info import PublicSystemInfo as PublicSystemInfo
+from jellyfin.models.query_filters import QueryFilters as QueryFilters
+from jellyfin.models.query_filters_legacy import QueryFiltersLegacy as QueryFiltersLegacy
+from jellyfin.models.queue_item import QueueItem as QueueItem
+from jellyfin.models.queue_request_dto import QueueRequestDto as QueueRequestDto
+from jellyfin.models.quick_connect_dto import QuickConnectDto as QuickConnectDto
+from jellyfin.models.quick_connect_result import QuickConnectResult as QuickConnectResult
+from jellyfin.models.rating_type import RatingType as RatingType
+from jellyfin.models.ready_request_dto import ReadyRequestDto as ReadyRequestDto
+from jellyfin.models.recommendation_dto import RecommendationDto as RecommendationDto
+from jellyfin.models.recommendation_type import RecommendationType as RecommendationType
+from jellyfin.models.recording_status import RecordingStatus as RecordingStatus
+from jellyfin.models.refresh_progress_message import RefreshProgressMessage as RefreshProgressMessage
+from jellyfin.models.remote_image_info import RemoteImageInfo as RemoteImageInfo
+from jellyfin.models.remote_image_result import RemoteImageResult as RemoteImageResult
+from jellyfin.models.remote_lyric_info_dto import RemoteLyricInfoDto as RemoteLyricInfoDto
+from jellyfin.models.remote_search_result import RemoteSearchResult as RemoteSearchResult
+from jellyfin.models.remote_subtitle_info import RemoteSubtitleInfo as RemoteSubtitleInfo
+from jellyfin.models.remove_from_playlist_request_dto import RemoveFromPlaylistRequestDto as RemoveFromPlaylistRequestDto
+from jellyfin.models.repeat_mode import RepeatMode as RepeatMode
+from jellyfin.models.repository_info import RepositoryInfo as RepositoryInfo
+from jellyfin.models.restart_required_message import RestartRequiredMessage as RestartRequiredMessage
+from jellyfin.models.scheduled_task_ended_message import ScheduledTaskEndedMessage as ScheduledTaskEndedMessage
+from jellyfin.models.scheduled_tasks_info_message import ScheduledTasksInfoMessage as ScheduledTasksInfoMessage
+from jellyfin.models.scheduled_tasks_info_start_message import ScheduledTasksInfoStartMessage as ScheduledTasksInfoStartMessage
+from jellyfin.models.scheduled_tasks_info_stop_message import ScheduledTasksInfoStopMessage as ScheduledTasksInfoStopMessage
+from jellyfin.models.scroll_direction import ScrollDirection as ScrollDirection
+from jellyfin.models.search_hint import SearchHint as SearchHint
+from jellyfin.models.search_hint_result import SearchHintResult as SearchHintResult
+from jellyfin.models.seek_request_dto import SeekRequestDto as SeekRequestDto
+from jellyfin.models.send_command import SendCommand as SendCommand
+from jellyfin.models.send_command_type import SendCommandType as SendCommandType
+from jellyfin.models.series_info import SeriesInfo as SeriesInfo
+from jellyfin.models.series_info_remote_search_query import SeriesInfoRemoteSearchQuery as SeriesInfoRemoteSearchQuery
+from jellyfin.models.series_status import SeriesStatus as SeriesStatus
+from jellyfin.models.series_timer_cancelled_message import SeriesTimerCancelledMessage as SeriesTimerCancelledMessage
+from jellyfin.models.series_timer_created_message import SeriesTimerCreatedMessage as SeriesTimerCreatedMessage
+from jellyfin.models.series_timer_info_dto import SeriesTimerInfoDto as SeriesTimerInfoDto
+from jellyfin.models.series_timer_info_dto_query_result import SeriesTimerInfoDtoQueryResult as SeriesTimerInfoDtoQueryResult
+from jellyfin.models.server_configuration import ServerConfiguration as ServerConfiguration
+from jellyfin.models.server_discovery_info import ServerDiscoveryInfo as ServerDiscoveryInfo
+from jellyfin.models.server_restarting_message import ServerRestartingMessage as ServerRestartingMessage
+from jellyfin.models.server_shutting_down_message import ServerShuttingDownMessage as ServerShuttingDownMessage
+from jellyfin.models.session_info_dto import SessionInfoDto as SessionInfoDto
+from jellyfin.models.session_message_type import SessionMessageType as SessionMessageType
+from jellyfin.models.session_user_info import SessionUserInfo as SessionUserInfo
+from jellyfin.models.sessions_message import SessionsMessage as SessionsMessage
+from jellyfin.models.sessions_start_message import SessionsStartMessage as SessionsStartMessage
+from jellyfin.models.sessions_stop_message import SessionsStopMessage as SessionsStopMessage
+from jellyfin.models.set_channel_mapping_dto import SetChannelMappingDto as SetChannelMappingDto
+from jellyfin.models.set_playlist_item_request_dto import SetPlaylistItemRequestDto as SetPlaylistItemRequestDto
+from jellyfin.models.set_repeat_mode_request_dto import SetRepeatModeRequestDto as SetRepeatModeRequestDto
+from jellyfin.models.set_shuffle_mode_request_dto import SetShuffleModeRequestDto as SetShuffleModeRequestDto
+from jellyfin.models.song_info import SongInfo as SongInfo
+from jellyfin.models.sort_order import SortOrder as SortOrder
+from jellyfin.models.special_view_option_dto import SpecialViewOptionDto as SpecialViewOptionDto
+from jellyfin.models.startup_configuration_dto import StartupConfigurationDto as StartupConfigurationDto
+from jellyfin.models.startup_remote_access_dto import StartupRemoteAccessDto as StartupRemoteAccessDto
+from jellyfin.models.startup_user_dto import StartupUserDto as StartupUserDto
+from jellyfin.models.subtitle_delivery_method import SubtitleDeliveryMethod as SubtitleDeliveryMethod
+from jellyfin.models.subtitle_playback_mode import SubtitlePlaybackMode as SubtitlePlaybackMode
+from jellyfin.models.subtitle_profile import SubtitleProfile as SubtitleProfile
+from jellyfin.models.sync_play_command_message import SyncPlayCommandMessage as SyncPlayCommandMessage
+from jellyfin.models.sync_play_group_does_not_exist_update import SyncPlayGroupDoesNotExistUpdate as SyncPlayGroupDoesNotExistUpdate
+from jellyfin.models.sync_play_group_joined_update import SyncPlayGroupJoinedUpdate as SyncPlayGroupJoinedUpdate
+from jellyfin.models.sync_play_group_left_update import SyncPlayGroupLeftUpdate as SyncPlayGroupLeftUpdate
+from jellyfin.models.sync_play_group_update_message import SyncPlayGroupUpdateMessage as SyncPlayGroupUpdateMessage
+from jellyfin.models.sync_play_library_access_denied_update import SyncPlayLibraryAccessDeniedUpdate as SyncPlayLibraryAccessDeniedUpdate
+from jellyfin.models.sync_play_not_in_group_update import SyncPlayNotInGroupUpdate as SyncPlayNotInGroupUpdate
+from jellyfin.models.sync_play_play_queue_update import SyncPlayPlayQueueUpdate as SyncPlayPlayQueueUpdate
+from jellyfin.models.sync_play_queue_item import SyncPlayQueueItem as SyncPlayQueueItem
+from jellyfin.models.sync_play_state_update import SyncPlayStateUpdate as SyncPlayStateUpdate
+from jellyfin.models.sync_play_user_access_type import SyncPlayUserAccessType as SyncPlayUserAccessType
+from jellyfin.models.sync_play_user_joined_update import SyncPlayUserJoinedUpdate as SyncPlayUserJoinedUpdate
+from jellyfin.models.sync_play_user_left_update import SyncPlayUserLeftUpdate as SyncPlayUserLeftUpdate
+from jellyfin.models.system_info import SystemInfo as SystemInfo
+from jellyfin.models.system_storage_dto import SystemStorageDto as SystemStorageDto
+from jellyfin.models.task_completion_status import TaskCompletionStatus as TaskCompletionStatus
+from jellyfin.models.task_info import TaskInfo as TaskInfo
+from jellyfin.models.task_result import TaskResult as TaskResult
+from jellyfin.models.task_state import TaskState as TaskState
+from jellyfin.models.task_trigger_info import TaskTriggerInfo as TaskTriggerInfo
+from jellyfin.models.task_trigger_info_type import TaskTriggerInfoType as TaskTriggerInfoType
+from jellyfin.models.theme_media_result import ThemeMediaResult as ThemeMediaResult
+from jellyfin.models.timer_cancelled_message import TimerCancelledMessage as TimerCancelledMessage
+from jellyfin.models.timer_created_message import TimerCreatedMessage as TimerCreatedMessage
+from jellyfin.models.timer_event_info import TimerEventInfo as TimerEventInfo
+from jellyfin.models.timer_info_dto import TimerInfoDto as TimerInfoDto
+from jellyfin.models.timer_info_dto_query_result import TimerInfoDtoQueryResult as TimerInfoDtoQueryResult
+from jellyfin.models.tonemapping_algorithm import TonemappingAlgorithm as TonemappingAlgorithm
+from jellyfin.models.tonemapping_mode import TonemappingMode as TonemappingMode
+from jellyfin.models.tonemapping_range import TonemappingRange as TonemappingRange
+from jellyfin.models.trailer_info import TrailerInfo as TrailerInfo
+from jellyfin.models.trailer_info_remote_search_query import TrailerInfoRemoteSearchQuery as TrailerInfoRemoteSearchQuery
+from jellyfin.models.transcode_reason import TranscodeReason as TranscodeReason
+from jellyfin.models.transcode_seek_info import TranscodeSeekInfo as TranscodeSeekInfo
+from jellyfin.models.transcoding_info import TranscodingInfo as TranscodingInfo
+from jellyfin.models.transcoding_profile import TranscodingProfile as TranscodingProfile
+from jellyfin.models.transport_stream_timestamp import TransportStreamTimestamp as TransportStreamTimestamp
+from jellyfin.models.trickplay_info_dto import TrickplayInfoDto as TrickplayInfoDto
+from jellyfin.models.trickplay_options import TrickplayOptions as TrickplayOptions
+from jellyfin.models.trickplay_scan_behavior import TrickplayScanBehavior as TrickplayScanBehavior
+from jellyfin.models.tuner_channel_mapping import TunerChannelMapping as TunerChannelMapping
+from jellyfin.models.tuner_host_info import TunerHostInfo as TunerHostInfo
+from jellyfin.models.type_options import TypeOptions as TypeOptions
+from jellyfin.models.unrated_item import UnratedItem as UnratedItem
+from jellyfin.models.update_library_options_dto import UpdateLibraryOptionsDto as UpdateLibraryOptionsDto
+from jellyfin.models.update_media_path_request_dto import UpdateMediaPathRequestDto as UpdateMediaPathRequestDto
+from jellyfin.models.update_playlist_dto import UpdatePlaylistDto as UpdatePlaylistDto
+from jellyfin.models.update_playlist_user_dto import UpdatePlaylistUserDto as UpdatePlaylistUserDto
+from jellyfin.models.update_user_item_data_dto import UpdateUserItemDataDto as UpdateUserItemDataDto
+from jellyfin.models.update_user_password import UpdateUserPassword as UpdateUserPassword
+from jellyfin.models.upload_subtitle_dto import UploadSubtitleDto as UploadSubtitleDto
+from jellyfin.models.user_configuration import UserConfiguration as UserConfiguration
+from jellyfin.models.user_data_change_info import UserDataChangeInfo as UserDataChangeInfo
+from jellyfin.models.user_data_changed_message import UserDataChangedMessage as UserDataChangedMessage
+from jellyfin.models.user_deleted_message import UserDeletedMessage as UserDeletedMessage
+from jellyfin.models.user_dto import UserDto as UserDto
+from jellyfin.models.user_item_data_dto import UserItemDataDto as UserItemDataDto
+from jellyfin.models.user_policy import UserPolicy as UserPolicy
+from jellyfin.models.user_updated_message import UserUpdatedMessage as UserUpdatedMessage
+from jellyfin.models.utc_time_response import UtcTimeResponse as UtcTimeResponse
+from jellyfin.models.validate_path_dto import ValidatePathDto as ValidatePathDto
+from jellyfin.models.version_info import VersionInfo as VersionInfo
+from jellyfin.models.video3_d_format import Video3DFormat as Video3DFormat
+from jellyfin.models.video_range import VideoRange as VideoRange
+from jellyfin.models.video_range_type import VideoRangeType as VideoRangeType
+from jellyfin.models.video_type import VideoType as VideoType
+from jellyfin.models.virtual_folder_info import VirtualFolderInfo as VirtualFolderInfo
+from jellyfin.models.web_socket_message import WebSocketMessage as WebSocketMessage
+from jellyfin.models.xbmc_metadata_options import XbmcMetadataOptions as XbmcMetadataOptions
+

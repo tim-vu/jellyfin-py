@@ -30,6 +30,7 @@ from jellyfin.models.video3_d_format import Video3DFormat
 from jellyfin.models.video_type import VideoType
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class MediaSourceInfo(BaseModel):
     """
@@ -83,7 +84,8 @@ class MediaSourceInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["Protocol", "Id", "Path", "EncoderPath", "EncoderProtocol", "Type", "Container", "Size", "Name", "IsRemote", "ETag", "RunTimeTicks", "ReadAtNativeFramerate", "IgnoreDts", "IgnoreIndex", "GenPtsInput", "SupportsTranscoding", "SupportsDirectStream", "SupportsDirectPlay", "IsInfiniteStream", "UseMostCompatibleTranscodingProfile", "RequiresOpening", "OpenToken", "RequiresClosing", "LiveStreamId", "BufferMs", "RequiresLooping", "SupportsProbing", "VideoType", "IsoType", "Video3DFormat", "MediaStreams", "MediaAttachments", "Formats", "Bitrate", "FallbackMaxStreamingBitrate", "Timestamp", "RequiredHttpHeaders", "TranscodingUrl", "TranscodingSubProtocol", "TranscodingContainer", "AnalyzeDurationMs", "DefaultAudioStreamIndex", "DefaultSubtitleStreamIndex", "HasSegments"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -95,8 +97,7 @@ class MediaSourceInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -125,15 +126,13 @@ class MediaSourceInfo(BaseModel):
         _items = []
         if self.media_streams:
             for _item_media_streams in self.media_streams:
-                if _item_media_streams:
-                    _items.append(_item_media_streams.to_dict())
+                _items.append(_item_media_streams.to_dict() if _item_media_streams is not None else None)
             _dict['MediaStreams'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in media_attachments (list)
         _items = []
         if self.media_attachments:
             for _item_media_attachments in self.media_attachments:
-                if _item_media_attachments:
-                    _items.append(_item_media_attachments.to_dict())
+                _items.append(_item_media_attachments.to_dict() if _item_media_attachments is not None else None)
             _dict['MediaAttachments'] = _items
         # set to None if id (nullable) is None
         # and model_fields_set contains the field

@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from jellyfin.models.base_item_dto_image_blur_hashes import BaseItemDtoImageBlurHashes
 from jellyfin.models.base_item_kind import BaseItemKind
 from jellyfin.models.base_item_person import BaseItemPerson
@@ -46,6 +47,7 @@ from jellyfin.models.video3_d_format import Video3DFormat
 from jellyfin.models.video_type import VideoType
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BaseItemDto(BaseModel):
     """
@@ -54,7 +56,7 @@ class BaseItemDto(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name.", alias="Name")
     original_title: Optional[StrictStr] = Field(default=None, alias="OriginalTitle")
     server_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the server identifier.", alias="ServerId")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the id.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the id.", alias="Id")
     etag: Optional[StrictStr] = Field(default=None, description="Gets or sets the etag.", alias="Etag")
     source_type: Optional[StrictStr] = Field(default=None, description="Gets or sets the type of the source.", alias="SourceType")
     playlist_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the playlist item identifier.", alias="PlaylistItemId")
@@ -83,7 +85,7 @@ class BaseItemDto(BaseModel):
     enable_media_source_display: Optional[StrictBool] = Field(default=None, alias="EnableMediaSourceDisplay")
     official_rating: Optional[StrictStr] = Field(default=None, description="Gets or sets the official rating.", alias="OfficialRating")
     custom_rating: Optional[StrictStr] = Field(default=None, description="Gets or sets the custom rating.", alias="CustomRating")
-    channel_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the channel identifier.", alias="ChannelId")
+    channel_id: Optional[UUID] = Field(default=None, description="Gets or sets the channel identifier.", alias="ChannelId")
     channel_name: Optional[StrictStr] = Field(default=None, alias="ChannelName")
     overview: Optional[StrictStr] = Field(default=None, description="Gets or sets the overview.", alias="Overview")
     taglines: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the taglines.", alias="Taglines")
@@ -104,21 +106,21 @@ class BaseItemDto(BaseModel):
     provider_ids: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Gets or sets the provider ids.", alias="ProviderIds")
     is_hd: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this instance is HD.", alias="IsHD")
     is_folder: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this instance is folder.", alias="IsFolder")
-    parent_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent id.", alias="ParentId")
+    parent_id: Optional[UUID] = Field(default=None, description="Gets or sets the parent id.", alias="ParentId")
     type: Optional[BaseItemKind] = Field(default=None, description="The base item kind.", alias="Type")
     people: Optional[List[BaseItemPerson]] = Field(default=None, description="Gets or sets the people.", alias="People")
     studios: Optional[List[NameGuidPair]] = Field(default=None, description="Gets or sets the studios.", alias="Studios")
     genre_items: Optional[List[NameGuidPair]] = Field(default=None, alias="GenreItems")
-    parent_logo_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets whether the item has a logo, this will hold the Id of the Parent that has one.", alias="ParentLogoItemId")
-    parent_backdrop_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets whether the item has any backdrops, this will hold the Id of the Parent that has one.", alias="ParentBackdropItemId")
+    parent_logo_item_id: Optional[UUID] = Field(default=None, description="Gets or sets whether the item has a logo, this will hold the Id of the Parent that has one.", alias="ParentLogoItemId")
+    parent_backdrop_item_id: Optional[UUID] = Field(default=None, description="Gets or sets whether the item has any backdrops, this will hold the Id of the Parent that has one.", alias="ParentBackdropItemId")
     parent_backdrop_image_tags: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the parent backdrop image tags.", alias="ParentBackdropImageTags")
     local_trailer_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the local trailer count.", alias="LocalTrailerCount")
     user_data: Optional[UserItemDataDto] = Field(default=None, description="Gets or sets the user data for this item based on the user it's being requested for.", alias="UserData")
     recursive_item_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the recursive item count.", alias="RecursiveItemCount")
     child_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the child count.", alias="ChildCount")
     series_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name of the series.", alias="SeriesName")
-    series_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the series id.", alias="SeriesId")
-    season_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the season identifier.", alias="SeasonId")
+    series_id: Optional[UUID] = Field(default=None, description="Gets or sets the series id.", alias="SeriesId")
+    season_id: Optional[UUID] = Field(default=None, description="Gets or sets the season identifier.", alias="SeasonId")
     special_feature_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the special feature count.", alias="SpecialFeatureCount")
     display_preferences_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the display preferences id.", alias="DisplayPreferencesId")
     status: Optional[StrictStr] = Field(default=None, description="Gets or sets the status.", alias="Status")
@@ -131,7 +133,7 @@ class BaseItemDto(BaseModel):
     album: Optional[StrictStr] = Field(default=None, description="Gets or sets the album.", alias="Album")
     collection_type: Optional[CollectionType] = Field(default=None, description="Gets or sets the type of the collection.", alias="CollectionType")
     display_order: Optional[StrictStr] = Field(default=None, description="Gets or sets the display order.", alias="DisplayOrder")
-    album_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the album id.", alias="AlbumId")
+    album_id: Optional[UUID] = Field(default=None, description="Gets or sets the album id.", alias="AlbumId")
     album_primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the album image tag.", alias="AlbumPrimaryImageTag")
     series_primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the series primary image tag.", alias="SeriesPrimaryImageTag")
     album_artist: Optional[StrictStr] = Field(default=None, description="Gets or sets the album artist.", alias="AlbumArtist")
@@ -145,14 +147,14 @@ class BaseItemDto(BaseModel):
     backdrop_image_tags: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the backdrop image tags.", alias="BackdropImageTags")
     screenshot_image_tags: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the screenshot image tags.", alias="ScreenshotImageTags")
     parent_logo_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent logo image tag.", alias="ParentLogoImageTag")
-    parent_art_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets whether the item has fan art, this will hold the Id of the Parent that has one.", alias="ParentArtItemId")
+    parent_art_item_id: Optional[UUID] = Field(default=None, description="Gets or sets whether the item has fan art, this will hold the Id of the Parent that has one.", alias="ParentArtItemId")
     parent_art_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent art image tag.", alias="ParentArtImageTag")
     series_thumb_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the series thumb image tag.", alias="SeriesThumbImageTag")
     image_blur_hashes: Optional[BaseItemDtoImageBlurHashes] = Field(default=None, alias="ImageBlurHashes")
     series_studio: Optional[StrictStr] = Field(default=None, description="Gets or sets the series studio.", alias="SeriesStudio")
-    parent_thumb_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent thumb item id.", alias="ParentThumbItemId")
+    parent_thumb_item_id: Optional[UUID] = Field(default=None, description="Gets or sets the parent thumb item id.", alias="ParentThumbItemId")
     parent_thumb_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent thumb image tag.", alias="ParentThumbImageTag")
-    parent_primary_image_item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent primary image item identifier.", alias="ParentPrimaryImageItemId")
+    parent_primary_image_item_id: Optional[UUID] = Field(default=None, description="Gets or sets the parent primary image item identifier.", alias="ParentPrimaryImageItemId")
     parent_primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the parent primary image tag.", alias="ParentPrimaryImageTag")
     chapters: Optional[List[ChapterInfo]] = Field(default=None, description="Gets or sets the chapters.", alias="Chapters")
     trickplay: Optional[Dict[str, Optional[Dict[str, TrickplayInfoDto]]]] = Field(default=None, description="Gets or sets the trickplay manifest.", alias="Trickplay")
@@ -209,7 +211,8 @@ class BaseItemDto(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "OriginalTitle", "ServerId", "Id", "Etag", "SourceType", "PlaylistItemId", "DateCreated", "DateLastMediaAdded", "ExtraType", "AirsBeforeSeasonNumber", "AirsAfterSeasonNumber", "AirsBeforeEpisodeNumber", "CanDelete", "CanDownload", "HasLyrics", "HasSubtitles", "PreferredMetadataLanguage", "PreferredMetadataCountryCode", "Container", "SortName", "ForcedSortName", "Video3DFormat", "PremiereDate", "ExternalUrls", "MediaSources", "CriticRating", "ProductionLocations", "Path", "EnableMediaSourceDisplay", "OfficialRating", "CustomRating", "ChannelId", "ChannelName", "Overview", "Taglines", "Genres", "CommunityRating", "CumulativeRunTimeTicks", "RunTimeTicks", "PlayAccess", "AspectRatio", "ProductionYear", "IsPlaceHolder", "Number", "ChannelNumber", "IndexNumber", "IndexNumberEnd", "ParentIndexNumber", "RemoteTrailers", "ProviderIds", "IsHD", "IsFolder", "ParentId", "Type", "People", "Studios", "GenreItems", "ParentLogoItemId", "ParentBackdropItemId", "ParentBackdropImageTags", "LocalTrailerCount", "UserData", "RecursiveItemCount", "ChildCount", "SeriesName", "SeriesId", "SeasonId", "SpecialFeatureCount", "DisplayPreferencesId", "Status", "AirTime", "AirDays", "Tags", "PrimaryImageAspectRatio", "Artists", "ArtistItems", "Album", "CollectionType", "DisplayOrder", "AlbumId", "AlbumPrimaryImageTag", "SeriesPrimaryImageTag", "AlbumArtist", "AlbumArtists", "SeasonName", "MediaStreams", "VideoType", "PartCount", "MediaSourceCount", "ImageTags", "BackdropImageTags", "ScreenshotImageTags", "ParentLogoImageTag", "ParentArtItemId", "ParentArtImageTag", "SeriesThumbImageTag", "ImageBlurHashes", "SeriesStudio", "ParentThumbItemId", "ParentThumbImageTag", "ParentPrimaryImageItemId", "ParentPrimaryImageTag", "Chapters", "Trickplay", "LocationType", "IsoType", "MediaType", "EndDate", "LockedFields", "TrailerCount", "MovieCount", "SeriesCount", "ProgramCount", "EpisodeCount", "SongCount", "AlbumCount", "ArtistCount", "MusicVideoCount", "LockData", "Width", "Height", "CameraMake", "CameraModel", "Software", "ExposureTime", "FocalLength", "ImageOrientation", "Aperture", "ShutterSpeed", "Latitude", "Longitude", "Altitude", "IsoSpeedRating", "SeriesTimerId", "ProgramId", "ChannelPrimaryImageTag", "StartDate", "CompletionPercentage", "IsRepeat", "EpisodeTitle", "ChannelType", "Audio", "IsMovie", "IsSports", "IsSeries", "IsLive", "IsNews", "IsKids", "IsPremiere", "TimerId", "NormalizationGain", "AlbumNormalizationGain", "CurrentProgram", "OriginalLanguage"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -221,8 +224,7 @@ class BaseItemDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -251,43 +253,37 @@ class BaseItemDto(BaseModel):
         _items = []
         if self.external_urls:
             for _item_external_urls in self.external_urls:
-                if _item_external_urls:
-                    _items.append(_item_external_urls.to_dict())
+                _items.append(_item_external_urls.to_dict() if _item_external_urls is not None else None)
             _dict['ExternalUrls'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in media_sources (list)
         _items = []
         if self.media_sources:
             for _item_media_sources in self.media_sources:
-                if _item_media_sources:
-                    _items.append(_item_media_sources.to_dict())
+                _items.append(_item_media_sources.to_dict() if _item_media_sources is not None else None)
             _dict['MediaSources'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in remote_trailers (list)
         _items = []
         if self.remote_trailers:
             for _item_remote_trailers in self.remote_trailers:
-                if _item_remote_trailers:
-                    _items.append(_item_remote_trailers.to_dict())
+                _items.append(_item_remote_trailers.to_dict() if _item_remote_trailers is not None else None)
             _dict['RemoteTrailers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in people (list)
         _items = []
         if self.people:
             for _item_people in self.people:
-                if _item_people:
-                    _items.append(_item_people.to_dict())
+                _items.append(_item_people.to_dict() if _item_people is not None else None)
             _dict['People'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in studios (list)
         _items = []
         if self.studios:
             for _item_studios in self.studios:
-                if _item_studios:
-                    _items.append(_item_studios.to_dict())
+                _items.append(_item_studios.to_dict() if _item_studios is not None else None)
             _dict['Studios'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in genre_items (list)
         _items = []
         if self.genre_items:
             for _item_genre_items in self.genre_items:
-                if _item_genre_items:
-                    _items.append(_item_genre_items.to_dict())
+                _items.append(_item_genre_items.to_dict() if _item_genre_items is not None else None)
             _dict['GenreItems'] = _items
         # override the default output from pydantic by calling `to_dict()` of user_data
         if self.user_data:
@@ -296,22 +292,19 @@ class BaseItemDto(BaseModel):
         _items = []
         if self.artist_items:
             for _item_artist_items in self.artist_items:
-                if _item_artist_items:
-                    _items.append(_item_artist_items.to_dict())
+                _items.append(_item_artist_items.to_dict() if _item_artist_items is not None else None)
             _dict['ArtistItems'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in album_artists (list)
         _items = []
         if self.album_artists:
             for _item_album_artists in self.album_artists:
-                if _item_album_artists:
-                    _items.append(_item_album_artists.to_dict())
+                _items.append(_item_album_artists.to_dict() if _item_album_artists is not None else None)
             _dict['AlbumArtists'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in media_streams (list)
         _items = []
         if self.media_streams:
             for _item_media_streams in self.media_streams:
-                if _item_media_streams:
-                    _items.append(_item_media_streams.to_dict())
+                _items.append(_item_media_streams.to_dict() if _item_media_streams is not None else None)
             _dict['MediaStreams'] = _items
         # override the default output from pydantic by calling `to_dict()` of image_blur_hashes
         if self.image_blur_hashes:
@@ -320,16 +313,16 @@ class BaseItemDto(BaseModel):
         _items = []
         if self.chapters:
             for _item_chapters in self.chapters:
-                if _item_chapters:
-                    _items.append(_item_chapters.to_dict())
+                _items.append(_item_chapters.to_dict() if _item_chapters is not None else None)
             _dict['Chapters'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each value in trickplay (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of each value in trickplay (dict of dict)
+        _field_dict_of_dict = {}
         if self.trickplay:
-            for _key_trickplay in self.trickplay:
-                if self.trickplay[_key_trickplay]:
-                    _field_dict[_key_trickplay] = self.trickplay[_key_trickplay].to_dict()
-            _dict['Trickplay'] = _field_dict
+            for _key_trickplay, _value_trickplay in self.trickplay.items():
+                _field_dict_of_dict[_key_trickplay] = {
+                    _key: _value.to_dict() if _value is not None else None for _key, _value in _value_trickplay.items()
+                } if _value_trickplay is not None else None
+            _dict['Trickplay'] = _field_dict_of_dict
         # override the default output from pydantic by calling `to_dict()` of current_program
         if self.current_program:
             _dict['CurrentProgram'] = self.current_program.to_dict()
@@ -1217,7 +1210,7 @@ class BaseItemDto(BaseModel):
                     if _v is not None
                     else None
                 )
-                for _k, _v in obj.get("Trickplay").items()
+                for _k, _v in obj["Trickplay"].items()
             )
             if obj.get("Trickplay") is not None
             else None,

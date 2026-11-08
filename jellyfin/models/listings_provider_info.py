@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from jellyfin.models.name_value_pair import NameValuePair
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ListingsProviderInfo(BaseModel):
     """
@@ -48,7 +49,8 @@ class ListingsProviderInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["Id", "Type", "Username", "Password", "ListingsId", "ZipCode", "Country", "Path", "EnabledTuners", "EnableAllTuners", "NewsCategories", "SportsCategories", "KidsCategories", "MovieCategories", "ChannelMappings", "MoviePrefix", "PreferredLanguage", "UserAgent"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -60,8 +62,7 @@ class ListingsProviderInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -90,8 +91,7 @@ class ListingsProviderInfo(BaseModel):
         _items = []
         if self.channel_mappings:
             for _item_channel_mappings in self.channel_mappings:
-                if _item_channel_mappings:
-                    _items.append(_item_channel_mappings.to_dict())
+                _items.append(_item_channel_mappings.to_dict() if _item_channel_mappings is not None else None)
             _dict['ChannelMappings'] = _items
         # set to None if id (nullable) is None
         # and model_fields_set contains the field

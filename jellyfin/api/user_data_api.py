@@ -10,16 +10,16 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictBool, StrictStr
+from pydantic import Field, StrictBool
 from typing import Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.update_user_item_data_dto import UpdateUserItemDataDto
 from jellyfin.models.user_item_data_dto import UserItemDataDto
 
@@ -44,8 +44,8 @@ class UserDataApi:
     @validate_call
     def delete_user_item_rating(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -63,9 +63,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -117,8 +117,8 @@ class UserDataApi:
     @validate_call
     def delete_user_item_rating_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -136,9 +136,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -190,8 +190,8 @@ class UserDataApi:
     @validate_call
     def delete_user_item_rating_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -209,9 +209,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -331,8 +331,8 @@ class UserDataApi:
     @validate_call
     def get_item_user_data(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -350,9 +350,9 @@ class UserDataApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -405,8 +405,8 @@ class UserDataApi:
     @validate_call
     def get_item_user_data_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -424,9 +424,9 @@ class UserDataApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -479,8 +479,8 @@ class UserDataApi:
     @validate_call
     def get_item_user_data_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -498,9 +498,9 @@ class UserDataApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -621,8 +621,8 @@ class UserDataApi:
     @validate_call
     def mark_favorite_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -640,9 +640,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -694,8 +694,8 @@ class UserDataApi:
     @validate_call
     def mark_favorite_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -713,9 +713,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -767,8 +767,8 @@ class UserDataApi:
     @validate_call
     def mark_favorite_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -786,9 +786,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -908,8 +908,8 @@ class UserDataApi:
     @validate_call
     def mark_played_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         date_played: Annotated[Optional[datetime], Field(description="Optional. The date the item was played.")] = None,
         _request_timeout: Union[
             None,
@@ -928,9 +928,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param date_played: Optional. The date the item was played.
         :type date_played: datetime
         :param _request_timeout: timeout setting for this request. If one
@@ -986,8 +986,8 @@ class UserDataApi:
     @validate_call
     def mark_played_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         date_played: Annotated[Optional[datetime], Field(description="Optional. The date the item was played.")] = None,
         _request_timeout: Union[
             None,
@@ -1006,9 +1006,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param date_played: Optional. The date the item was played.
         :type date_played: datetime
         :param _request_timeout: timeout setting for this request. If one
@@ -1064,8 +1064,8 @@ class UserDataApi:
     @validate_call
     def mark_played_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         date_played: Annotated[Optional[datetime], Field(description="Optional. The date the item was played.")] = None,
         _request_timeout: Union[
             None,
@@ -1084,9 +1084,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param date_played: Optional. The date the item was played.
         :type date_played: datetime
         :param _request_timeout: timeout setting for this request. If one
@@ -1224,8 +1224,8 @@ class UserDataApi:
     @validate_call
     def mark_unplayed_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1243,9 +1243,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1298,8 +1298,8 @@ class UserDataApi:
     @validate_call
     def mark_unplayed_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1317,9 +1317,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1372,8 +1372,8 @@ class UserDataApi:
     @validate_call
     def mark_unplayed_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1391,9 +1391,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1514,8 +1514,8 @@ class UserDataApi:
     @validate_call
     def unmark_favorite_item(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1533,9 +1533,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1587,8 +1587,8 @@ class UserDataApi:
     @validate_call
     def unmark_favorite_item_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1606,9 +1606,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1660,8 +1660,8 @@ class UserDataApi:
     @validate_call
     def unmark_favorite_item_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1679,9 +1679,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1801,9 +1801,9 @@ class UserDataApi:
     @validate_call
     def update_item_user_data(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         update_user_item_data_dto: Annotated[UpdateUserItemDataDto, Field(description="New user data object.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1821,11 +1821,11 @@ class UserDataApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param update_user_item_data_dto: New user data object. (required)
         :type update_user_item_data_dto: UpdateUserItemDataDto
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1879,9 +1879,9 @@ class UserDataApi:
     @validate_call
     def update_item_user_data_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         update_user_item_data_dto: Annotated[UpdateUserItemDataDto, Field(description="New user data object.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1899,11 +1899,11 @@ class UserDataApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param update_user_item_data_dto: New user data object. (required)
         :type update_user_item_data_dto: UpdateUserItemDataDto
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1957,9 +1957,9 @@ class UserDataApi:
     @validate_call
     def update_item_user_data_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         update_user_item_data_dto: Annotated[UpdateUserItemDataDto, Field(description="New user data object.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1977,11 +1977,11 @@ class UserDataApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param update_user_item_data_dto: New user data object. (required)
         :type update_user_item_data_dto: UpdateUserItemDataDto
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2121,8 +2121,8 @@ class UserDataApi:
     @validate_call
     def update_user_item_rating(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         likes: Annotated[Optional[StrictBool], Field(description="Whether this M:Jellyfin.Api.Controllers.UserLibraryController.UpdateUserItemRating(System.Nullable{System.Guid},System.Guid,System.Nullable{System.Boolean}) is likes.")] = None,
         _request_timeout: Union[
             None,
@@ -2141,9 +2141,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param likes: Whether this M:Jellyfin.Api.Controllers.UserLibraryController.UpdateUserItemRating(System.Nullable{System.Guid},System.Guid,System.Nullable{System.Boolean}) is likes.
         :type likes: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -2198,8 +2198,8 @@ class UserDataApi:
     @validate_call
     def update_user_item_rating_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         likes: Annotated[Optional[StrictBool], Field(description="Whether this M:Jellyfin.Api.Controllers.UserLibraryController.UpdateUserItemRating(System.Nullable{System.Guid},System.Guid,System.Nullable{System.Boolean}) is likes.")] = None,
         _request_timeout: Union[
             None,
@@ -2218,9 +2218,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param likes: Whether this M:Jellyfin.Api.Controllers.UserLibraryController.UpdateUserItemRating(System.Nullable{System.Guid},System.Guid,System.Nullable{System.Boolean}) is likes.
         :type likes: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -2275,8 +2275,8 @@ class UserDataApi:
     @validate_call
     def update_user_item_rating_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        item_id: Annotated[UUID, Field(description="Item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         likes: Annotated[Optional[StrictBool], Field(description="Whether this M:Jellyfin.Api.Controllers.UserLibraryController.UpdateUserItemRating(System.Nullable{System.Guid},System.Guid,System.Nullable{System.Boolean}) is likes.")] = None,
         _request_timeout: Union[
             None,
@@ -2295,9 +2295,9 @@ class UserDataApi:
 
 
         :param item_id: Item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param likes: Whether this M:Jellyfin.Api.Controllers.UserLibraryController.UpdateUserItemRating(System.Nullable{System.Guid},System.Guid,System.Nullable{System.Boolean}) is likes.
         :type likes: bool
         :param _request_timeout: timeout setting for this request. If one

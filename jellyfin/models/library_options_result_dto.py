@@ -23,6 +23,7 @@ from jellyfin.models.library_option_info_dto import LibraryOptionInfoDto
 from jellyfin.models.library_type_options_dto import LibraryTypeOptionsDto
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LibraryOptionsResultDto(BaseModel):
     """
@@ -37,7 +38,8 @@ class LibraryOptionsResultDto(BaseModel):
     __properties: ClassVar[List[str]] = ["MetadataSavers", "MetadataReaders", "SubtitleFetchers", "LyricFetchers", "MediaSegmentProviders", "TypeOptions"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +51,7 @@ class LibraryOptionsResultDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -79,43 +80,37 @@ class LibraryOptionsResultDto(BaseModel):
         _items = []
         if self.metadata_savers:
             for _item_metadata_savers in self.metadata_savers:
-                if _item_metadata_savers:
-                    _items.append(_item_metadata_savers.to_dict())
+                _items.append(_item_metadata_savers.to_dict() if _item_metadata_savers is not None else None)
             _dict['MetadataSavers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in metadata_readers (list)
         _items = []
         if self.metadata_readers:
             for _item_metadata_readers in self.metadata_readers:
-                if _item_metadata_readers:
-                    _items.append(_item_metadata_readers.to_dict())
+                _items.append(_item_metadata_readers.to_dict() if _item_metadata_readers is not None else None)
             _dict['MetadataReaders'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in subtitle_fetchers (list)
         _items = []
         if self.subtitle_fetchers:
             for _item_subtitle_fetchers in self.subtitle_fetchers:
-                if _item_subtitle_fetchers:
-                    _items.append(_item_subtitle_fetchers.to_dict())
+                _items.append(_item_subtitle_fetchers.to_dict() if _item_subtitle_fetchers is not None else None)
             _dict['SubtitleFetchers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in lyric_fetchers (list)
         _items = []
         if self.lyric_fetchers:
             for _item_lyric_fetchers in self.lyric_fetchers:
-                if _item_lyric_fetchers:
-                    _items.append(_item_lyric_fetchers.to_dict())
+                _items.append(_item_lyric_fetchers.to_dict() if _item_lyric_fetchers is not None else None)
             _dict['LyricFetchers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in media_segment_providers (list)
         _items = []
         if self.media_segment_providers:
             for _item_media_segment_providers in self.media_segment_providers:
-                if _item_media_segment_providers:
-                    _items.append(_item_media_segment_providers.to_dict())
+                _items.append(_item_media_segment_providers.to_dict() if _item_media_segment_providers is not None else None)
             _dict['MediaSegmentProviders'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in type_options (list)
         _items = []
         if self.type_options:
             for _item_type_options in self.type_options:
-                if _item_type_options:
-                    _items.append(_item_type_options.to_dict())
+                _items.append(_item_type_options.to_dict() if _item_type_options is not None else None)
             _dict['TypeOptions'] = _items
         return _dict
 

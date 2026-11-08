@@ -19,24 +19,26 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.device_profile import DeviceProfile
 from jellyfin.models.media_protocol import MediaProtocol
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class OpenLiveStreamDto(BaseModel):
     """
     Open live stream dto.
     """ # noqa: E501
     open_token: Optional[StrictStr] = Field(default=None, description="Gets or sets the open token.", alias="OpenToken")
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the user id.", alias="UserId")
+    user_id: Optional[UUID] = Field(default=None, description="Gets or sets the user id.", alias="UserId")
     play_session_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the play session id.", alias="PlaySessionId")
     max_streaming_bitrate: Optional[StrictInt] = Field(default=None, description="Gets or sets the max streaming bitrate.", alias="MaxStreamingBitrate")
     start_time_ticks: Optional[StrictInt] = Field(default=None, description="Gets or sets the start time in ticks.", alias="StartTimeTicks")
     audio_stream_index: Optional[StrictInt] = Field(default=None, description="Gets or sets the audio stream index.", alias="AudioStreamIndex")
     subtitle_stream_index: Optional[StrictInt] = Field(default=None, description="Gets or sets the subtitle stream index.", alias="SubtitleStreamIndex")
     max_audio_channels: Optional[StrictInt] = Field(default=None, description="Gets or sets the max audio channels.", alias="MaxAudioChannels")
-    item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the item id.", alias="ItemId")
+    item_id: Optional[UUID] = Field(default=None, description="Gets or sets the item id.", alias="ItemId")
     enable_direct_play: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether to enable direct play.", alias="EnableDirectPlay")
     enable_direct_stream: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether to enable direct stream.", alias="EnableDirectStream")
     always_burn_in_subtitle_when_transcoding: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether always burn in subtitles when transcoding.", alias="AlwaysBurnInSubtitleWhenTranscoding")
@@ -45,7 +47,8 @@ class OpenLiveStreamDto(BaseModel):
     __properties: ClassVar[List[str]] = ["OpenToken", "UserId", "PlaySessionId", "MaxStreamingBitrate", "StartTimeTicks", "AudioStreamIndex", "SubtitleStreamIndex", "MaxAudioChannels", "ItemId", "EnableDirectPlay", "EnableDirectStream", "AlwaysBurnInSubtitleWhenTranscoding", "DeviceProfile", "DirectPlayProtocols"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -57,8 +60,7 @@ class OpenLiveStreamDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

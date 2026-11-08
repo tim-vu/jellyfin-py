@@ -19,9 +19,11 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.plugin_status import PluginStatus
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PluginInfo(BaseModel):
     """
@@ -31,14 +33,15 @@ class PluginInfo(BaseModel):
     version: Optional[StrictStr] = Field(default=None, description="Gets or sets the version.", alias="Version")
     configuration_file_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name of the configuration file.", alias="ConfigurationFileName")
     description: Optional[StrictStr] = Field(default=None, description="Gets or sets the description.", alias="Description")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the unique id.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the unique id.", alias="Id")
     can_uninstall: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the plugin can be uninstalled.", alias="CanUninstall")
     has_image: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this plugin has a valid image.", alias="HasImage")
     status: Optional[PluginStatus] = Field(default=None, description="Gets or sets a value indicating the status of the plugin.", alias="Status")
     __properties: ClassVar[List[str]] = ["Name", "Version", "ConfigurationFileName", "Description", "Id", "CanUninstall", "HasImage", "Status"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +53,7 @@ class PluginInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

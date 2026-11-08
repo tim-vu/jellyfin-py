@@ -19,8 +19,10 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class IPlugin(BaseModel):
     """
@@ -28,7 +30,7 @@ class IPlugin(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Gets the name of the plugin.", alias="Name")
     description: Optional[StrictStr] = Field(default=None, description="Gets the Description.", alias="Description")
-    id: Optional[StrictStr] = Field(default=None, description="Gets the unique id.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets the unique id.", alias="Id")
     version: Optional[StrictStr] = Field(default=None, description="Gets the plugin version.", alias="Version")
     assembly_file_path: Optional[StrictStr] = Field(default=None, description="Gets the path to the assembly file.", alias="AssemblyFilePath")
     can_uninstall: Optional[StrictBool] = Field(default=None, description="Gets a value indicating whether the plugin can be uninstalled.", alias="CanUninstall")
@@ -36,7 +38,8 @@ class IPlugin(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "Description", "Id", "Version", "AssemblyFilePath", "CanUninstall", "DataFolderPath"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +51,7 @@ class IPlugin(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

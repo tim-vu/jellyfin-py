@@ -23,6 +23,7 @@ from jellyfin.models.custom_database_options import CustomDatabaseOptions
 from jellyfin.models.database_locking_behavior_types import DatabaseLockingBehaviorTypes
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DatabaseConfigurationOptions(BaseModel):
     """
@@ -34,7 +35,8 @@ class DatabaseConfigurationOptions(BaseModel):
     __properties: ClassVar[List[str]] = ["DatabaseType", "CustomProviderOptions", "LockingBehavior"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +48,7 @@ class DatabaseConfigurationOptions(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

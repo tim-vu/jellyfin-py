@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from jellyfin.models.lyric_line_cue import LyricLineCue
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LyricLine(BaseModel):
     """
@@ -33,7 +34,8 @@ class LyricLine(BaseModel):
     __properties: ClassVar[List[str]] = ["Text", "Start", "Cues"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -45,8 +47,7 @@ class LyricLine(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,8 +76,7 @@ class LyricLine(BaseModel):
         _items = []
         if self.cues:
             for _item_cues in self.cues:
-                if _item_cues:
-                    _items.append(_item_cues.to_dict())
+                _items.append(_item_cues.to_dict() if _item_cues is not None else None)
             _dict['Cues'] = _items
         # set to None if start (nullable) is None
         # and model_fields_set contains the field

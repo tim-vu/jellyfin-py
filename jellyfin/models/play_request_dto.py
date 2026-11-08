@@ -17,22 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PlayRequestDto(BaseModel):
     """
     Class PlayRequestDto.
     """ # noqa: E501
-    playing_queue: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the playing queue.", alias="PlayingQueue")
+    playing_queue: Optional[List[UUID]] = Field(default=None, description="Gets or sets the playing queue.", alias="PlayingQueue")
     playing_item_position: Optional[StrictInt] = Field(default=None, description="Gets or sets the position of the playing item in the queue.", alias="PlayingItemPosition")
     start_position_ticks: Optional[StrictInt] = Field(default=None, description="Gets or sets the start position ticks.", alias="StartPositionTicks")
     __properties: ClassVar[List[str]] = ["PlayingQueue", "PlayingItemPosition", "StartPositionTicks"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -44,8 +47,7 @@ class PlayRequestDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

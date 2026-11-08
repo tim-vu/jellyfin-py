@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.client_capabilities_dto import ClientCapabilitiesDto
 from jellyfin.models.general_command_type import GeneralCommandType
@@ -30,6 +31,7 @@ from jellyfin.models.session_user_info import SessionUserInfo
 from jellyfin.models.transcoding_info import TranscodingInfo
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SessionInfoDto(BaseModel):
     """
@@ -41,7 +43,7 @@ class SessionInfoDto(BaseModel):
     remote_end_point: Optional[StrictStr] = Field(default=None, description="Gets or sets the remote end point.", alias="RemoteEndPoint")
     playable_media_types: Optional[List[MediaType]] = Field(default=None, description="Gets or sets the playable media types.", alias="PlayableMediaTypes")
     id: Optional[StrictStr] = Field(default=None, description="Gets or sets the id.", alias="Id")
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the user id.", alias="UserId")
+    user_id: Optional[UUID] = Field(default=None, description="Gets or sets the user id.", alias="UserId")
     user_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the username.", alias="UserName")
     client: Optional[StrictStr] = Field(default=None, description="Gets or sets the type of the client.", alias="Client")
     last_activity_date: Optional[datetime] = Field(default=None, description="Gets or sets the last activity date.", alias="LastActivityDate")
@@ -66,7 +68,8 @@ class SessionInfoDto(BaseModel):
     __properties: ClassVar[List[str]] = ["PlayState", "AdditionalUsers", "Capabilities", "RemoteEndPoint", "PlayableMediaTypes", "Id", "UserId", "UserName", "Client", "LastActivityDate", "LastPlaybackCheckIn", "LastPausedDate", "DeviceName", "DeviceType", "NowPlayingItem", "NowViewingItem", "DeviceId", "ApplicationVersion", "TranscodingInfo", "IsActive", "SupportsMediaControl", "SupportsRemoteControl", "NowPlayingQueue", "HasCustomDeviceName", "PlaylistItemId", "ServerId", "UserPrimaryImageTag", "SupportedCommands"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -78,8 +81,7 @@ class SessionInfoDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -111,8 +113,7 @@ class SessionInfoDto(BaseModel):
         _items = []
         if self.additional_users:
             for _item_additional_users in self.additional_users:
-                if _item_additional_users:
-                    _items.append(_item_additional_users.to_dict())
+                _items.append(_item_additional_users.to_dict() if _item_additional_users is not None else None)
             _dict['AdditionalUsers'] = _items
         # override the default output from pydantic by calling `to_dict()` of capabilities
         if self.capabilities:
@@ -130,8 +131,7 @@ class SessionInfoDto(BaseModel):
         _items = []
         if self.now_playing_queue:
             for _item_now_playing_queue in self.now_playing_queue:
-                if _item_now_playing_queue:
-                    _items.append(_item_now_playing_queue.to_dict())
+                _items.append(_item_now_playing_queue.to_dict() if _item_now_playing_queue is not None else None)
             _dict['NowPlayingQueue'] = _items
         # set to None if play_state (nullable) is None
         # and model_fields_set contains the field

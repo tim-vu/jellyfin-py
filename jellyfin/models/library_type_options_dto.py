@@ -24,6 +24,7 @@ from jellyfin.models.image_type import ImageType
 from jellyfin.models.library_option_info_dto import LibraryOptionInfoDto
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LibraryTypeOptionsDto(BaseModel):
     """
@@ -38,7 +39,8 @@ class LibraryTypeOptionsDto(BaseModel):
     __properties: ClassVar[List[str]] = ["Type", "MetadataFetchers", "ImageFetchers", "SimilarItemProviders", "SupportedImageTypes", "DefaultImageOptions"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +52,7 @@ class LibraryTypeOptionsDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -80,29 +81,25 @@ class LibraryTypeOptionsDto(BaseModel):
         _items = []
         if self.metadata_fetchers:
             for _item_metadata_fetchers in self.metadata_fetchers:
-                if _item_metadata_fetchers:
-                    _items.append(_item_metadata_fetchers.to_dict())
+                _items.append(_item_metadata_fetchers.to_dict() if _item_metadata_fetchers is not None else None)
             _dict['MetadataFetchers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in image_fetchers (list)
         _items = []
         if self.image_fetchers:
             for _item_image_fetchers in self.image_fetchers:
-                if _item_image_fetchers:
-                    _items.append(_item_image_fetchers.to_dict())
+                _items.append(_item_image_fetchers.to_dict() if _item_image_fetchers is not None else None)
             _dict['ImageFetchers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in similar_item_providers (list)
         _items = []
         if self.similar_item_providers:
             for _item_similar_item_providers in self.similar_item_providers:
-                if _item_similar_item_providers:
-                    _items.append(_item_similar_item_providers.to_dict())
+                _items.append(_item_similar_item_providers.to_dict() if _item_similar_item_providers is not None else None)
             _dict['SimilarItemProviders'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in default_image_options (list)
         _items = []
         if self.default_image_options:
             for _item_default_image_options in self.default_image_options:
-                if _item_default_image_options:
-                    _items.append(_item_default_image_options.to_dict())
+                _items.append(_item_default_image_options.to_dict() if _item_default_image_options is not None else None)
             _dict['DefaultImageOptions'] = _items
         # set to None if type (nullable) is None
         # and model_fields_set contains the field

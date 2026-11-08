@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.codec_profile import CodecProfile
 from jellyfin.models.container_profile import ContainerProfile
 from jellyfin.models.direct_play_profile import DirectPlayProfile
@@ -26,13 +27,14 @@ from jellyfin.models.subtitle_profile import SubtitleProfile
 from jellyfin.models.transcoding_profile import TranscodingProfile
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DeviceProfile(BaseModel):
     """
     A MediaBrowser.Model.Dlna.DeviceProfile represents a set of metadata which determines which content a certain device is able to play.   Specifically, it defines the supported <see cref=\"P:MediaBrowser.Model.Dlna.DeviceProfile.ContainerProfiles\">containers</see> and <see cref=\"P:MediaBrowser.Model.Dlna.DeviceProfile.CodecProfiles\">codecs</see> (video and/or audio, including codec profiles and levels) the device is able to direct play (without transcoding or remuxing), as well as which <see cref=\"P:MediaBrowser.Model.Dlna.DeviceProfile.TranscodingProfiles\">containers/codecs to transcode to</see> in case it isn't.
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name of this device profile. User profiles must have a unique name.", alias="Name")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the unique internal identifier.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the unique internal identifier.", alias="Id")
     max_streaming_bitrate: Optional[StrictInt] = Field(default=None, description="Gets or sets the maximum allowed bitrate for all streamed content.", alias="MaxStreamingBitrate")
     max_static_bitrate: Optional[StrictInt] = Field(default=None, description="Gets or sets the maximum allowed bitrate for statically streamed content (= direct played files).", alias="MaxStaticBitrate")
     music_streaming_transcoding_bitrate: Optional[StrictInt] = Field(default=None, description="Gets or sets the maximum allowed bitrate for transcoded music streams.", alias="MusicStreamingTranscodingBitrate")
@@ -45,7 +47,8 @@ class DeviceProfile(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "Id", "MaxStreamingBitrate", "MaxStaticBitrate", "MusicStreamingTranscodingBitrate", "MaxStaticMusicBitrate", "DirectPlayProfiles", "TranscodingProfiles", "ContainerProfiles", "CodecProfiles", "SubtitleProfiles"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -57,8 +60,7 @@ class DeviceProfile(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -87,36 +89,31 @@ class DeviceProfile(BaseModel):
         _items = []
         if self.direct_play_profiles:
             for _item_direct_play_profiles in self.direct_play_profiles:
-                if _item_direct_play_profiles:
-                    _items.append(_item_direct_play_profiles.to_dict())
+                _items.append(_item_direct_play_profiles.to_dict() if _item_direct_play_profiles is not None else None)
             _dict['DirectPlayProfiles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in transcoding_profiles (list)
         _items = []
         if self.transcoding_profiles:
             for _item_transcoding_profiles in self.transcoding_profiles:
-                if _item_transcoding_profiles:
-                    _items.append(_item_transcoding_profiles.to_dict())
+                _items.append(_item_transcoding_profiles.to_dict() if _item_transcoding_profiles is not None else None)
             _dict['TranscodingProfiles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in container_profiles (list)
         _items = []
         if self.container_profiles:
             for _item_container_profiles in self.container_profiles:
-                if _item_container_profiles:
-                    _items.append(_item_container_profiles.to_dict())
+                _items.append(_item_container_profiles.to_dict() if _item_container_profiles is not None else None)
             _dict['ContainerProfiles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in codec_profiles (list)
         _items = []
         if self.codec_profiles:
             for _item_codec_profiles in self.codec_profiles:
-                if _item_codec_profiles:
-                    _items.append(_item_codec_profiles.to_dict())
+                _items.append(_item_codec_profiles.to_dict() if _item_codec_profiles is not None else None)
             _dict['CodecProfiles'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in subtitle_profiles (list)
         _items = []
         if self.subtitle_profiles:
             for _item_subtitle_profiles in self.subtitle_profiles:
-                if _item_subtitle_profiles:
-                    _items.append(_item_subtitle_profiles.to_dict())
+                _items.append(_item_subtitle_profiles.to_dict() if _item_subtitle_profiles is not None else None)
             _dict['SubtitleProfiles'] = _items
         # set to None if name (nullable) is None
         # and model_fields_set contains the field

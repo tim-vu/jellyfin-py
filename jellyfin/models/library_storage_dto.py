@@ -19,21 +19,24 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from uuid import UUID
 from jellyfin.models.folder_storage_dto import FolderStorageDto
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LibraryStorageDto(BaseModel):
     """
     Contains informations about a libraries storage informations.
     """ # noqa: E501
-    id: StrictStr = Field(description="Gets or sets the Library Id.", alias="Id")
+    id: UUID = Field(description="Gets or sets the Library Id.", alias="Id")
     name: StrictStr = Field(description="Gets or sets the name of the library.", alias="Name")
     folders: List[FolderStorageDto] = Field(description="Gets or sets the storage informations about the folders used in a library.", alias="Folders")
     __properties: ClassVar[List[str]] = ["Id", "Name", "Folders"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -45,8 +48,7 @@ class LibraryStorageDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,8 +77,7 @@ class LibraryStorageDto(BaseModel):
         _items = []
         if self.folders:
             for _item_folders in self.folders:
-                if _item_folders:
-                    _items.append(_item_folders.to_dict())
+                _items.append(_item_folders.to_dict() if _item_folders is not None else None)
             _dict['Folders'] = _items
         return _dict
 

@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.client_capabilities_dto import ClientCapabilitiesDto
 from jellyfin.models.general_command import GeneralCommand
 from jellyfin.models.general_command_type import GeneralCommandType
@@ -51,7 +51,7 @@ class SessionApi:
     def add_user_to_session(
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -71,7 +71,7 @@ class SessionApi:
         :param session_id: The session id. (required)
         :type session_id: str
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -124,7 +124,7 @@ class SessionApi:
     def add_user_to_session_with_http_info(
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -144,7 +144,7 @@ class SessionApi:
         :param session_id: The session id. (required)
         :type session_id: str
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -197,7 +197,7 @@ class SessionApi:
     def add_user_to_session_without_preload_content(
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -217,7 +217,7 @@ class SessionApi:
         :param session_id: The session id. (required)
         :type session_id: str
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -650,7 +650,7 @@ class SessionApi:
     @validate_call
     def get_sessions(
         self,
-        controllable_by_user_id: Annotated[Optional[StrictStr], Field(description="Filter by sessions that a given user is allowed to remote control.")] = None,
+        controllable_by_user_id: Annotated[Optional[UUID], Field(description="Filter by sessions that a given user is allowed to remote control.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="Filter by device Id.")] = None,
         active_within_seconds: Annotated[Optional[StrictInt], Field(description="Optional. Filter by sessions that were active in the last n seconds.")] = None,
         _request_timeout: Union[
@@ -670,7 +670,7 @@ class SessionApi:
 
 
         :param controllable_by_user_id: Filter by sessions that a given user is allowed to remote control.
-        :type controllable_by_user_id: str
+        :type controllable_by_user_id: UUID
         :param device_id: Filter by device Id.
         :type device_id: str
         :param active_within_seconds: Optional. Filter by sessions that were active in the last n seconds.
@@ -727,7 +727,7 @@ class SessionApi:
     @validate_call
     def get_sessions_with_http_info(
         self,
-        controllable_by_user_id: Annotated[Optional[StrictStr], Field(description="Filter by sessions that a given user is allowed to remote control.")] = None,
+        controllable_by_user_id: Annotated[Optional[UUID], Field(description="Filter by sessions that a given user is allowed to remote control.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="Filter by device Id.")] = None,
         active_within_seconds: Annotated[Optional[StrictInt], Field(description="Optional. Filter by sessions that were active in the last n seconds.")] = None,
         _request_timeout: Union[
@@ -747,7 +747,7 @@ class SessionApi:
 
 
         :param controllable_by_user_id: Filter by sessions that a given user is allowed to remote control.
-        :type controllable_by_user_id: str
+        :type controllable_by_user_id: UUID
         :param device_id: Filter by device Id.
         :type device_id: str
         :param active_within_seconds: Optional. Filter by sessions that were active in the last n seconds.
@@ -804,7 +804,7 @@ class SessionApi:
     @validate_call
     def get_sessions_without_preload_content(
         self,
-        controllable_by_user_id: Annotated[Optional[StrictStr], Field(description="Filter by sessions that a given user is allowed to remote control.")] = None,
+        controllable_by_user_id: Annotated[Optional[UUID], Field(description="Filter by sessions that a given user is allowed to remote control.")] = None,
         device_id: Annotated[Optional[StrictStr], Field(description="Filter by device Id.")] = None,
         active_within_seconds: Annotated[Optional[StrictInt], Field(description="Optional. Filter by sessions that were active in the last n seconds.")] = None,
         _request_timeout: Union[
@@ -824,7 +824,7 @@ class SessionApi:
 
 
         :param controllable_by_user_id: Filter by sessions that a given user is allowed to remote control.
-        :type controllable_by_user_id: str
+        :type controllable_by_user_id: UUID
         :param device_id: Filter by device Id.
         :type device_id: str
         :param active_within_seconds: Optional. Filter by sessions that were active in the last n seconds.
@@ -1227,7 +1227,7 @@ class SessionApi:
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
         play_command: Annotated[StrictStr, Field(description="The type of play command to issue (PlayNow, PlayNext, PlayLast). Clients who have not yet implemented play next and play last may play now.")],
-        item_ids: Annotated[List[StrictStr], Field(description="The ids of the items to play, comma delimited.")],
+        item_ids: Annotated[List[UUID], Field(description="The ids of the items to play, comma delimited.")],
         start_position_ticks: Annotated[Optional[StrictInt], Field(description="The starting position of the first item.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="Optional. The media source id.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="Optional. The index of the audio stream to play.")] = None,
@@ -1254,7 +1254,7 @@ class SessionApi:
         :param play_command: The type of play command to issue (PlayNow, PlayNext, PlayLast). Clients who have not yet implemented play next and play last may play now. (required)
         :type play_command: PlayCommand
         :param item_ids: The ids of the items to play, comma delimited. (required)
-        :type item_ids: List[str]
+        :type item_ids: List[UUID]
         :param start_position_ticks: The starting position of the first item.
         :type start_position_ticks: int
         :param media_source_id: Optional. The media source id.
@@ -1324,7 +1324,7 @@ class SessionApi:
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
         play_command: Annotated[StrictStr, Field(description="The type of play command to issue (PlayNow, PlayNext, PlayLast). Clients who have not yet implemented play next and play last may play now.")],
-        item_ids: Annotated[List[StrictStr], Field(description="The ids of the items to play, comma delimited.")],
+        item_ids: Annotated[List[UUID], Field(description="The ids of the items to play, comma delimited.")],
         start_position_ticks: Annotated[Optional[StrictInt], Field(description="The starting position of the first item.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="Optional. The media source id.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="Optional. The index of the audio stream to play.")] = None,
@@ -1351,7 +1351,7 @@ class SessionApi:
         :param play_command: The type of play command to issue (PlayNow, PlayNext, PlayLast). Clients who have not yet implemented play next and play last may play now. (required)
         :type play_command: PlayCommand
         :param item_ids: The ids of the items to play, comma delimited. (required)
-        :type item_ids: List[str]
+        :type item_ids: List[UUID]
         :param start_position_ticks: The starting position of the first item.
         :type start_position_ticks: int
         :param media_source_id: Optional. The media source id.
@@ -1421,7 +1421,7 @@ class SessionApi:
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
         play_command: Annotated[StrictStr, Field(description="The type of play command to issue (PlayNow, PlayNext, PlayLast). Clients who have not yet implemented play next and play last may play now.")],
-        item_ids: Annotated[List[StrictStr], Field(description="The ids of the items to play, comma delimited.")],
+        item_ids: Annotated[List[UUID], Field(description="The ids of the items to play, comma delimited.")],
         start_position_ticks: Annotated[Optional[StrictInt], Field(description="The starting position of the first item.")] = None,
         media_source_id: Annotated[Optional[StrictStr], Field(description="Optional. The media source id.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="Optional. The index of the audio stream to play.")] = None,
@@ -1448,7 +1448,7 @@ class SessionApi:
         :param play_command: The type of play command to issue (PlayNow, PlayNext, PlayLast). Clients who have not yet implemented play next and play last may play now. (required)
         :type play_command: PlayCommand
         :param item_ids: The ids of the items to play, comma delimited. (required)
-        :type item_ids: List[str]
+        :type item_ids: List[UUID]
         :param start_position_ticks: The starting position of the first item.
         :type start_position_ticks: int
         :param media_source_id: Optional. The media source id.
@@ -2251,7 +2251,7 @@ class SessionApi:
     def remove_user_from_session(
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2271,7 +2271,7 @@ class SessionApi:
         :param session_id: The session id. (required)
         :type session_id: str
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2324,7 +2324,7 @@ class SessionApi:
     def remove_user_from_session_with_http_info(
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2344,7 +2344,7 @@ class SessionApi:
         :param session_id: The session id. (required)
         :type session_id: str
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2397,7 +2397,7 @@ class SessionApi:
     def remove_user_from_session_without_preload_content(
         self,
         session_id: Annotated[StrictStr, Field(description="The session id.")],
-        user_id: Annotated[StrictStr, Field(description="The user id.")],
+        user_id: Annotated[UUID, Field(description="The user id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2417,7 +2417,7 @@ class SessionApi:
         :param session_id: The session id. (required)
         :type session_id: str
         :param user_id: The user id. (required)
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

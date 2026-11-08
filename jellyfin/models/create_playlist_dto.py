@@ -19,25 +19,28 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.media_type import MediaType
 from jellyfin.models.playlist_user_permissions import PlaylistUserPermissions
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CreatePlaylistDto(BaseModel):
     """
     Create new playlist dto.
     """ # noqa: E501
     name: StrictStr = Field(description="Gets or sets the name of the new playlist.", alias="Name")
-    ids: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets item ids to add to the playlist.", alias="Ids")
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the user id.", alias="UserId")
+    ids: Optional[List[UUID]] = Field(default=None, description="Gets or sets item ids to add to the playlist.", alias="Ids")
+    user_id: Optional[UUID] = Field(default=None, description="Gets or sets the user id.", alias="UserId")
     media_type: Optional[MediaType] = Field(default=None, description="Gets or sets the media type.", alias="MediaType")
     users: Optional[List[PlaylistUserPermissions]] = Field(default=None, description="Gets or sets the playlist users.", alias="Users")
     is_public: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether the playlist is public.", alias="IsPublic")
     __properties: ClassVar[List[str]] = ["Name", "Ids", "UserId", "MediaType", "Users", "IsPublic"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +52,7 @@ class CreatePlaylistDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -79,8 +81,7 @@ class CreatePlaylistDto(BaseModel):
         _items = []
         if self.users:
             for _item_users in self.users:
-                if _item_users:
-                    _items.append(_item_users.to_dict())
+                _items.append(_item_users.to_dict() if _item_users is not None else None)
             _dict['Users'] = _items
         # set to None if user_id (nullable) is None
         # and model_fields_set contains the field

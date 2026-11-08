@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.live_stream_response import LiveStreamResponse
 from jellyfin.models.open_live_stream_dto import OpenLiveStreamDto
 from jellyfin.models.playback_info_dto import PlaybackInfoDto
@@ -327,7 +327,7 @@ class MediaInfoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Tests the network with a request with the size of the bitrate.
 
 
@@ -364,7 +364,7 @@ class MediaInfoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -396,7 +396,7 @@ class MediaInfoApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Tests the network with a request with the size of the bitrate.
 
 
@@ -433,7 +433,7 @@ class MediaInfoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -502,7 +502,7 @@ class MediaInfoApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -584,8 +584,8 @@ class MediaInfoApi:
     @validate_call
     def get_playback_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -603,9 +603,9 @@ class MediaInfoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -658,8 +658,8 @@ class MediaInfoApi:
     @validate_call
     def get_playback_info_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -677,9 +677,9 @@ class MediaInfoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -732,8 +732,8 @@ class MediaInfoApi:
     @validate_call
     def get_playback_info_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -751,9 +751,9 @@ class MediaInfoApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -874,8 +874,8 @@ class MediaInfoApi:
     @validate_call
     def get_posted_playback_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         max_streaming_bitrate: Annotated[Optional[StrictInt], Field(description="The maximum streaming bitrate.")] = None,
         start_time_ticks: Annotated[Optional[StrictInt], Field(description="The start time in ticks.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="The audio stream index.")] = None,
@@ -908,9 +908,9 @@ class MediaInfoApi:
         For backwards compatibility parameters can be sent via Query or Body, with Query having higher precedence. Query parameters are obsolete.
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param max_streaming_bitrate: The maximum streaming bitrate.
         :type max_streaming_bitrate: int
         :param start_time_ticks: The start time in ticks.
@@ -1005,8 +1005,8 @@ class MediaInfoApi:
     @validate_call
     def get_posted_playback_info_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         max_streaming_bitrate: Annotated[Optional[StrictInt], Field(description="The maximum streaming bitrate.")] = None,
         start_time_ticks: Annotated[Optional[StrictInt], Field(description="The start time in ticks.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="The audio stream index.")] = None,
@@ -1039,9 +1039,9 @@ class MediaInfoApi:
         For backwards compatibility parameters can be sent via Query or Body, with Query having higher precedence. Query parameters are obsolete.
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param max_streaming_bitrate: The maximum streaming bitrate.
         :type max_streaming_bitrate: int
         :param start_time_ticks: The start time in ticks.
@@ -1136,8 +1136,8 @@ class MediaInfoApi:
     @validate_call
     def get_posted_playback_info_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        item_id: Annotated[UUID, Field(description="The item id.")],
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         max_streaming_bitrate: Annotated[Optional[StrictInt], Field(description="The maximum streaming bitrate.")] = None,
         start_time_ticks: Annotated[Optional[StrictInt], Field(description="The start time in ticks.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="The audio stream index.")] = None,
@@ -1170,9 +1170,9 @@ class MediaInfoApi:
         For backwards compatibility parameters can be sent via Query or Body, with Query having higher precedence. Query parameters are obsolete.
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param max_streaming_bitrate: The maximum streaming bitrate.
         :type max_streaming_bitrate: int
         :param start_time_ticks: The start time in ticks.
@@ -1419,14 +1419,14 @@ class MediaInfoApi:
     def open_live_stream(
         self,
         open_token: Annotated[Optional[StrictStr], Field(description="The open token.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         play_session_id: Annotated[Optional[StrictStr], Field(description="The play session id.")] = None,
         max_streaming_bitrate: Annotated[Optional[StrictInt], Field(description="The maximum streaming bitrate.")] = None,
         start_time_ticks: Annotated[Optional[StrictInt], Field(description="The start time in ticks.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="The audio stream index.")] = None,
         subtitle_stream_index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="The maximum number of audio channels.")] = None,
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         enable_direct_play: Annotated[Optional[StrictBool], Field(description="Whether to enable direct play. Default: true.")] = None,
         enable_direct_stream: Annotated[Optional[StrictBool], Field(description="Whether to enable direct stream. Default: true.")] = None,
         always_burn_in_subtitle_when_transcoding: Annotated[Optional[StrictBool], Field(description="Always burn-in subtitle when transcoding.")] = None,
@@ -1450,7 +1450,7 @@ class MediaInfoApi:
         :param open_token: The open token.
         :type open_token: str
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param play_session_id: The play session id.
         :type play_session_id: str
         :param max_streaming_bitrate: The maximum streaming bitrate.
@@ -1464,7 +1464,7 @@ class MediaInfoApi:
         :param max_audio_channels: The maximum number of audio channels.
         :type max_audio_channels: int
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param enable_direct_play: Whether to enable direct play. Default: true.
         :type enable_direct_play: bool
         :param enable_direct_stream: Whether to enable direct stream. Default: true.
@@ -1536,14 +1536,14 @@ class MediaInfoApi:
     def open_live_stream_with_http_info(
         self,
         open_token: Annotated[Optional[StrictStr], Field(description="The open token.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         play_session_id: Annotated[Optional[StrictStr], Field(description="The play session id.")] = None,
         max_streaming_bitrate: Annotated[Optional[StrictInt], Field(description="The maximum streaming bitrate.")] = None,
         start_time_ticks: Annotated[Optional[StrictInt], Field(description="The start time in ticks.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="The audio stream index.")] = None,
         subtitle_stream_index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="The maximum number of audio channels.")] = None,
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         enable_direct_play: Annotated[Optional[StrictBool], Field(description="Whether to enable direct play. Default: true.")] = None,
         enable_direct_stream: Annotated[Optional[StrictBool], Field(description="Whether to enable direct stream. Default: true.")] = None,
         always_burn_in_subtitle_when_transcoding: Annotated[Optional[StrictBool], Field(description="Always burn-in subtitle when transcoding.")] = None,
@@ -1567,7 +1567,7 @@ class MediaInfoApi:
         :param open_token: The open token.
         :type open_token: str
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param play_session_id: The play session id.
         :type play_session_id: str
         :param max_streaming_bitrate: The maximum streaming bitrate.
@@ -1581,7 +1581,7 @@ class MediaInfoApi:
         :param max_audio_channels: The maximum number of audio channels.
         :type max_audio_channels: int
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param enable_direct_play: Whether to enable direct play. Default: true.
         :type enable_direct_play: bool
         :param enable_direct_stream: Whether to enable direct stream. Default: true.
@@ -1653,14 +1653,14 @@ class MediaInfoApi:
     def open_live_stream_without_preload_content(
         self,
         open_token: Annotated[Optional[StrictStr], Field(description="The open token.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id.")] = None,
         play_session_id: Annotated[Optional[StrictStr], Field(description="The play session id.")] = None,
         max_streaming_bitrate: Annotated[Optional[StrictInt], Field(description="The maximum streaming bitrate.")] = None,
         start_time_ticks: Annotated[Optional[StrictInt], Field(description="The start time in ticks.")] = None,
         audio_stream_index: Annotated[Optional[StrictInt], Field(description="The audio stream index.")] = None,
         subtitle_stream_index: Annotated[Optional[StrictInt], Field(description="The subtitle stream index.")] = None,
         max_audio_channels: Annotated[Optional[StrictInt], Field(description="The maximum number of audio channels.")] = None,
-        item_id: Annotated[Optional[StrictStr], Field(description="The item id.")] = None,
+        item_id: Annotated[Optional[UUID], Field(description="The item id.")] = None,
         enable_direct_play: Annotated[Optional[StrictBool], Field(description="Whether to enable direct play. Default: true.")] = None,
         enable_direct_stream: Annotated[Optional[StrictBool], Field(description="Whether to enable direct stream. Default: true.")] = None,
         always_burn_in_subtitle_when_transcoding: Annotated[Optional[StrictBool], Field(description="Always burn-in subtitle when transcoding.")] = None,
@@ -1684,7 +1684,7 @@ class MediaInfoApi:
         :param open_token: The open token.
         :type open_token: str
         :param user_id: The user id.
-        :type user_id: str
+        :type user_id: UUID
         :param play_session_id: The play session id.
         :type play_session_id: str
         :param max_streaming_bitrate: The maximum streaming bitrate.
@@ -1698,7 +1698,7 @@ class MediaInfoApi:
         :param max_audio_channels: The maximum number of audio channels.
         :type max_audio_channels: int
         :param item_id: The item id.
-        :type item_id: str
+        :type item_id: UUID
         :param enable_direct_play: Whether to enable direct play. Default: true.
         :type enable_direct_play: bool
         :param enable_direct_stream: Whether to enable direct stream. Default: true.

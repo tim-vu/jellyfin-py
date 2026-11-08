@@ -23,6 +23,7 @@ from jellyfin.models.name_guid_pair import NameGuidPair
 from jellyfin.models.name_value_pair import NameValuePair
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class QueryFilters(BaseModel):
     """
@@ -35,7 +36,8 @@ class QueryFilters(BaseModel):
     __properties: ClassVar[List[str]] = ["Genres", "Tags", "AudioLanguages", "SubtitleLanguages"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -47,8 +49,7 @@ class QueryFilters(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -77,22 +78,19 @@ class QueryFilters(BaseModel):
         _items = []
         if self.genres:
             for _item_genres in self.genres:
-                if _item_genres:
-                    _items.append(_item_genres.to_dict())
+                _items.append(_item_genres.to_dict() if _item_genres is not None else None)
             _dict['Genres'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in audio_languages (list)
         _items = []
         if self.audio_languages:
             for _item_audio_languages in self.audio_languages:
-                if _item_audio_languages:
-                    _items.append(_item_audio_languages.to_dict())
+                _items.append(_item_audio_languages.to_dict() if _item_audio_languages is not None else None)
             _dict['AudioLanguages'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in subtitle_languages (list)
         _items = []
         if self.subtitle_languages:
             for _item_subtitle_languages in self.subtitle_languages:
-                if _item_subtitle_languages:
-                    _items.append(_item_subtitle_languages.to_dict())
+                _items.append(_item_subtitle_languages.to_dict() if _item_subtitle_languages is not None else None)
             _dict['SubtitleLanguages'] = _items
         # set to None if genres (nullable) is None
         # and model_fields_set contains the field

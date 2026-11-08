@@ -29,6 +29,7 @@ from jellyfin.models.repository_info import RepositoryInfo
 from jellyfin.models.trickplay_options import TrickplayOptions
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ServerConfiguration(BaseModel):
     """
@@ -93,7 +94,8 @@ class ServerConfiguration(BaseModel):
     __properties: ClassVar[List[str]] = ["LogFileRetentionDays", "IsStartupWizardCompleted", "CachePath", "PreviousVersion", "PreviousVersionStr", "EnableMetrics", "EnableNormalizedItemByNameIds", "IsPortAuthorized", "QuickConnectAvailable", "EnableCaseSensitiveItemIds", "DisableLiveTvChannelUserDataName", "MetadataPath", "PreferredMetadataLanguage", "MetadataCountryCode", "SortReplaceCharacters", "SortRemoveCharacters", "SortRemoveWords", "MinResumePct", "MaxResumePct", "MinResumeDurationSeconds", "MinAudiobookResume", "MaxAudiobookResume", "InactiveSessionThreshold", "LibraryMonitorDelay", "LibraryUpdateDuration", "CacheSize", "ImageSavingConvention", "MetadataOptions", "SkipDeserializationForBasicTypes", "ServerName", "UICulture", "SaveMetadataHidden", "ContentTypes", "RemoteClientBitrateLimit", "EnableFolderView", "EnableGroupingMoviesIntoCollections", "EnableGroupingShowsIntoCollections", "DisplaySpecialsWithinSeasons", "CodecsUsed", "PluginRepositories", "EnableExternalContentInSuggestions", "ImageExtractionTimeoutMs", "PathSubstitutions", "EnableSlowResponseWarning", "SlowResponseThresholdMs", "CorsHosts", "ActivityLogRetentionDays", "LibraryScanFanoutConcurrency", "LibraryMetadataRefreshConcurrency", "AllowClientLogUpload", "DummyChapterDuration", "ChapterImageResolution", "ParallelImageEncodingLimit", "CastReceiverApplications", "TrickplayOptions", "EnableLegacyAuthorization"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -105,8 +107,7 @@ class ServerConfiguration(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -135,36 +136,31 @@ class ServerConfiguration(BaseModel):
         _items = []
         if self.metadata_options:
             for _item_metadata_options in self.metadata_options:
-                if _item_metadata_options:
-                    _items.append(_item_metadata_options.to_dict())
+                _items.append(_item_metadata_options.to_dict() if _item_metadata_options is not None else None)
             _dict['MetadataOptions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in content_types (list)
         _items = []
         if self.content_types:
             for _item_content_types in self.content_types:
-                if _item_content_types:
-                    _items.append(_item_content_types.to_dict())
+                _items.append(_item_content_types.to_dict() if _item_content_types is not None else None)
             _dict['ContentTypes'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plugin_repositories (list)
         _items = []
         if self.plugin_repositories:
             for _item_plugin_repositories in self.plugin_repositories:
-                if _item_plugin_repositories:
-                    _items.append(_item_plugin_repositories.to_dict())
+                _items.append(_item_plugin_repositories.to_dict() if _item_plugin_repositories is not None else None)
             _dict['PluginRepositories'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in path_substitutions (list)
         _items = []
         if self.path_substitutions:
             for _item_path_substitutions in self.path_substitutions:
-                if _item_path_substitutions:
-                    _items.append(_item_path_substitutions.to_dict())
+                _items.append(_item_path_substitutions.to_dict() if _item_path_substitutions is not None else None)
             _dict['PathSubstitutions'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in cast_receiver_applications (list)
         _items = []
         if self.cast_receiver_applications:
             for _item_cast_receiver_applications in self.cast_receiver_applications:
-                if _item_cast_receiver_applications:
-                    _items.append(_item_cast_receiver_applications.to_dict())
+                _items.append(_item_cast_receiver_applications.to_dict() if _item_cast_receiver_applications is not None else None)
             _dict['CastReceiverApplications'] = _items
         # override the default output from pydantic by calling `to_dict()` of trickplay_options
         if self.trickplay_options:

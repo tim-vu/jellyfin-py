@@ -24,6 +24,7 @@ from jellyfin.models.media_path_info import MediaPathInfo
 from jellyfin.models.type_options import TypeOptions
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class LibraryOptions(BaseModel):
     """
@@ -74,7 +75,8 @@ class LibraryOptions(BaseModel):
     __properties: ClassVar[List[str]] = ["Enabled", "EnablePhotos", "EnableRealtimeMonitor", "EnableLUFSScan", "EnableChapterImageExtraction", "ExtractChapterImagesDuringLibraryScan", "EnableTrickplayImageExtraction", "ExtractTrickplayImagesDuringLibraryScan", "PathInfos", "SaveLocalMetadata", "EnableInternetProviders", "EnableAutomaticSeriesGrouping", "EnableEmbeddedTitles", "EnableEmbeddedExtrasTitles", "EnableEmbeddedEpisodeInfos", "AutomaticRefreshIntervalDays", "PreferredMetadataLanguage", "MetadataCountryCode", "SeasonZeroDisplayName", "MetadataSavers", "DisabledLocalMetadataReaders", "LocalMetadataReaderOrder", "DisabledSubtitleFetchers", "SubtitleFetcherOrder", "DisabledMediaSegmentProviders", "MediaSegmentProviderOrder", "SkipSubtitlesIfEmbeddedSubtitlesPresent", "SkipSubtitlesIfAudioTrackMatches", "SubtitleDownloadLanguages", "RequirePerfectSubtitleMatch", "SaveSubtitlesWithMedia", "SaveLyricsWithMedia", "SaveTrickplayWithMedia", "DisabledLyricFetchers", "LyricFetcherOrder", "PreferNonstandardArtistsTag", "UseCustomTagDelimiters", "CustomTagDelimiters", "DelimiterWhitelist", "AutomaticallyAddToCollection", "AllowEmbeddedSubtitles", "TypeOptions"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -86,8 +88,7 @@ class LibraryOptions(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -116,15 +117,13 @@ class LibraryOptions(BaseModel):
         _items = []
         if self.path_infos:
             for _item_path_infos in self.path_infos:
-                if _item_path_infos:
-                    _items.append(_item_path_infos.to_dict())
+                _items.append(_item_path_infos.to_dict() if _item_path_infos is not None else None)
             _dict['PathInfos'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in type_options (list)
         _items = []
         if self.type_options:
             for _item_type_options in self.type_options:
-                if _item_type_options:
-                    _items.append(_item_type_options.to_dict())
+                _items.append(_item_type_options.to_dict() if _item_type_options is not None else None)
             _dict['TypeOptions'] = _items
         # set to None if preferred_metadata_language (nullable) is None
         # and model_fields_set contains the field

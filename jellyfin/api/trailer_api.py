@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -20,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import List, Optional, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.base_item_kind import BaseItemKind
 from jellyfin.models.image_type import ImageType
@@ -53,14 +53,14 @@ class TrailerApi:
     @validate_call
     def get_trailers(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
         max_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).")] = None,
         has_theme_song: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme songs.")] = None,
         has_theme_video: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme videos.")] = None,
         has_subtitles: Annotated[Optional[StrictBool], Field(description="Optional filter by items with subtitles.")] = None,
         has_special_feature: Annotated[Optional[StrictBool], Field(description="Optional filter by items with special features.")] = None,
         has_trailer: Annotated[Optional[StrictBool], Field(description="Optional filter by items with trailers.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         parent_index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by parent index number.")] = None,
         has_parental_rating: Annotated[Optional[StrictBool], Field(description="Optional filter by items that have or do not have a parental rating.")] = None,
         is_hd: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are HD or not.")] = None,
@@ -84,13 +84,13 @@ class TrailerApi:
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv news.")] = None,
         is_kids: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv kids.")] = None,
         is_sports: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv sports.")] = None,
-        exclude_item_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
+        exclude_item_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="When searching within folders, this determines whether or not the search will be recursive. true/false.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Filter based on a search term.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending, Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         filters: Annotated[Optional[List[ItemFilter]], Field(description="Optional. Specify additional filters to apply. This allows multiple, comma delimited. Options: IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes.")] = None,
@@ -107,17 +107,17 @@ class TrailerApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
         artists: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.")] = None,
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
-        artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
-        album_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
-        contributing_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
+        artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
+        album_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
+        contributing_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
         albums: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.")] = None,
-        album_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
+        album_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
         video_types: Annotated[Optional[List[VideoType]], Field(description="Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.")] = None,
         min_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are locked.")] = None,
@@ -133,8 +133,8 @@ class TrailerApi:
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         audio_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.")] = None,
         subtitle_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on subtitale language. This allows multiple, comma delimited values.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Optional. Enable the total record count.")] = None,
@@ -156,7 +156,7 @@ class TrailerApi:
 
 
         :param user_id: The user id supplied as query parameter; this is required when not using an API key.
-        :type user_id: str
+        :type user_id: UUID
         :param max_official_rating: Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
         :type max_official_rating: str
         :param has_theme_song: Optional filter by items with theme songs.
@@ -170,7 +170,7 @@ class TrailerApi:
         :param has_trailer: Optional filter by items with trailers.
         :type has_trailer: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param parent_index_number: Optional filter by parent index number.
         :type parent_index_number: int
         :param has_parental_rating: Optional filter by items that have or do not have a parental rating.
@@ -218,7 +218,7 @@ class TrailerApi:
         :param is_sports: Optional filter for live tv sports.
         :type is_sports: bool
         :param exclude_item_ids: Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.
-        :type exclude_item_ids: List[str]
+        :type exclude_item_ids: List[UUID]
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -230,7 +230,7 @@ class TrailerApi:
         :param sort_order: Sort Order - Ascending, Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -264,7 +264,7 @@ class TrailerApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person id.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
@@ -272,19 +272,19 @@ class TrailerApi:
         :param artists: Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.
         :type artists: List[str]
         :param exclude_artist_ids: Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param artist_ids: Optional. If specified, results will be filtered to include only those containing the specified artist id.
-        :type artist_ids: List[str]
+        :type artist_ids: List[UUID]
         :param album_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified album artist id.
-        :type album_artist_ids: List[str]
+        :type album_artist_ids: List[UUID]
         :param contributing_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.
-        :type contributing_artist_ids: List[str]
+        :type contributing_artist_ids: List[UUID]
         :param albums: Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.
         :type albums: List[str]
         :param album_ids: Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.
-        :type album_ids: List[str]
+        :type album_ids: List[UUID]
         :param ids: Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param video_types: Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.
         :type video_types: List[VideoType]
         :param min_official_rating: Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).
@@ -316,9 +316,9 @@ class TrailerApi:
         :param name_less_than: Optional filter by items whose name is equally or lesser than a given input string.
         :type name_less_than: str
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param audio_languages: Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.
         :type audio_languages: List[str]
         :param subtitle_languages: Optional. If specified, results will be filtered based on subtitale language. This allows multiple, comma delimited values.
@@ -463,14 +463,14 @@ class TrailerApi:
     @validate_call
     def get_trailers_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
         max_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).")] = None,
         has_theme_song: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme songs.")] = None,
         has_theme_video: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme videos.")] = None,
         has_subtitles: Annotated[Optional[StrictBool], Field(description="Optional filter by items with subtitles.")] = None,
         has_special_feature: Annotated[Optional[StrictBool], Field(description="Optional filter by items with special features.")] = None,
         has_trailer: Annotated[Optional[StrictBool], Field(description="Optional filter by items with trailers.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         parent_index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by parent index number.")] = None,
         has_parental_rating: Annotated[Optional[StrictBool], Field(description="Optional filter by items that have or do not have a parental rating.")] = None,
         is_hd: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are HD or not.")] = None,
@@ -494,13 +494,13 @@ class TrailerApi:
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv news.")] = None,
         is_kids: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv kids.")] = None,
         is_sports: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv sports.")] = None,
-        exclude_item_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
+        exclude_item_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="When searching within folders, this determines whether or not the search will be recursive. true/false.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Filter based on a search term.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending, Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         filters: Annotated[Optional[List[ItemFilter]], Field(description="Optional. Specify additional filters to apply. This allows multiple, comma delimited. Options: IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes.")] = None,
@@ -517,17 +517,17 @@ class TrailerApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
         artists: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.")] = None,
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
-        artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
-        album_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
-        contributing_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
+        artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
+        album_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
+        contributing_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
         albums: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.")] = None,
-        album_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
+        album_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
         video_types: Annotated[Optional[List[VideoType]], Field(description="Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.")] = None,
         min_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are locked.")] = None,
@@ -543,8 +543,8 @@ class TrailerApi:
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         audio_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.")] = None,
         subtitle_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on subtitale language. This allows multiple, comma delimited values.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Optional. Enable the total record count.")] = None,
@@ -566,7 +566,7 @@ class TrailerApi:
 
 
         :param user_id: The user id supplied as query parameter; this is required when not using an API key.
-        :type user_id: str
+        :type user_id: UUID
         :param max_official_rating: Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
         :type max_official_rating: str
         :param has_theme_song: Optional filter by items with theme songs.
@@ -580,7 +580,7 @@ class TrailerApi:
         :param has_trailer: Optional filter by items with trailers.
         :type has_trailer: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param parent_index_number: Optional filter by parent index number.
         :type parent_index_number: int
         :param has_parental_rating: Optional filter by items that have or do not have a parental rating.
@@ -628,7 +628,7 @@ class TrailerApi:
         :param is_sports: Optional filter for live tv sports.
         :type is_sports: bool
         :param exclude_item_ids: Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.
-        :type exclude_item_ids: List[str]
+        :type exclude_item_ids: List[UUID]
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -640,7 +640,7 @@ class TrailerApi:
         :param sort_order: Sort Order - Ascending, Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -674,7 +674,7 @@ class TrailerApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person id.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
@@ -682,19 +682,19 @@ class TrailerApi:
         :param artists: Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.
         :type artists: List[str]
         :param exclude_artist_ids: Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param artist_ids: Optional. If specified, results will be filtered to include only those containing the specified artist id.
-        :type artist_ids: List[str]
+        :type artist_ids: List[UUID]
         :param album_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified album artist id.
-        :type album_artist_ids: List[str]
+        :type album_artist_ids: List[UUID]
         :param contributing_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.
-        :type contributing_artist_ids: List[str]
+        :type contributing_artist_ids: List[UUID]
         :param albums: Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.
         :type albums: List[str]
         :param album_ids: Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.
-        :type album_ids: List[str]
+        :type album_ids: List[UUID]
         :param ids: Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param video_types: Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.
         :type video_types: List[VideoType]
         :param min_official_rating: Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).
@@ -726,9 +726,9 @@ class TrailerApi:
         :param name_less_than: Optional filter by items whose name is equally or lesser than a given input string.
         :type name_less_than: str
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param audio_languages: Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.
         :type audio_languages: List[str]
         :param subtitle_languages: Optional. If specified, results will be filtered based on subtitale language. This allows multiple, comma delimited values.
@@ -873,14 +873,14 @@ class TrailerApi:
     @validate_call
     def get_trailers_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="The user id supplied as query parameter; this is required when not using an API key.")] = None,
         max_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).")] = None,
         has_theme_song: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme songs.")] = None,
         has_theme_video: Annotated[Optional[StrictBool], Field(description="Optional filter by items with theme videos.")] = None,
         has_subtitles: Annotated[Optional[StrictBool], Field(description="Optional filter by items with subtitles.")] = None,
         has_special_feature: Annotated[Optional[StrictBool], Field(description="Optional filter by items with special features.")] = None,
         has_trailer: Annotated[Optional[StrictBool], Field(description="Optional filter by items with trailers.")] = None,
-        adjacent_to: Annotated[Optional[StrictStr], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
+        adjacent_to: Annotated[Optional[UUID], Field(description="Optional. Return items that are siblings of a supplied item.")] = None,
         parent_index_number: Annotated[Optional[StrictInt], Field(description="Optional filter by parent index number.")] = None,
         has_parental_rating: Annotated[Optional[StrictBool], Field(description="Optional filter by items that have or do not have a parental rating.")] = None,
         is_hd: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are HD or not.")] = None,
@@ -904,13 +904,13 @@ class TrailerApi:
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv news.")] = None,
         is_kids: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv kids.")] = None,
         is_sports: Annotated[Optional[StrictBool], Field(description="Optional filter for live tv sports.")] = None,
-        exclude_item_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
+        exclude_item_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="When searching within folders, this determines whether or not the search will be recursive. true/false.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Filter based on a search term.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending, Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
         filters: Annotated[Optional[List[ItemFilter]], Field(description="Optional. Specify additional filters to apply. This allows multiple, comma delimited. Options: IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes.")] = None,
@@ -927,17 +927,17 @@ class TrailerApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person id.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
         artists: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.")] = None,
-        exclude_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
-        artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
-        album_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
-        contributing_artist_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
+        exclude_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.")] = None,
+        artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified artist id.")] = None,
+        album_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified album artist id.")] = None,
+        contributing_artist_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.")] = None,
         albums: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.")] = None,
-        album_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
-        ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
+        album_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.")] = None,
+        ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.")] = None,
         video_types: Annotated[Optional[List[VideoType]], Field(description="Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.")] = None,
         min_official_rating: Annotated[Optional[StrictStr], Field(description="Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are locked.")] = None,
@@ -953,8 +953,8 @@ class TrailerApi:
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         audio_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.")] = None,
         subtitle_languages: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on subtitale language. This allows multiple, comma delimited values.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Optional. Enable the total record count.")] = None,
@@ -976,7 +976,7 @@ class TrailerApi:
 
 
         :param user_id: The user id supplied as query parameter; this is required when not using an API key.
-        :type user_id: str
+        :type user_id: UUID
         :param max_official_rating: Optional filter by maximum official rating (PG, PG-13, TV-MA, etc).
         :type max_official_rating: str
         :param has_theme_song: Optional filter by items with theme songs.
@@ -990,7 +990,7 @@ class TrailerApi:
         :param has_trailer: Optional filter by items with trailers.
         :type has_trailer: bool
         :param adjacent_to: Optional. Return items that are siblings of a supplied item.
-        :type adjacent_to: str
+        :type adjacent_to: UUID
         :param parent_index_number: Optional filter by parent index number.
         :type parent_index_number: int
         :param has_parental_rating: Optional filter by items that have or do not have a parental rating.
@@ -1038,7 +1038,7 @@ class TrailerApi:
         :param is_sports: Optional filter for live tv sports.
         :type is_sports: bool
         :param exclude_item_ids: Optional. If specified, results will be filtered by excluding item ids. This allows multiple, comma delimited.
-        :type exclude_item_ids: List[str]
+        :type exclude_item_ids: List[UUID]
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1050,7 +1050,7 @@ class TrailerApi:
         :param sort_order: Sort Order - Ascending, Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output. This allows multiple, comma delimited. Options: Budget, Chapters, DateCreated, Genres, HomePageUrl, IndexOptions, MediaStreams, Overview, ParentId, Path, People, ProviderIds, PrimaryImageAspectRatio, Revenue, SortName, Studios, Taglines.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.
@@ -1084,7 +1084,7 @@ class TrailerApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person id.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
@@ -1092,19 +1092,19 @@ class TrailerApi:
         :param artists: Optional. If specified, results will be filtered based on artists. This allows multiple, pipe delimited.
         :type artists: List[str]
         :param exclude_artist_ids: Optional. If specified, results will be filtered based on artist id. This allows multiple, pipe delimited.
-        :type exclude_artist_ids: List[str]
+        :type exclude_artist_ids: List[UUID]
         :param artist_ids: Optional. If specified, results will be filtered to include only those containing the specified artist id.
-        :type artist_ids: List[str]
+        :type artist_ids: List[UUID]
         :param album_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified album artist id.
-        :type album_artist_ids: List[str]
+        :type album_artist_ids: List[UUID]
         :param contributing_artist_ids: Optional. If specified, results will be filtered to include only those containing the specified contributing artist id.
-        :type contributing_artist_ids: List[str]
+        :type contributing_artist_ids: List[UUID]
         :param albums: Optional. If specified, results will be filtered based on album. This allows multiple, pipe delimited.
         :type albums: List[str]
         :param album_ids: Optional. If specified, results will be filtered based on album id. This allows multiple, pipe delimited.
-        :type album_ids: List[str]
+        :type album_ids: List[UUID]
         :param ids: Optional. If specific items are needed, specify a list of item id's to retrieve. This allows multiple, comma delimited.
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param video_types: Optional filter by VideoType (videofile, dvd, bluray, iso). Allows multiple, comma delimited.
         :type video_types: List[VideoType]
         :param min_official_rating: Optional filter by minimum official rating (PG, PG-13, TV-MA, etc).
@@ -1136,9 +1136,9 @@ class TrailerApi:
         :param name_less_than: Optional filter by items whose name is equally or lesser than a given input string.
         :type name_less_than: str
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param audio_languages: Optional. If specified, results will be filtered based on audio language. This allows multiple, comma delimited values.
         :type audio_languages: List[str]
         :param subtitle_languages: Optional. If specified, results will be filtered based on subtitale language. This allows multiple, comma delimited values.

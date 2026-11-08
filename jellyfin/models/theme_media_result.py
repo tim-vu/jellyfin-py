@@ -17,11 +17,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ThemeMediaResult(BaseModel):
     """
@@ -30,11 +32,12 @@ class ThemeMediaResult(BaseModel):
     items: Optional[List[BaseItemDto]] = Field(default=None, description="Gets or sets the items.", alias="Items")
     total_record_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the total number of records available.", alias="TotalRecordCount")
     start_index: Optional[StrictInt] = Field(default=None, description="Gets or sets the index of the first record in Items.", alias="StartIndex")
-    owner_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the owner id.", alias="OwnerId")
+    owner_id: Optional[UUID] = Field(default=None, description="Gets or sets the owner id.", alias="OwnerId")
     __properties: ClassVar[List[str]] = ["Items", "TotalRecordCount", "StartIndex", "OwnerId"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +49,7 @@ class ThemeMediaResult(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -76,8 +78,7 @@ class ThemeMediaResult(BaseModel):
         _items = []
         if self.items:
             for _item_items in self.items:
-                if _item_items:
-                    _items.append(_item_items.to_dict())
+                _items.append(_item_items.to_dict() if _item_items is not None else None)
             _dict['Items'] = _items
         return _dict
 

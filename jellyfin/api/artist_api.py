@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import List, Optional, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.base_item_kind import BaseItemKind
@@ -54,7 +54,7 @@ class ArtistApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -62,7 +62,7 @@ class ArtistApi:
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are marked as favorite, or not.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional filter by MediaType. Allows multiple, comma delimited.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         official_ratings: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.")] = None,
         tags: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.")] = None,
         years: Annotated[Optional[List[StrictInt]], Field(description="Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.")] = None,
@@ -70,11 +70,11 @@ class ArtistApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -107,7 +107,7 @@ class ArtistApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -123,7 +123,7 @@ class ArtistApi:
         :param genres: Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.
         :type genres: List[str]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param official_ratings: Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.
         :type official_ratings: List[str]
         :param tags: Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.
@@ -139,15 +139,15 @@ class ArtistApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person ids.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
         :type studios: List[str]
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -248,7 +248,7 @@ class ArtistApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -256,7 +256,7 @@ class ArtistApi:
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are marked as favorite, or not.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional filter by MediaType. Allows multiple, comma delimited.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         official_ratings: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.")] = None,
         tags: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.")] = None,
         years: Annotated[Optional[List[StrictInt]], Field(description="Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.")] = None,
@@ -264,11 +264,11 @@ class ArtistApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -301,7 +301,7 @@ class ArtistApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -317,7 +317,7 @@ class ArtistApi:
         :param genres: Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.
         :type genres: List[str]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param official_ratings: Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.
         :type official_ratings: List[str]
         :param tags: Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.
@@ -333,15 +333,15 @@ class ArtistApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person ids.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
         :type studios: List[str]
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -442,7 +442,7 @@ class ArtistApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -450,7 +450,7 @@ class ArtistApi:
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are marked as favorite, or not.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional filter by MediaType. Allows multiple, comma delimited.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         official_ratings: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.")] = None,
         tags: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.")] = None,
         years: Annotated[Optional[List[StrictInt]], Field(description="Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.")] = None,
@@ -458,11 +458,11 @@ class ArtistApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -495,7 +495,7 @@ class ArtistApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -511,7 +511,7 @@ class ArtistApi:
         :param genres: Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.
         :type genres: List[str]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param official_ratings: Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.
         :type official_ratings: List[str]
         :param tags: Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.
@@ -527,15 +527,15 @@ class ArtistApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person ids.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
         :type studios: List[str]
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -870,7 +870,7 @@ class ArtistApi:
     def get_artist_by_name(
         self,
         name: Annotated[StrictStr, Field(description="Studio name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -890,7 +890,7 @@ class ArtistApi:
         :param name: Studio name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -944,7 +944,7 @@ class ArtistApi:
     def get_artist_by_name_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="Studio name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -964,7 +964,7 @@ class ArtistApi:
         :param name: Studio name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1018,7 +1018,7 @@ class ArtistApi:
     def get_artist_by_name_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="Studio name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1038,7 +1038,7 @@ class ArtistApi:
         :param name: Studio name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1163,7 +1163,7 @@ class ArtistApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -1171,7 +1171,7 @@ class ArtistApi:
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are marked as favorite, or not.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional filter by MediaType. Allows multiple, comma delimited.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         official_ratings: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.")] = None,
         tags: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.")] = None,
         years: Annotated[Optional[List[StrictInt]], Field(description="Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.")] = None,
@@ -1179,11 +1179,11 @@ class ArtistApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -1216,7 +1216,7 @@ class ArtistApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -1232,7 +1232,7 @@ class ArtistApi:
         :param genres: Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.
         :type genres: List[str]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param official_ratings: Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.
         :type official_ratings: List[str]
         :param tags: Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.
@@ -1248,15 +1248,15 @@ class ArtistApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person ids.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
         :type studios: List[str]
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -1357,7 +1357,7 @@ class ArtistApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -1365,7 +1365,7 @@ class ArtistApi:
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are marked as favorite, or not.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional filter by MediaType. Allows multiple, comma delimited.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         official_ratings: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.")] = None,
         tags: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.")] = None,
         years: Annotated[Optional[List[StrictInt]], Field(description="Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.")] = None,
@@ -1373,11 +1373,11 @@ class ArtistApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -1410,7 +1410,7 @@ class ArtistApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -1426,7 +1426,7 @@ class ArtistApi:
         :param genres: Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.
         :type genres: List[str]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param official_ratings: Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.
         :type official_ratings: List[str]
         :param tags: Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.
@@ -1442,15 +1442,15 @@ class ArtistApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person ids.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
         :type studios: List[str]
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -1551,7 +1551,7 @@ class ArtistApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -1559,7 +1559,7 @@ class ArtistApi:
         is_favorite: Annotated[Optional[StrictBool], Field(description="Optional filter by items that are marked as favorite, or not.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="Optional filter by MediaType. Allows multiple, comma delimited.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.")] = None,
         official_ratings: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.")] = None,
         tags: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.")] = None,
         years: Annotated[Optional[List[StrictInt]], Field(description="Optional. If specified, results will be filtered based on production year. This allows multiple, comma delimited.")] = None,
@@ -1567,11 +1567,11 @@ class ArtistApi:
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         person: Annotated[Optional[StrictStr], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person.")] = None,
-        person_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
+        person_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered to include only those containing the specified person ids.")] = None,
         person_types: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.")] = None,
         studios: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.")] = None,
-        studio_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        studio_ids: Annotated[Optional[List[UUID]], Field(description="Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -1604,7 +1604,7 @@ class ArtistApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -1620,7 +1620,7 @@ class ArtistApi:
         :param genres: Optional. If specified, results will be filtered based on genre. This allows multiple, pipe delimited.
         :type genres: List[str]
         :param genre_ids: Optional. If specified, results will be filtered based on genre id. This allows multiple, pipe delimited.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param official_ratings: Optional. If specified, results will be filtered based on OfficialRating. This allows multiple, pipe delimited.
         :type official_ratings: List[str]
         :param tags: Optional. If specified, results will be filtered based on tag. This allows multiple, pipe delimited.
@@ -1636,15 +1636,15 @@ class ArtistApi:
         :param person: Optional. If specified, results will be filtered to include only those containing the specified person.
         :type person: str
         :param person_ids: Optional. If specified, results will be filtered to include only those containing the specified person ids.
-        :type person_ids: List[str]
+        :type person_ids: List[UUID]
         :param person_types: Optional. If specified, along with Person, results will be filtered to include only those containing the specified person and PersonType. Allows multiple, comma-delimited.
         :type person_types: List[str]
         :param studios: Optional. If specified, results will be filtered based on studio. This allows multiple, pipe delimited.
         :type studios: List[str]
         :param studio_ids: Optional. If specified, results will be filtered based on studio id. This allows multiple, pipe delimited.
-        :type studio_ids: List[str]
+        :type studio_ids: List[UUID]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.

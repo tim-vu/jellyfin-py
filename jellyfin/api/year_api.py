@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictInt
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.base_item_kind import BaseItemKind
@@ -50,7 +50,7 @@ class YearApi:
     def get_year(
         self,
         year: Annotated[StrictInt, Field(description="The year.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -70,7 +70,7 @@ class YearApi:
         :param year: The year. (required)
         :type year: int
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -124,7 +124,7 @@ class YearApi:
     def get_year_with_http_info(
         self,
         year: Annotated[StrictInt, Field(description="The year.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -144,7 +144,7 @@ class YearApi:
         :param year: The year. (required)
         :type year: int
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -198,7 +198,7 @@ class YearApi:
     def get_year_without_preload_content(
         self,
         year: Annotated[StrictInt, Field(description="The year.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -218,7 +218,7 @@ class YearApi:
         :param year: The year. (required)
         :type year: int
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -342,7 +342,7 @@ class YearApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Skips over a given number of items within the results. Use for paging.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending,Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be excluded based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be included based on item type. This allows multiple, comma delimited.")] = None,
@@ -351,7 +351,7 @@ class YearApi:
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="Search recursively.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         _request_timeout: Union[
@@ -377,7 +377,7 @@ class YearApi:
         :param sort_order: Sort Order - Ascending,Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be excluded based on item type. This allows multiple, comma delimited.
@@ -395,7 +395,7 @@ class YearApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param recursive: Search recursively.
         :type recursive: bool
         :param enable_images: Optional. Include image information in output.
@@ -467,7 +467,7 @@ class YearApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Skips over a given number of items within the results. Use for paging.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending,Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be excluded based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be included based on item type. This allows multiple, comma delimited.")] = None,
@@ -476,7 +476,7 @@ class YearApi:
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="Search recursively.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         _request_timeout: Union[
@@ -502,7 +502,7 @@ class YearApi:
         :param sort_order: Sort Order - Ascending,Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be excluded based on item type. This allows multiple, comma delimited.
@@ -520,7 +520,7 @@ class YearApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param recursive: Search recursively.
         :type recursive: bool
         :param enable_images: Optional. Include image information in output.
@@ -592,7 +592,7 @@ class YearApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Skips over a given number of items within the results. Use for paging.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending,Descending.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be excluded based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be included based on item type. This allows multiple, comma delimited.")] = None,
@@ -601,7 +601,7 @@ class YearApi:
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id.")] = None,
         recursive: Annotated[Optional[StrictBool], Field(description="Search recursively.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         _request_timeout: Union[
@@ -627,7 +627,7 @@ class YearApi:
         :param sort_order: Sort Order - Ascending,Descending.
         :type sort_order: List[SortOrder]
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be excluded based on item type. This allows multiple, comma delimited.
@@ -645,7 +645,7 @@ class YearApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param user_id: User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param recursive: Search recursively.
         :type recursive: bool
         :param enable_images: Optional. Include image information in output.

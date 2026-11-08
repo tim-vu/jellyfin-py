@@ -19,17 +19,19 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.base_item_person_image_blur_hashes import BaseItemPersonImageBlurHashes
 from jellyfin.models.person_kind import PersonKind
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BaseItemPerson(BaseModel):
     """
     This is used by the api to get information about a Person within a BaseItem.
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name.", alias="Name")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the identifier.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the identifier.", alias="Id")
     role: Optional[StrictStr] = Field(default=None, description="Gets or sets the role.", alias="Role")
     type: Optional[PersonKind] = Field(default=PersonKind.UNKNOWN, description="The person kind.", alias="Type")
     primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the primary image tag.", alias="PrimaryImageTag")
@@ -37,7 +39,8 @@ class BaseItemPerson(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "Id", "Role", "Type", "PrimaryImageTag", "ImageBlurHashes"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +52,7 @@ class BaseItemPerson(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

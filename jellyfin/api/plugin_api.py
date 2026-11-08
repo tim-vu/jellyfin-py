@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictStr
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.configuration_page_info import ConfigurationPageInfo
 from jellyfin.models.package_info import PackageInfo
 from jellyfin.models.plugin_info import PluginInfo
@@ -45,7 +45,7 @@ class PluginApi:
     @validate_call
     def cancel_package_installation(
         self,
-        package_id: Annotated[StrictStr, Field(description="Installation Id.")],
+        package_id: Annotated[UUID, Field(description="Installation Id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -63,7 +63,7 @@ class PluginApi:
 
 
         :param package_id: Installation Id. (required)
-        :type package_id: str
+        :type package_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -114,7 +114,7 @@ class PluginApi:
     @validate_call
     def cancel_package_installation_with_http_info(
         self,
-        package_id: Annotated[StrictStr, Field(description="Installation Id.")],
+        package_id: Annotated[UUID, Field(description="Installation Id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,7 +132,7 @@ class PluginApi:
 
 
         :param package_id: Installation Id. (required)
-        :type package_id: str
+        :type package_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -183,7 +183,7 @@ class PluginApi:
     @validate_call
     def cancel_package_installation_without_preload_content(
         self,
-        package_id: Annotated[StrictStr, Field(description="Installation Id.")],
+        package_id: Annotated[UUID, Field(description="Installation Id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -201,7 +201,7 @@ class PluginApi:
 
 
         :param package_id: Installation Id. (required)
-        :type package_id: str
+        :type package_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -312,7 +312,7 @@ class PluginApi:
     @validate_call
     def disable_plugin(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -331,7 +331,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -386,7 +386,7 @@ class PluginApi:
     @validate_call
     def disable_plugin_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -405,7 +405,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -460,7 +460,7 @@ class PluginApi:
     @validate_call
     def disable_plugin_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -479,7 +479,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -600,7 +600,7 @@ class PluginApi:
     @validate_call
     def enable_plugin(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -619,7 +619,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -674,7 +674,7 @@ class PluginApi:
     @validate_call
     def enable_plugin_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -693,7 +693,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -748,7 +748,7 @@ class PluginApi:
     @validate_call
     def enable_plugin_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -767,7 +767,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1176,7 +1176,7 @@ class PluginApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a dashboard configuration page.
 
 
@@ -1213,7 +1213,7 @@ class PluginApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1244,7 +1244,7 @@ class PluginApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a dashboard configuration page.
 
 
@@ -1281,7 +1281,7 @@ class PluginApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1349,7 +1349,7 @@ class PluginApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -1433,7 +1433,7 @@ class PluginApi:
     def get_package_info(
         self,
         name: Annotated[StrictStr, Field(description="The name of the package.")],
-        assembly_guid: Annotated[Optional[StrictStr], Field(description="The GUID of the associated assembly.")] = None,
+        assembly_guid: Annotated[Optional[UUID], Field(description="The GUID of the associated assembly.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1453,7 +1453,7 @@ class PluginApi:
         :param name: The name of the package. (required)
         :type name: str
         :param assembly_guid: The GUID of the associated assembly.
-        :type assembly_guid: str
+        :type assembly_guid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1506,7 +1506,7 @@ class PluginApi:
     def get_package_info_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="The name of the package.")],
-        assembly_guid: Annotated[Optional[StrictStr], Field(description="The GUID of the associated assembly.")] = None,
+        assembly_guid: Annotated[Optional[UUID], Field(description="The GUID of the associated assembly.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1526,7 +1526,7 @@ class PluginApi:
         :param name: The name of the package. (required)
         :type name: str
         :param assembly_guid: The GUID of the associated assembly.
-        :type assembly_guid: str
+        :type assembly_guid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1579,7 +1579,7 @@ class PluginApi:
     def get_package_info_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="The name of the package.")],
-        assembly_guid: Annotated[Optional[StrictStr], Field(description="The GUID of the associated assembly.")] = None,
+        assembly_guid: Annotated[Optional[UUID], Field(description="The GUID of the associated assembly.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1599,7 +1599,7 @@ class PluginApi:
         :param name: The name of the package. (required)
         :type name: str
         :param assembly_guid: The GUID of the associated assembly.
-        :type assembly_guid: str
+        :type assembly_guid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1974,7 +1974,7 @@ class PluginApi:
     @validate_call
     def get_plugin_configuration(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1992,7 +1992,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2044,7 +2044,7 @@ class PluginApi:
     @validate_call
     def get_plugin_configuration_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2062,7 +2062,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2114,7 +2114,7 @@ class PluginApi:
     @validate_call
     def get_plugin_configuration_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2132,7 +2132,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2247,7 +2247,7 @@ class PluginApi:
     @validate_call
     def get_plugin_image(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -2261,12 +2261,12 @@ class PluginApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a plugin's image.
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2301,7 +2301,7 @@ class PluginApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -2321,7 +2321,7 @@ class PluginApi:
     @validate_call
     def get_plugin_image_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -2335,12 +2335,12 @@ class PluginApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a plugin's image.
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2375,7 +2375,7 @@ class PluginApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -2395,7 +2395,7 @@ class PluginApi:
     @validate_call
     def get_plugin_image_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -2414,7 +2414,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2449,7 +2449,7 @@ class PluginApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -2536,7 +2536,7 @@ class PluginApi:
     @validate_call
     def get_plugin_manifest(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2554,7 +2554,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2606,7 +2606,7 @@ class PluginApi:
     @validate_call
     def get_plugin_manifest_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2624,7 +2624,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2676,7 +2676,7 @@ class PluginApi:
     @validate_call
     def get_plugin_manifest_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2694,7 +2694,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3320,7 +3320,7 @@ class PluginApi:
     def install_package(
         self,
         name: Annotated[StrictStr, Field(description="Package name.")],
-        assembly_guid: Annotated[Optional[StrictStr], Field(description="GUID of the associated assembly.")] = None,
+        assembly_guid: Annotated[Optional[UUID], Field(description="GUID of the associated assembly.")] = None,
         version: Annotated[Optional[StrictStr], Field(description="Optional version. Defaults to latest version.")] = None,
         repository_url: Annotated[Optional[StrictStr], Field(description="Optional. Specify the repository to install from.")] = None,
         _request_timeout: Union[
@@ -3342,7 +3342,7 @@ class PluginApi:
         :param name: Package name. (required)
         :type name: str
         :param assembly_guid: GUID of the associated assembly.
-        :type assembly_guid: str
+        :type assembly_guid: UUID
         :param version: Optional version. Defaults to latest version.
         :type version: str
         :param repository_url: Optional. Specify the repository to install from.
@@ -3402,7 +3402,7 @@ class PluginApi:
     def install_package_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="Package name.")],
-        assembly_guid: Annotated[Optional[StrictStr], Field(description="GUID of the associated assembly.")] = None,
+        assembly_guid: Annotated[Optional[UUID], Field(description="GUID of the associated assembly.")] = None,
         version: Annotated[Optional[StrictStr], Field(description="Optional version. Defaults to latest version.")] = None,
         repository_url: Annotated[Optional[StrictStr], Field(description="Optional. Specify the repository to install from.")] = None,
         _request_timeout: Union[
@@ -3424,7 +3424,7 @@ class PluginApi:
         :param name: Package name. (required)
         :type name: str
         :param assembly_guid: GUID of the associated assembly.
-        :type assembly_guid: str
+        :type assembly_guid: UUID
         :param version: Optional version. Defaults to latest version.
         :type version: str
         :param repository_url: Optional. Specify the repository to install from.
@@ -3484,7 +3484,7 @@ class PluginApi:
     def install_package_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="Package name.")],
-        assembly_guid: Annotated[Optional[StrictStr], Field(description="GUID of the associated assembly.")] = None,
+        assembly_guid: Annotated[Optional[UUID], Field(description="GUID of the associated assembly.")] = None,
         version: Annotated[Optional[StrictStr], Field(description="Optional version. Defaults to latest version.")] = None,
         repository_url: Annotated[Optional[StrictStr], Field(description="Optional. Specify the repository to install from.")] = None,
         _request_timeout: Union[
@@ -3506,7 +3506,7 @@ class PluginApi:
         :param name: Package name. (required)
         :type name: str
         :param assembly_guid: GUID of the associated assembly.
-        :type assembly_guid: str
+        :type assembly_guid: UUID
         :param version: Optional version. Defaults to latest version.
         :type version: str
         :param repository_url: Optional. Specify the repository to install from.
@@ -3926,7 +3926,7 @@ class PluginApi:
     @validate_call
     def uninstall_plugin(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3944,7 +3944,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3996,7 +3996,7 @@ class PluginApi:
     @validate_call
     def uninstall_plugin_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4014,7 +4014,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4066,7 +4066,7 @@ class PluginApi:
     @validate_call
     def uninstall_plugin_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4084,7 +4084,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4199,7 +4199,7 @@ class PluginApi:
     @validate_call
     def uninstall_plugin_by_version(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -4218,7 +4218,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4273,7 +4273,7 @@ class PluginApi:
     @validate_call
     def uninstall_plugin_by_version_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -4292,7 +4292,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4347,7 +4347,7 @@ class PluginApi:
     @validate_call
     def uninstall_plugin_by_version_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         version: Annotated[StrictStr, Field(description="Plugin version.")],
         _request_timeout: Union[
             None,
@@ -4366,7 +4366,7 @@ class PluginApi:
 
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param version: Plugin version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4487,7 +4487,7 @@ class PluginApi:
     @validate_call
     def update_plugin_configuration(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4506,7 +4506,7 @@ class PluginApi:
         Accepts plugin configuration as JSON body.
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4558,7 +4558,7 @@ class PluginApi:
     @validate_call
     def update_plugin_configuration_with_http_info(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4577,7 +4577,7 @@ class PluginApi:
         Accepts plugin configuration as JSON body.
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4629,7 +4629,7 @@ class PluginApi:
     @validate_call
     def update_plugin_configuration_without_preload_content(
         self,
-        plugin_id: Annotated[StrictStr, Field(description="Plugin id.")],
+        plugin_id: Annotated[UUID, Field(description="Plugin id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4648,7 +4648,7 @@ class PluginApi:
         Accepts plugin configuration as JSON body.
 
         :param plugin_id: Plugin id. (required)
-        :type plugin_id: str
+        :type plugin_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

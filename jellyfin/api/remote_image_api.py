@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.image_provider_info import ImageProviderInfo
 from jellyfin.models.remote_image_result import RemoteImageResult
 
@@ -43,7 +43,7 @@ class RemoteImageApi:
     @validate_call
     def download_remote_image(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         type: Annotated[StrictStr, Field(description="The image type.")],
         image_url: Annotated[Optional[StrictStr], Field(description="The image url.")] = None,
         _request_timeout: Union[
@@ -63,7 +63,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param type: The image type. (required)
         :type type: ImageType
         :param image_url: The image url.
@@ -121,7 +121,7 @@ class RemoteImageApi:
     @validate_call
     def download_remote_image_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         type: Annotated[StrictStr, Field(description="The image type.")],
         image_url: Annotated[Optional[StrictStr], Field(description="The image url.")] = None,
         _request_timeout: Union[
@@ -141,7 +141,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param type: The image type. (required)
         :type type: ImageType
         :param image_url: The image url.
@@ -199,7 +199,7 @@ class RemoteImageApi:
     @validate_call
     def download_remote_image_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         type: Annotated[StrictStr, Field(description="The image type.")],
         image_url: Annotated[Optional[StrictStr], Field(description="The image url.")] = None,
         _request_timeout: Union[
@@ -219,7 +219,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param type: The image type. (required)
         :type type: ImageType
         :param image_url: The image url.
@@ -350,7 +350,7 @@ class RemoteImageApi:
     @validate_call
     def get_remote_image_providers(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,7 +368,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -420,7 +420,7 @@ class RemoteImageApi:
     @validate_call
     def get_remote_image_providers_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -438,7 +438,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -490,7 +490,7 @@ class RemoteImageApi:
     @validate_call
     def get_remote_image_providers_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -508,7 +508,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -623,7 +623,7 @@ class RemoteImageApi:
     @validate_call
     def get_remote_images(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         type: Annotated[Optional[StrictStr], Field(description="The image type.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
@@ -646,7 +646,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param type: The image type.
         :type type: ImageType
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
@@ -713,7 +713,7 @@ class RemoteImageApi:
     @validate_call
     def get_remote_images_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         type: Annotated[Optional[StrictStr], Field(description="The image type.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
@@ -736,7 +736,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param type: The image type.
         :type type: ImageType
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
@@ -803,7 +803,7 @@ class RemoteImageApi:
     @validate_call
     def get_remote_images_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="Item Id.")],
+        item_id: Annotated[UUID, Field(description="Item Id.")],
         type: Annotated[Optional[StrictStr], Field(description="The image type.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
@@ -826,7 +826,7 @@ class RemoteImageApi:
 
 
         :param item_id: Item Id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param type: The image type.
         :type type: ImageType
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.

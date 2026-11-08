@@ -20,17 +20,19 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from jellyfin.models.base_item_kind import BaseItemKind
 from jellyfin.models.media_type import MediaType
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class SearchHint(BaseModel):
     """
     Class SearchHintResult.
     """ # noqa: E501
-    item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the item id.", alias="ItemId")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the item id.", alias="Id")
+    item_id: Optional[UUID] = Field(default=None, description="Gets or sets the item id.", alias="ItemId")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the item id.", alias="Id")
     name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name.", alias="Name")
     matched_term: Optional[StrictStr] = Field(default=None, description="Gets or sets the matched term.", alias="MatchedTerm")
     index_number: Optional[StrictInt] = Field(default=None, description="Gets or sets the index number.", alias="IndexNumber")
@@ -50,18 +52,19 @@ class SearchHint(BaseModel):
     series: Optional[StrictStr] = Field(default=None, description="Gets or sets the series.", alias="Series")
     status: Optional[StrictStr] = Field(default=None, description="Gets or sets the status.", alias="Status")
     album: Optional[StrictStr] = Field(default=None, description="Gets or sets the album.", alias="Album")
-    album_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the album id.", alias="AlbumId")
+    album_id: Optional[UUID] = Field(default=None, description="Gets or sets the album id.", alias="AlbumId")
     album_artist: Optional[StrictStr] = Field(default=None, description="Gets or sets the album artist.", alias="AlbumArtist")
     artists: Optional[List[StrictStr]] = Field(default=None, description="Gets or sets the artists.", alias="Artists")
     song_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the song count.", alias="SongCount")
     episode_count: Optional[StrictInt] = Field(default=None, description="Gets or sets the episode count.", alias="EpisodeCount")
-    channel_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the channel identifier.", alias="ChannelId")
+    channel_id: Optional[UUID] = Field(default=None, description="Gets or sets the channel identifier.", alias="ChannelId")
     channel_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name of the channel.", alias="ChannelName")
     primary_image_aspect_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Gets or sets the primary image aspect ratio.", alias="PrimaryImageAspectRatio")
     __properties: ClassVar[List[str]] = ["ItemId", "Id", "Name", "MatchedTerm", "IndexNumber", "ProductionYear", "ParentIndexNumber", "PrimaryImageTag", "ThumbImageTag", "ThumbImageItemId", "BackdropImageTag", "BackdropImageItemId", "Type", "IsFolder", "RunTimeTicks", "MediaType", "StartDate", "EndDate", "Series", "Status", "Album", "AlbumId", "AlbumArtist", "Artists", "SongCount", "EpisodeCount", "ChannelId", "ChannelName", "PrimaryImageAspectRatio"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -73,8 +76,7 @@ class SearchHint(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

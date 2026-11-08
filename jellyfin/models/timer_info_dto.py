@@ -20,11 +20,13 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.keep_until import KeepUntil
 from jellyfin.models.recording_status import RecordingStatus
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TimerInfoDto(BaseModel):
     """
@@ -34,7 +36,7 @@ class TimerInfoDto(BaseModel):
     type: Optional[StrictStr] = Field(default=None, alias="Type")
     server_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the server identifier.", alias="ServerId")
     external_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the external identifier.", alias="ExternalId")
-    channel_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the channel id of the recording.", alias="ChannelId")
+    channel_id: Optional[UUID] = Field(default=None, description="Gets or sets the channel id of the recording.", alias="ChannelId")
     external_channel_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the external channel identifier.", alias="ExternalChannelId")
     channel_name: Optional[StrictStr] = Field(default=None, description="Gets or sets the channel name of the recording.", alias="ChannelName")
     channel_primary_image_tag: Optional[StrictStr] = Field(default=None, alias="ChannelPrimaryImageTag")
@@ -61,7 +63,8 @@ class TimerInfoDto(BaseModel):
     __properties: ClassVar[List[str]] = ["Id", "Type", "ServerId", "ExternalId", "ChannelId", "ExternalChannelId", "ChannelName", "ChannelPrimaryImageTag", "ProgramId", "ExternalProgramId", "Name", "Overview", "StartDate", "EndDate", "ServiceName", "Priority", "PrePaddingSeconds", "PostPaddingSeconds", "IsPrePaddingRequired", "ParentBackdropItemId", "ParentBackdropImageTags", "IsPostPaddingRequired", "KeepUntil", "Status", "SeriesTimerId", "ExternalSeriesTimerId", "RunTimeTicks", "ProgramInfo"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -73,8 +76,7 @@ class TimerInfoDto(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -24,6 +24,7 @@ from jellyfin.models.task_state import TaskState
 from jellyfin.models.task_trigger_info import TaskTriggerInfo
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TaskInfo(BaseModel):
     """
@@ -42,7 +43,8 @@ class TaskInfo(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "State", "CurrentProgressPercentage", "Id", "LastExecutionResult", "Triggers", "Description", "Category", "IsHidden", "Key"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -54,8 +56,7 @@ class TaskInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -87,8 +88,7 @@ class TaskInfo(BaseModel):
         _items = []
         if self.triggers:
             for _item_triggers in self.triggers:
-                if _item_triggers:
-                    _items.append(_item_triggers.to_dict())
+                _items.append(_item_triggers.to_dict() if _item_triggers is not None else None)
             _dict['Triggers'] = _items
         # set to None if name (nullable) is None
         # and model_fields_set contains the field

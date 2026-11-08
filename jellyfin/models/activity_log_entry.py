@@ -20,9 +20,11 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.log_level import LogLevel
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ActivityLogEntry(BaseModel):
     """
@@ -35,13 +37,14 @@ class ActivityLogEntry(BaseModel):
     type: Optional[StrictStr] = Field(default=None, description="Gets or sets the type.", alias="Type")
     item_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the item identifier.", alias="ItemId")
     var_date: Optional[datetime] = Field(default=None, description="Gets or sets the date.", alias="Date")
-    user_id: Optional[StrictStr] = Field(default=None, description="Gets or sets the user identifier.", alias="UserId")
+    user_id: Optional[UUID] = Field(default=None, description="Gets or sets the user identifier.", alias="UserId")
     user_primary_image_tag: Optional[StrictStr] = Field(default=None, description="Gets or sets the user primary image tag.", alias="UserPrimaryImageTag")
     severity: Optional[LogLevel] = Field(default=None, description="Gets or sets the log severity.", alias="Severity")
     __properties: ClassVar[List[str]] = ["Id", "Name", "Overview", "ShortOverview", "Type", "ItemId", "Date", "UserId", "UserPrimaryImageTag", "Severity"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +56,7 @@ class ActivityLogEntry(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

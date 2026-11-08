@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.collection_creation_result import CollectionCreationResult
 
 from jellyfin.api_client import ApiClient, RequestSerialized
@@ -42,8 +42,8 @@ class CollectionApi:
     @validate_call
     def add_to_collection(
         self,
-        collection_id: Annotated[StrictStr, Field(description="The collection id.")],
-        ids: Annotated[List[StrictStr], Field(description="Item ids, comma delimited.")],
+        collection_id: Annotated[UUID, Field(description="The collection id.")],
+        ids: Annotated[List[UUID], Field(description="Item ids, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,9 +61,9 @@ class CollectionApi:
 
 
         :param collection_id: The collection id. (required)
-        :type collection_id: str
+        :type collection_id: UUID
         :param ids: Item ids, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -115,8 +115,8 @@ class CollectionApi:
     @validate_call
     def add_to_collection_with_http_info(
         self,
-        collection_id: Annotated[StrictStr, Field(description="The collection id.")],
-        ids: Annotated[List[StrictStr], Field(description="Item ids, comma delimited.")],
+        collection_id: Annotated[UUID, Field(description="The collection id.")],
+        ids: Annotated[List[UUID], Field(description="Item ids, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,9 +134,9 @@ class CollectionApi:
 
 
         :param collection_id: The collection id. (required)
-        :type collection_id: str
+        :type collection_id: UUID
         :param ids: Item ids, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -188,8 +188,8 @@ class CollectionApi:
     @validate_call
     def add_to_collection_without_preload_content(
         self,
-        collection_id: Annotated[StrictStr, Field(description="The collection id.")],
-        ids: Annotated[List[StrictStr], Field(description="Item ids, comma delimited.")],
+        collection_id: Annotated[UUID, Field(description="The collection id.")],
+        ids: Annotated[List[UUID], Field(description="Item ids, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -207,9 +207,9 @@ class CollectionApi:
 
 
         :param collection_id: The collection id. (required)
-        :type collection_id: str
+        :type collection_id: UUID
         :param ids: Item ids, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -329,7 +329,7 @@ class CollectionApi:
         self,
         name: Annotated[Optional[StrictStr], Field(description="The name of the collection.")] = None,
         ids: Annotated[Optional[List[StrictStr]], Field(description="Item Ids to add to the collection.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Create the collection within a specific folder.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Create the collection within a specific folder.")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Whether or not to lock the new collection.")] = None,
         _request_timeout: Union[
             None,
@@ -352,7 +352,7 @@ class CollectionApi:
         :param ids: Item Ids to add to the collection.
         :type ids: List[str]
         :param parent_id: Optional. Create the collection within a specific folder.
-        :type parent_id: str
+        :type parent_id: UUID
         :param is_locked: Whether or not to lock the new collection.
         :type is_locked: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -410,7 +410,7 @@ class CollectionApi:
         self,
         name: Annotated[Optional[StrictStr], Field(description="The name of the collection.")] = None,
         ids: Annotated[Optional[List[StrictStr]], Field(description="Item Ids to add to the collection.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Create the collection within a specific folder.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Create the collection within a specific folder.")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Whether or not to lock the new collection.")] = None,
         _request_timeout: Union[
             None,
@@ -433,7 +433,7 @@ class CollectionApi:
         :param ids: Item Ids to add to the collection.
         :type ids: List[str]
         :param parent_id: Optional. Create the collection within a specific folder.
-        :type parent_id: str
+        :type parent_id: UUID
         :param is_locked: Whether or not to lock the new collection.
         :type is_locked: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -491,7 +491,7 @@ class CollectionApi:
         self,
         name: Annotated[Optional[StrictStr], Field(description="The name of the collection.")] = None,
         ids: Annotated[Optional[List[StrictStr]], Field(description="Item Ids to add to the collection.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Optional. Create the collection within a specific folder.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Optional. Create the collection within a specific folder.")] = None,
         is_locked: Annotated[Optional[StrictBool], Field(description="Whether or not to lock the new collection.")] = None,
         _request_timeout: Union[
             None,
@@ -514,7 +514,7 @@ class CollectionApi:
         :param ids: Item Ids to add to the collection.
         :type ids: List[str]
         :param parent_id: Optional. Create the collection within a specific folder.
-        :type parent_id: str
+        :type parent_id: UUID
         :param is_locked: Whether or not to lock the new collection.
         :type is_locked: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -651,8 +651,8 @@ class CollectionApi:
     @validate_call
     def remove_from_collection(
         self,
-        collection_id: Annotated[StrictStr, Field(description="The collection id.")],
-        ids: Annotated[List[StrictStr], Field(description="Item ids, comma delimited.")],
+        collection_id: Annotated[UUID, Field(description="The collection id.")],
+        ids: Annotated[List[UUID], Field(description="Item ids, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -670,9 +670,9 @@ class CollectionApi:
 
 
         :param collection_id: The collection id. (required)
-        :type collection_id: str
+        :type collection_id: UUID
         :param ids: Item ids, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -724,8 +724,8 @@ class CollectionApi:
     @validate_call
     def remove_from_collection_with_http_info(
         self,
-        collection_id: Annotated[StrictStr, Field(description="The collection id.")],
-        ids: Annotated[List[StrictStr], Field(description="Item ids, comma delimited.")],
+        collection_id: Annotated[UUID, Field(description="The collection id.")],
+        ids: Annotated[List[UUID], Field(description="Item ids, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -743,9 +743,9 @@ class CollectionApi:
 
 
         :param collection_id: The collection id. (required)
-        :type collection_id: str
+        :type collection_id: UUID
         :param ids: Item ids, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -797,8 +797,8 @@ class CollectionApi:
     @validate_call
     def remove_from_collection_without_preload_content(
         self,
-        collection_id: Annotated[StrictStr, Field(description="The collection id.")],
-        ids: Annotated[List[StrictStr], Field(description="Item ids, comma delimited.")],
+        collection_id: Annotated[UUID, Field(description="The collection id.")],
+        ids: Annotated[List[UUID], Field(description="Item ids, comma delimited.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -816,9 +816,9 @@ class CollectionApi:
 
 
         :param collection_id: The collection id. (required)
-        :type collection_id: str
+        :type collection_id: UUID
         :param ids: Item ids, comma delimited. (required)
-        :type ids: List[str]
+        :type ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBytes, StrictInt, StrictStr
 from typing import Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 
 from jellyfin.api_client import ApiClient, RequestSerialized
 from jellyfin.api_response import ApiResponse
@@ -41,9 +41,9 @@ class TrickPlayApi:
     @validate_call
     def get_trickplay_hls_playlist(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         width: Annotated[StrictInt, Field(description="The width of a single tile.")],
-        media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if using an alternate version.")] = None,
+        media_source_id: Annotated[Optional[UUID], Field(description="The media version id, if using an alternate version.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -56,16 +56,16 @@ class TrickPlayApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets an image tiles playlist for trickplay.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param width: The width of a single tile. (required)
         :type width: int
         :param media_source_id: The media version id, if using an alternate version.
-        :type media_source_id: str
+        :type media_source_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -99,7 +99,7 @@ class TrickPlayApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -119,9 +119,9 @@ class TrickPlayApi:
     @validate_call
     def get_trickplay_hls_playlist_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         width: Annotated[StrictInt, Field(description="The width of a single tile.")],
-        media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if using an alternate version.")] = None,
+        media_source_id: Annotated[Optional[UUID], Field(description="The media version id, if using an alternate version.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,16 +134,16 @@ class TrickPlayApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets an image tiles playlist for trickplay.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param width: The width of a single tile. (required)
         :type width: int
         :param media_source_id: The media version id, if using an alternate version.
-        :type media_source_id: str
+        :type media_source_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -177,7 +177,7 @@ class TrickPlayApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -197,9 +197,9 @@ class TrickPlayApi:
     @validate_call
     def get_trickplay_hls_playlist_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         width: Annotated[StrictInt, Field(description="The width of a single tile.")],
-        media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if using an alternate version.")] = None,
+        media_source_id: Annotated[Optional[UUID], Field(description="The media version id, if using an alternate version.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -217,11 +217,11 @@ class TrickPlayApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param width: The width of a single tile. (required)
         :type width: int
         :param media_source_id: The media version id, if using an alternate version.
-        :type media_source_id: str
+        :type media_source_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -255,7 +255,7 @@ class TrickPlayApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -347,10 +347,10 @@ class TrickPlayApi:
     @validate_call
     def get_trickplay_tile_image(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         width: Annotated[StrictInt, Field(description="The width of a single tile.")],
         index: Annotated[StrictInt, Field(description="The index of the desired tile.")],
-        media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if using an alternate version.")] = None,
+        media_source_id: Annotated[Optional[UUID], Field(description="The media version id, if using an alternate version.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -363,18 +363,18 @@ class TrickPlayApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a trickplay tile image.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param width: The width of a single tile. (required)
         :type width: int
         :param index: The index of the desired tile. (required)
         :type index: int
         :param media_source_id: The media version id, if using an alternate version.
-        :type media_source_id: str
+        :type media_source_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -409,7 +409,7 @@ class TrickPlayApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -429,10 +429,10 @@ class TrickPlayApi:
     @validate_call
     def get_trickplay_tile_image_with_http_info(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         width: Annotated[StrictInt, Field(description="The width of a single tile.")],
         index: Annotated[StrictInt, Field(description="The index of the desired tile.")],
-        media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if using an alternate version.")] = None,
+        media_source_id: Annotated[Optional[UUID], Field(description="The media version id, if using an alternate version.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -445,18 +445,18 @@ class TrickPlayApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a trickplay tile image.
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param width: The width of a single tile. (required)
         :type width: int
         :param index: The index of the desired tile. (required)
         :type index: int
         :param media_source_id: The media version id, if using an alternate version.
-        :type media_source_id: str
+        :type media_source_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -491,7 +491,7 @@ class TrickPlayApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,
@@ -511,10 +511,10 @@ class TrickPlayApi:
     @validate_call
     def get_trickplay_tile_image_without_preload_content(
         self,
-        item_id: Annotated[StrictStr, Field(description="The item id.")],
+        item_id: Annotated[UUID, Field(description="The item id.")],
         width: Annotated[StrictInt, Field(description="The width of a single tile.")],
         index: Annotated[StrictInt, Field(description="The index of the desired tile.")],
-        media_source_id: Annotated[Optional[StrictStr], Field(description="The media version id, if using an alternate version.")] = None,
+        media_source_id: Annotated[Optional[UUID], Field(description="The media version id, if using an alternate version.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -532,13 +532,13 @@ class TrickPlayApi:
 
 
         :param item_id: The item id. (required)
-        :type item_id: str
+        :type item_id: UUID
         :param width: The width of a single tile. (required)
         :type width: int
         :param index: The index of the desired tile. (required)
         :type index: int
         :param media_source_id: The media version id, if using an alternate version.
-        :type media_source_id: str
+        :type media_source_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -573,7 +573,7 @@ class TrickPlayApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
             '401': None,

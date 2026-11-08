@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -20,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, field_validator
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.channel_mapping_options_dto import ChannelMappingOptionsDto
@@ -2049,7 +2049,7 @@ class LiveTvApi:
     @validate_call
     def delete_recording(
         self,
-        recording_id: Annotated[StrictStr, Field(description="Recording id.")],
+        recording_id: Annotated[UUID, Field(description="Recording id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2067,7 +2067,7 @@ class LiveTvApi:
 
 
         :param recording_id: Recording id. (required)
-        :type recording_id: str
+        :type recording_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2119,7 +2119,7 @@ class LiveTvApi:
     @validate_call
     def delete_recording_with_http_info(
         self,
-        recording_id: Annotated[StrictStr, Field(description="Recording id.")],
+        recording_id: Annotated[UUID, Field(description="Recording id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2137,7 +2137,7 @@ class LiveTvApi:
 
 
         :param recording_id: Recording id. (required)
-        :type recording_id: str
+        :type recording_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2189,7 +2189,7 @@ class LiveTvApi:
     @validate_call
     def delete_recording_without_preload_content(
         self,
-        recording_id: Annotated[StrictStr, Field(description="Recording id.")],
+        recording_id: Annotated[UUID, Field(description="Recording id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2207,7 +2207,7 @@ class LiveTvApi:
 
 
         :param recording_id: Recording id. (required)
-        :type recording_id: str
+        :type recording_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3135,8 +3135,8 @@ class LiveTvApi:
     @validate_call
     def get_channel(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        channel_id: Annotated[UUID, Field(description="Channel id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3154,9 +3154,9 @@ class LiveTvApi:
 
 
         :param channel_id: Channel id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3209,8 +3209,8 @@ class LiveTvApi:
     @validate_call
     def get_channel_with_http_info(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        channel_id: Annotated[UUID, Field(description="Channel id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3228,9 +3228,9 @@ class LiveTvApi:
 
 
         :param channel_id: Channel id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3283,8 +3283,8 @@ class LiveTvApi:
     @validate_call
     def get_channel_without_preload_content(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        channel_id: Annotated[UUID, Field(description="Channel id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3302,9 +3302,9 @@ class LiveTvApi:
 
 
         :param channel_id: Channel id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4815,7 +4815,7 @@ class LiveTvApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a live tv recording stream.
 
 
@@ -4852,7 +4852,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -4883,7 +4883,7 @@ class LiveTvApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a live tv recording stream.
 
 
@@ -4920,7 +4920,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -4988,7 +4988,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5083,7 +5083,7 @@ class LiveTvApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets a live tv channel stream.
 
 
@@ -5123,7 +5123,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5155,7 +5155,7 @@ class LiveTvApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets a live tv channel stream.
 
 
@@ -5195,7 +5195,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5267,7 +5267,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '404': "ProblemDetails",
             '503': None,
         }
@@ -5352,7 +5352,7 @@ class LiveTvApi:
     def get_live_tv_channels(
         self,
         type: Annotated[Optional[StrictStr], Field(description="Optional. Filter by channel type.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional. Filter for movies.")] = None,
         is_series: Annotated[Optional[StrictBool], Field(description="Optional. Filter for series.")] = None,
@@ -5391,7 +5391,7 @@ class LiveTvApi:
         :param type: Optional. Filter by channel type.
         :type type: ChannelType
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param is_movie: Optional. Filter for movies.
@@ -5501,7 +5501,7 @@ class LiveTvApi:
     def get_live_tv_channels_with_http_info(
         self,
         type: Annotated[Optional[StrictStr], Field(description="Optional. Filter by channel type.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional. Filter for movies.")] = None,
         is_series: Annotated[Optional[StrictBool], Field(description="Optional. Filter for series.")] = None,
@@ -5540,7 +5540,7 @@ class LiveTvApi:
         :param type: Optional. Filter by channel type.
         :type type: ChannelType
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param is_movie: Optional. Filter for movies.
@@ -5650,7 +5650,7 @@ class LiveTvApi:
     def get_live_tv_channels_without_preload_content(
         self,
         type: Annotated[Optional[StrictStr], Field(description="Optional. Filter by channel type.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional. Filter for movies.")] = None,
         is_series: Annotated[Optional[StrictBool], Field(description="Optional. Filter for series.")] = None,
@@ -5689,7 +5689,7 @@ class LiveTvApi:
         :param type: Optional. Filter by channel type.
         :type type: ChannelType
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param is_movie: Optional. Filter for movies.
@@ -6221,8 +6221,8 @@ class LiveTvApi:
     @validate_call
     def get_live_tv_programs(
         self,
-        channel_ids: Annotated[Optional[List[StrictStr]], Field(description="The channels to return guide information for.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id.")] = None,
+        channel_ids: Annotated[Optional[List[UUID]], Field(description="The channels to return guide information for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id.")] = None,
         min_start_date: Annotated[Optional[datetime], Field(description="Optional. The minimum premiere start date.")] = None,
         has_aired: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that have completed airing, or not.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that are currently airing, or not.")] = None,
@@ -6239,13 +6239,13 @@ class LiveTvApi:
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Name, StartDate.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending,Descending.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="The genres to return guide information for.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="The genre ids to return guide information for.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="The genre ids to return guide information for.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
         series_timer_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by series timer id.")] = None,
-        library_series_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by library series id.")] = None,
+        library_series_id: Annotated[Optional[UUID], Field(description="Optional. Filter by library series id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Retrieve total record count.")] = None,
         _request_timeout: Union[
@@ -6265,9 +6265,9 @@ class LiveTvApi:
 
 
         :param channel_ids: The channels to return guide information for.
-        :type channel_ids: List[str]
+        :type channel_ids: List[UUID]
         :param user_id: Optional. Filter by user id.
-        :type user_id: str
+        :type user_id: UUID
         :param min_start_date: Optional. The minimum premiere start date.
         :type min_start_date: datetime
         :param has_aired: Optional. Filter by programs that have completed airing, or not.
@@ -6301,7 +6301,7 @@ class LiveTvApi:
         :param genres: The genres to return guide information for.
         :type genres: List[str]
         :param genre_ids: The genre ids to return guide information for.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -6313,7 +6313,7 @@ class LiveTvApi:
         :param series_timer_id: Optional. Filter by series timer id.
         :type series_timer_id: str
         :param library_series_id: Optional. Filter by library series id.
-        :type library_series_id: str
+        :type library_series_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param enable_total_record_count: Retrieve total record count.
@@ -6394,8 +6394,8 @@ class LiveTvApi:
     @validate_call
     def get_live_tv_programs_with_http_info(
         self,
-        channel_ids: Annotated[Optional[List[StrictStr]], Field(description="The channels to return guide information for.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id.")] = None,
+        channel_ids: Annotated[Optional[List[UUID]], Field(description="The channels to return guide information for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id.")] = None,
         min_start_date: Annotated[Optional[datetime], Field(description="Optional. The minimum premiere start date.")] = None,
         has_aired: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that have completed airing, or not.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that are currently airing, or not.")] = None,
@@ -6412,13 +6412,13 @@ class LiveTvApi:
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Name, StartDate.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending,Descending.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="The genres to return guide information for.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="The genre ids to return guide information for.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="The genre ids to return guide information for.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
         series_timer_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by series timer id.")] = None,
-        library_series_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by library series id.")] = None,
+        library_series_id: Annotated[Optional[UUID], Field(description="Optional. Filter by library series id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Retrieve total record count.")] = None,
         _request_timeout: Union[
@@ -6438,9 +6438,9 @@ class LiveTvApi:
 
 
         :param channel_ids: The channels to return guide information for.
-        :type channel_ids: List[str]
+        :type channel_ids: List[UUID]
         :param user_id: Optional. Filter by user id.
-        :type user_id: str
+        :type user_id: UUID
         :param min_start_date: Optional. The minimum premiere start date.
         :type min_start_date: datetime
         :param has_aired: Optional. Filter by programs that have completed airing, or not.
@@ -6474,7 +6474,7 @@ class LiveTvApi:
         :param genres: The genres to return guide information for.
         :type genres: List[str]
         :param genre_ids: The genre ids to return guide information for.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -6486,7 +6486,7 @@ class LiveTvApi:
         :param series_timer_id: Optional. Filter by series timer id.
         :type series_timer_id: str
         :param library_series_id: Optional. Filter by library series id.
-        :type library_series_id: str
+        :type library_series_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param enable_total_record_count: Retrieve total record count.
@@ -6567,8 +6567,8 @@ class LiveTvApi:
     @validate_call
     def get_live_tv_programs_without_preload_content(
         self,
-        channel_ids: Annotated[Optional[List[StrictStr]], Field(description="The channels to return guide information for.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id.")] = None,
+        channel_ids: Annotated[Optional[List[UUID]], Field(description="The channels to return guide information for.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id.")] = None,
         min_start_date: Annotated[Optional[datetime], Field(description="Optional. The minimum premiere start date.")] = None,
         has_aired: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that have completed airing, or not.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that are currently airing, or not.")] = None,
@@ -6585,13 +6585,13 @@ class LiveTvApi:
         sort_by: Annotated[Optional[List[ItemSortBy]], Field(description="Optional. Specify one or more sort orders, comma delimited. Options: Name, StartDate.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Sort Order - Ascending,Descending.")] = None,
         genres: Annotated[Optional[List[StrictStr]], Field(description="The genres to return guide information for.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="The genre ids to return guide information for.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="The genre ids to return guide information for.")] = None,
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. Include user data.")] = None,
         series_timer_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by series timer id.")] = None,
-        library_series_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by library series id.")] = None,
+        library_series_id: Annotated[Optional[UUID], Field(description="Optional. Filter by library series id.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Retrieve total record count.")] = None,
         _request_timeout: Union[
@@ -6611,9 +6611,9 @@ class LiveTvApi:
 
 
         :param channel_ids: The channels to return guide information for.
-        :type channel_ids: List[str]
+        :type channel_ids: List[UUID]
         :param user_id: Optional. Filter by user id.
-        :type user_id: str
+        :type user_id: UUID
         :param min_start_date: Optional. The minimum premiere start date.
         :type min_start_date: datetime
         :param has_aired: Optional. Filter by programs that have completed airing, or not.
@@ -6647,7 +6647,7 @@ class LiveTvApi:
         :param genres: The genres to return guide information for.
         :type genres: List[str]
         :param genre_ids: The genre ids to return guide information for.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param enable_images: Optional. Include image information in output.
         :type enable_images: bool
         :param image_type_limit: Optional. The max number of images to return, per image type.
@@ -6659,7 +6659,7 @@ class LiveTvApi:
         :param series_timer_id: Optional. Filter by series timer id.
         :type series_timer_id: str
         :param library_series_id: Optional. Filter by library series id.
-        :type library_series_id: str
+        :type library_series_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param enable_total_record_count: Retrieve total record count.
@@ -6979,7 +6979,7 @@ class LiveTvApi:
     def get_program(
         self,
         program_id: Annotated[StrictStr, Field(description="Program id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6999,7 +6999,7 @@ class LiveTvApi:
         :param program_id: Program id. (required)
         :type program_id: str
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7053,7 +7053,7 @@ class LiveTvApi:
     def get_program_with_http_info(
         self,
         program_id: Annotated[StrictStr, Field(description="Program id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7073,7 +7073,7 @@ class LiveTvApi:
         :param program_id: Program id. (required)
         :type program_id: str
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7127,7 +7127,7 @@ class LiveTvApi:
     def get_program_without_preload_content(
         self,
         program_id: Annotated[StrictStr, Field(description="Program id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7147,7 +7147,7 @@ class LiveTvApi:
         :param program_id: Program id. (required)
         :type program_id: str
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7553,7 +7553,7 @@ class LiveTvApi:
     @validate_call
     def get_recommended_programs(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. filter by user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. filter by user id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that are currently airing, or not.")] = None,
@@ -7566,7 +7566,7 @@ class LiveTvApi:
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="The genres to return guide information for.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="The genres to return guide information for.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. include user data.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Retrieve total record count.")] = None,
@@ -7587,7 +7587,7 @@ class LiveTvApi:
 
 
         :param user_id: Optional. filter by user id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -7613,7 +7613,7 @@ class LiveTvApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param genre_ids: The genres to return guide information for.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param enable_user_data: Optional. include user data.
@@ -7686,7 +7686,7 @@ class LiveTvApi:
     @validate_call
     def get_recommended_programs_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. filter by user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. filter by user id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that are currently airing, or not.")] = None,
@@ -7699,7 +7699,7 @@ class LiveTvApi:
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="The genres to return guide information for.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="The genres to return guide information for.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. include user data.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Retrieve total record count.")] = None,
@@ -7720,7 +7720,7 @@ class LiveTvApi:
 
 
         :param user_id: Optional. filter by user id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -7746,7 +7746,7 @@ class LiveTvApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param genre_ids: The genres to return guide information for.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param enable_user_data: Optional. include user data.
@@ -7819,7 +7819,7 @@ class LiveTvApi:
     @validate_call
     def get_recommended_programs_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. filter by user id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. filter by user id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         is_airing: Annotated[Optional[StrictBool], Field(description="Optional. Filter by programs that are currently airing, or not.")] = None,
@@ -7832,7 +7832,7 @@ class LiveTvApi:
         enable_images: Annotated[Optional[StrictBool], Field(description="Optional. Include image information in output.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional. The max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        genre_ids: Annotated[Optional[List[StrictStr]], Field(description="The genres to return guide information for.")] = None,
+        genre_ids: Annotated[Optional[List[UUID]], Field(description="The genres to return guide information for.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional. include user data.")] = None,
         enable_total_record_count: Annotated[Optional[StrictBool], Field(description="Retrieve total record count.")] = None,
@@ -7853,7 +7853,7 @@ class LiveTvApi:
 
 
         :param user_id: Optional. filter by user id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -7879,7 +7879,7 @@ class LiveTvApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param genre_ids: The genres to return guide information for.
-        :type genre_ids: List[str]
+        :type genre_ids: List[UUID]
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param enable_user_data: Optional. include user data.
@@ -8100,8 +8100,8 @@ class LiveTvApi:
     @validate_call
     def get_recording(
         self,
-        recording_id: Annotated[StrictStr, Field(description="Recording id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        recording_id: Annotated[UUID, Field(description="Recording id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8119,9 +8119,9 @@ class LiveTvApi:
 
 
         :param recording_id: Recording id. (required)
-        :type recording_id: str
+        :type recording_id: UUID
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8174,8 +8174,8 @@ class LiveTvApi:
     @validate_call
     def get_recording_with_http_info(
         self,
-        recording_id: Annotated[StrictStr, Field(description="Recording id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        recording_id: Annotated[UUID, Field(description="Recording id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8193,9 +8193,9 @@ class LiveTvApi:
 
 
         :param recording_id: Recording id. (required)
-        :type recording_id: str
+        :type recording_id: UUID
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8248,8 +8248,8 @@ class LiveTvApi:
     @validate_call
     def get_recording_without_preload_content(
         self,
-        recording_id: Annotated[StrictStr, Field(description="Recording id.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Attach user data.")] = None,
+        recording_id: Annotated[UUID, Field(description="Recording id.")],
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8267,9 +8267,9 @@ class LiveTvApi:
 
 
         :param recording_id: Recording id. (required)
-        :type recording_id: str
+        :type recording_id: UUID
         :param user_id: Optional. Attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8390,7 +8390,7 @@ class LiveTvApi:
     @validate_call
     def get_recording_folders(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8408,7 +8408,7 @@ class LiveTvApi:
 
 
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8459,7 +8459,7 @@ class LiveTvApi:
     @validate_call
     def get_recording_folders_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8477,7 +8477,7 @@ class LiveTvApi:
 
 
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8528,7 +8528,7 @@ class LiveTvApi:
     @validate_call
     def get_recording_folders_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8546,7 +8546,7 @@ class LiveTvApi:
 
 
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8663,7 +8663,7 @@ class LiveTvApi:
     def get_recordings(
         self,
         channel_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by channel id.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Optional. Filter by recording status.")] = None,
@@ -8700,7 +8700,7 @@ class LiveTvApi:
         :param channel_id: Optional. Filter by channel id.
         :type channel_id: str
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -8804,7 +8804,7 @@ class LiveTvApi:
     def get_recordings_with_http_info(
         self,
         channel_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by channel id.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Optional. Filter by recording status.")] = None,
@@ -8841,7 +8841,7 @@ class LiveTvApi:
         :param channel_id: Optional. Filter by channel id.
         :type channel_id: str
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -8945,7 +8945,7 @@ class LiveTvApi:
     def get_recordings_without_preload_content(
         self,
         channel_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by channel id.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user and attach user data.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         status: Annotated[Optional[StrictStr], Field(description="Optional. Filter by recording status.")] = None,
@@ -8982,7 +8982,7 @@ class LiveTvApi:
         :param channel_id: Optional. Filter by channel id.
         :type channel_id: str
         :param user_id: Optional. Filter by user and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -9254,7 +9254,7 @@ class LiveTvApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> bytearray:
+    ) -> bytes:
         """Gets available countries.
 
 
@@ -9288,7 +9288,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -9319,7 +9319,7 @@ class LiveTvApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[bytearray]:
+    ) -> ApiResponse[bytes]:
         """Gets available countries.
 
 
@@ -9353,7 +9353,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,
@@ -9418,7 +9418,7 @@ class LiveTvApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "bytearray",
+            '200': "bytes",
             '503': None,
             '401': None,
             '403': None,

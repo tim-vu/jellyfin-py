@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto import BaseItemDto
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.base_item_kind import BaseItemKind
@@ -47,7 +47,7 @@ class StudioApi:
     def get_studio(
         self,
         name: Annotated[StrictStr, Field(description="Studio name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,7 +67,7 @@ class StudioApi:
         :param name: Studio name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -120,7 +120,7 @@ class StudioApi:
     def get_studio_with_http_info(
         self,
         name: Annotated[StrictStr, Field(description="Studio name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -140,7 +140,7 @@ class StudioApi:
         :param name: Studio name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -193,7 +193,7 @@ class StudioApi:
     def get_studio_without_preload_content(
         self,
         name: Annotated[StrictStr, Field(description="Studio name.")],
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Filter by user id, and attach user data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Filter by user id, and attach user data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -213,7 +213,7 @@ class StudioApi:
         :param name: Studio name. (required)
         :type name: str
         :param user_id: Optional. Filter by user id, and attach user data.
-        :type user_id: str
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -336,7 +336,7 @@ class StudioApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -344,7 +344,7 @@ class StudioApi:
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional, include user data.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -373,7 +373,7 @@ class StudioApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -389,7 +389,7 @@ class StudioApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -469,7 +469,7 @@ class StudioApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -477,7 +477,7 @@ class StudioApi:
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional, include user data.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -506,7 +506,7 @@ class StudioApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -522,7 +522,7 @@ class StudioApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.
@@ -602,7 +602,7 @@ class StudioApi:
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         search_term: Annotated[Optional[StrictStr], Field(description="Optional. Search term.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="Specify this to localize the search to a specific item or folder. Omit to use the root.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="Optional. If specified, results will be filtered based on item type. This allows multiple, comma delimited.")] = None,
@@ -610,7 +610,7 @@ class StudioApi:
         enable_user_data: Annotated[Optional[StrictBool], Field(description="Optional, include user data.")] = None,
         image_type_limit: Annotated[Optional[StrictInt], Field(description="Optional, the max number of images to return, per image type.")] = None,
         enable_image_types: Annotated[Optional[List[ImageType]], Field(description="Optional. The image types to include in the output.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="User id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User id.")] = None,
         name_starts_with_or_greater: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally or greater than a given input string.")] = None,
         name_starts_with: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is sorted equally than a given input string.")] = None,
         name_less_than: Annotated[Optional[StrictStr], Field(description="Optional filter by items whose name is equally or lesser than a given input string.")] = None,
@@ -639,7 +639,7 @@ class StudioApi:
         :param search_term: Optional. Search term.
         :type search_term: str
         :param parent_id: Specify this to localize the search to a specific item or folder. Omit to use the root.
-        :type parent_id: str
+        :type parent_id: UUID
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param exclude_item_types: Optional. If specified, results will be filtered out based on item type. This allows multiple, comma delimited.
@@ -655,7 +655,7 @@ class StudioApi:
         :param enable_image_types: Optional. The image types to include in the output.
         :type enable_image_types: List[ImageType]
         :param user_id: User id.
-        :type user_id: str
+        :type user_id: UUID
         :param name_starts_with_or_greater: Optional filter by items whose name is sorted equally or greater than a given input string.
         :type name_starts_with_or_greater: str
         :param name_starts_with: Optional filter by items whose name is sorted equally than a given input string.

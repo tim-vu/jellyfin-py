@@ -10,15 +10,15 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictInt
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_dto_query_result import BaseItemDtoQueryResult
 from jellyfin.models.channel_features import ChannelFeatures
 from jellyfin.models.item_fields import ItemFields
@@ -302,7 +302,7 @@ class ChannelApi:
     @validate_call
     def get_channel_features(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel id.")],
+        channel_id: Annotated[UUID, Field(description="Channel id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -320,7 +320,7 @@ class ChannelApi:
 
 
         :param channel_id: Channel id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -371,7 +371,7 @@ class ChannelApi:
     @validate_call
     def get_channel_features_with_http_info(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel id.")],
+        channel_id: Annotated[UUID, Field(description="Channel id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -389,7 +389,7 @@ class ChannelApi:
 
 
         :param channel_id: Channel id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -440,7 +440,7 @@ class ChannelApi:
     @validate_call
     def get_channel_features_without_preload_content(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel id.")],
+        channel_id: Annotated[UUID, Field(description="Channel id.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -458,7 +458,7 @@ class ChannelApi:
 
 
         :param channel_id: Channel id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -572,9 +572,9 @@ class ChannelApi:
     @validate_call
     def get_channel_items(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel Id.")],
-        folder_id: Annotated[Optional[StrictStr], Field(description="Optional. Folder Id.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User Id.")] = None,
+        channel_id: Annotated[UUID, Field(description="Channel Id.")],
+        folder_id: Annotated[Optional[UUID], Field(description="Optional. Folder Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User Id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending,Descending.")] = None,
@@ -598,11 +598,11 @@ class ChannelApi:
 
 
         :param channel_id: Channel Id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param folder_id: Optional. Folder Id.
-        :type folder_id: str
+        :type folder_id: UUID
         :param user_id: Optional. User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -673,9 +673,9 @@ class ChannelApi:
     @validate_call
     def get_channel_items_with_http_info(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel Id.")],
-        folder_id: Annotated[Optional[StrictStr], Field(description="Optional. Folder Id.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User Id.")] = None,
+        channel_id: Annotated[UUID, Field(description="Channel Id.")],
+        folder_id: Annotated[Optional[UUID], Field(description="Optional. Folder Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User Id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending,Descending.")] = None,
@@ -699,11 +699,11 @@ class ChannelApi:
 
 
         :param channel_id: Channel Id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param folder_id: Optional. Folder Id.
-        :type folder_id: str
+        :type folder_id: UUID
         :param user_id: Optional. User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -774,9 +774,9 @@ class ChannelApi:
     @validate_call
     def get_channel_items_without_preload_content(
         self,
-        channel_id: Annotated[StrictStr, Field(description="Channel Id.")],
-        folder_id: Annotated[Optional[StrictStr], Field(description="Optional. Folder Id.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User Id.")] = None,
+        channel_id: Annotated[UUID, Field(description="Channel Id.")],
+        folder_id: Annotated[Optional[UUID], Field(description="Optional. Folder Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User Id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         sort_order: Annotated[Optional[List[SortOrder]], Field(description="Optional. Sort Order - Ascending,Descending.")] = None,
@@ -800,11 +800,11 @@ class ChannelApi:
 
 
         :param channel_id: Channel Id. (required)
-        :type channel_id: str
+        :type channel_id: UUID
         :param folder_id: Optional. Folder Id.
-        :type folder_id: str
+        :type folder_id: UUID
         :param user_id: Optional. User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -982,7 +982,7 @@ class ChannelApi:
     @validate_call
     def get_channels(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id to filter by. Use System.Guid.Empty to not filter by user.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id to filter by. Use System.Guid.Empty to not filter by user.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         supports_latest_items: Annotated[Optional[StrictBool], Field(description="Optional. Filter by channels that support getting latest items.")] = None,
@@ -1005,7 +1005,7 @@ class ChannelApi:
 
 
         :param user_id: User Id to filter by. Use System.Guid.Empty to not filter by user.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1071,7 +1071,7 @@ class ChannelApi:
     @validate_call
     def get_channels_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id to filter by. Use System.Guid.Empty to not filter by user.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id to filter by. Use System.Guid.Empty to not filter by user.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         supports_latest_items: Annotated[Optional[StrictBool], Field(description="Optional. Filter by channels that support getting latest items.")] = None,
@@ -1094,7 +1094,7 @@ class ChannelApi:
 
 
         :param user_id: User Id to filter by. Use System.Guid.Empty to not filter by user.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1160,7 +1160,7 @@ class ChannelApi:
     @validate_call
     def get_channels_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="User Id to filter by. Use System.Guid.Empty to not filter by user.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="User Id to filter by. Use System.Guid.Empty to not filter by user.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         supports_latest_items: Annotated[Optional[StrictBool], Field(description="Optional. Filter by channels that support getting latest items.")] = None,
@@ -1183,7 +1183,7 @@ class ChannelApi:
 
 
         :param user_id: User Id to filter by. Use System.Guid.Empty to not filter by user.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1339,12 +1339,12 @@ class ChannelApi:
     @validate_call
     def get_latest_channel_items(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User Id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         filters: Annotated[Optional[List[ItemFilter]], Field(description="Optional. Specify additional filters to apply.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        channel_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. Specify one or more channel id's, comma delimited.")] = None,
+        channel_ids: Annotated[Optional[List[UUID]], Field(description="Optional. Specify one or more channel id's, comma delimited.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1362,7 +1362,7 @@ class ChannelApi:
 
 
         :param user_id: Optional. User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1372,7 +1372,7 @@ class ChannelApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param channel_ids: Optional. Specify one or more channel id's, comma delimited.
-        :type channel_ids: List[str]
+        :type channel_ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1428,12 +1428,12 @@ class ChannelApi:
     @validate_call
     def get_latest_channel_items_with_http_info(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User Id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         filters: Annotated[Optional[List[ItemFilter]], Field(description="Optional. Specify additional filters to apply.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        channel_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. Specify one or more channel id's, comma delimited.")] = None,
+        channel_ids: Annotated[Optional[List[UUID]], Field(description="Optional. Specify one or more channel id's, comma delimited.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1451,7 +1451,7 @@ class ChannelApi:
 
 
         :param user_id: Optional. User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1461,7 +1461,7 @@ class ChannelApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param channel_ids: Optional. Specify one or more channel id's, comma delimited.
-        :type channel_ids: List[str]
+        :type channel_ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1517,12 +1517,12 @@ class ChannelApi:
     @validate_call
     def get_latest_channel_items_without_preload_content(
         self,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. User Id.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. User Id.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
         filters: Annotated[Optional[List[ItemFilter]], Field(description="Optional. Specify additional filters to apply.")] = None,
         fields: Annotated[Optional[List[ItemFields]], Field(description="Optional. Specify additional fields of information to return in the output.")] = None,
-        channel_ids: Annotated[Optional[List[StrictStr]], Field(description="Optional. Specify one or more channel id's, comma delimited.")] = None,
+        channel_ids: Annotated[Optional[List[UUID]], Field(description="Optional. Specify one or more channel id's, comma delimited.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1540,7 +1540,7 @@ class ChannelApi:
 
 
         :param user_id: Optional. User Id.
-        :type user_id: str
+        :type user_id: UUID
         :param start_index: Optional. The record index to start at. All items with a lower index will be dropped from the results.
         :type start_index: int
         :param limit: Optional. The maximum number of records to return.
@@ -1550,7 +1550,7 @@ class ChannelApi:
         :param fields: Optional. Specify additional fields of information to return in the output.
         :type fields: List[ItemFields]
         :param channel_ids: Optional. Specify one or more channel id's, comma delimited.
-        :type channel_ids: List[str]
+        :type channel_ids: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

@@ -19,9 +19,11 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.subtitle_playback_mode import SubtitlePlaybackMode
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class UserConfiguration(BaseModel):
     """
@@ -31,13 +33,13 @@ class UserConfiguration(BaseModel):
     play_default_audio_track: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether [play default audio track].", alias="PlayDefaultAudioTrack")
     subtitle_language_preference: Optional[StrictStr] = Field(default=None, description="Gets or sets the subtitle language preference.", alias="SubtitleLanguagePreference")
     display_missing_episodes: Optional[StrictBool] = Field(default=None, alias="DisplayMissingEpisodes")
-    grouped_folders: Optional[List[StrictStr]] = Field(default=None, alias="GroupedFolders")
+    grouped_folders: Optional[List[UUID]] = Field(default=None, alias="GroupedFolders")
     subtitle_mode: Optional[SubtitlePlaybackMode] = Field(default=None, description="An enum representing a subtitle playback mode.", alias="SubtitleMode")
     display_collections_view: Optional[StrictBool] = Field(default=None, alias="DisplayCollectionsView")
     enable_local_password: Optional[StrictBool] = Field(default=None, alias="EnableLocalPassword")
-    ordered_views: Optional[List[StrictStr]] = Field(default=None, alias="OrderedViews")
-    latest_items_excludes: Optional[List[StrictStr]] = Field(default=None, alias="LatestItemsExcludes")
-    my_media_excludes: Optional[List[StrictStr]] = Field(default=None, alias="MyMediaExcludes")
+    ordered_views: Optional[List[UUID]] = Field(default=None, alias="OrderedViews")
+    latest_items_excludes: Optional[List[UUID]] = Field(default=None, alias="LatestItemsExcludes")
+    my_media_excludes: Optional[List[UUID]] = Field(default=None, alias="MyMediaExcludes")
     hide_played_in_latest: Optional[StrictBool] = Field(default=None, alias="HidePlayedInLatest")
     remember_audio_selections: Optional[StrictBool] = Field(default=None, alias="RememberAudioSelections")
     remember_subtitle_selections: Optional[StrictBool] = Field(default=None, alias="RememberSubtitleSelections")
@@ -46,7 +48,8 @@ class UserConfiguration(BaseModel):
     __properties: ClassVar[List[str]] = ["AudioLanguagePreference", "PlayDefaultAudioTrack", "SubtitleLanguagePreference", "DisplayMissingEpisodes", "GroupedFolders", "SubtitleMode", "DisplayCollectionsView", "EnableLocalPassword", "OrderedViews", "LatestItemsExcludes", "MyMediaExcludes", "HidePlayedInLatest", "RememberAudioSelections", "RememberSubtitleSelections", "EnableNextEpisodeAutoPlay", "CastReceiverId"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -58,8 +61,7 @@ class UserConfiguration(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

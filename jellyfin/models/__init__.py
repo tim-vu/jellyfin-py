@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from jellyfin.models.access_schedule import AccessSchedule
 from jellyfin.models.activity_log_entry import ActivityLogEntry
@@ -372,3 +371,4 @@ from jellyfin.models.video_type import VideoType
 from jellyfin.models.virtual_folder_info import VirtualFolderInfo
 from jellyfin.models.web_socket_message import WebSocketMessage
 from jellyfin.models.xbmc_metadata_options import XbmcMetadataOptions
+

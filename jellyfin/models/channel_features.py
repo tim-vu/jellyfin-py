@@ -19,18 +19,20 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from jellyfin.models.channel_item_sort_field import ChannelItemSortField
 from jellyfin.models.channel_media_content_type import ChannelMediaContentType
 from jellyfin.models.channel_media_type import ChannelMediaType
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ChannelFeatures(BaseModel):
     """
     ChannelFeatures
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Gets or sets the name.", alias="Name")
-    id: Optional[StrictStr] = Field(default=None, description="Gets or sets the identifier.", alias="Id")
+    id: Optional[UUID] = Field(default=None, description="Gets or sets the identifier.", alias="Id")
     can_search: Optional[StrictBool] = Field(default=None, description="Gets or sets a value indicating whether this instance can search.", alias="CanSearch")
     media_types: Optional[List[ChannelMediaType]] = Field(default=None, description="Gets or sets the media types.", alias="MediaTypes")
     content_types: Optional[List[ChannelMediaContentType]] = Field(default=None, description="Gets or sets the content types.", alias="ContentTypes")
@@ -44,7 +46,8 @@ class ChannelFeatures(BaseModel):
     __properties: ClassVar[List[str]] = ["Name", "Id", "CanSearch", "MediaTypes", "ContentTypes", "MaxPageSize", "AutoRefreshLevels", "DefaultSortFields", "SupportsSortOrderToggle", "SupportsLatestMedia", "CanFilter", "SupportsContentDownloading"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -56,8 +59,7 @@ class ChannelFeatures(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

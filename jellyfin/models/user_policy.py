@@ -20,11 +20,13 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.access_schedule import AccessSchedule
 from jellyfin.models.sync_play_user_access_type import SyncPlayUserAccessType
 from jellyfin.models.unrated_item import UnratedItem
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class UserPolicy(BaseModel):
     """
@@ -60,16 +62,16 @@ class UserPolicy(BaseModel):
     enable_media_conversion: Optional[StrictBool] = Field(default=None, alias="EnableMediaConversion")
     enabled_devices: Optional[List[StrictStr]] = Field(default=None, alias="EnabledDevices")
     enable_all_devices: Optional[StrictBool] = Field(default=None, alias="EnableAllDevices")
-    enabled_channels: Optional[List[StrictStr]] = Field(default=None, alias="EnabledChannels")
+    enabled_channels: Optional[List[UUID]] = Field(default=None, alias="EnabledChannels")
     enable_all_channels: Optional[StrictBool] = Field(default=None, alias="EnableAllChannels")
-    enabled_folders: Optional[List[StrictStr]] = Field(default=None, alias="EnabledFolders")
+    enabled_folders: Optional[List[UUID]] = Field(default=None, alias="EnabledFolders")
     enable_all_folders: Optional[StrictBool] = Field(default=None, alias="EnableAllFolders")
     invalid_login_attempt_count: Optional[StrictInt] = Field(default=None, alias="InvalidLoginAttemptCount")
     login_attempts_before_lockout: Optional[StrictInt] = Field(default=None, alias="LoginAttemptsBeforeLockout")
     max_active_sessions: Optional[StrictInt] = Field(default=None, alias="MaxActiveSessions")
     enable_public_sharing: Optional[StrictBool] = Field(default=None, alias="EnablePublicSharing")
-    blocked_media_folders: Optional[List[StrictStr]] = Field(default=None, alias="BlockedMediaFolders")
-    blocked_channels: Optional[List[StrictStr]] = Field(default=None, alias="BlockedChannels")
+    blocked_media_folders: Optional[List[UUID]] = Field(default=None, alias="BlockedMediaFolders")
+    blocked_channels: Optional[List[UUID]] = Field(default=None, alias="BlockedChannels")
     remote_client_bitrate_limit: Optional[StrictInt] = Field(default=None, alias="RemoteClientBitrateLimit")
     authentication_provider_id: Annotated[str, Field(min_length=1, strict=True)] = Field(alias="AuthenticationProviderId")
     password_reset_provider_id: Annotated[str, Field(min_length=1, strict=True)] = Field(alias="PasswordResetProviderId")
@@ -77,7 +79,8 @@ class UserPolicy(BaseModel):
     __properties: ClassVar[List[str]] = ["IsAdministrator", "IsHidden", "EnableCollectionManagement", "EnableSubtitleManagement", "EnableLyricManagement", "IsDisabled", "MaxParentalRating", "MaxParentalSubRating", "BlockedTags", "AllowedTags", "EnableUserPreferenceAccess", "AccessSchedules", "BlockUnratedItems", "EnableRemoteControlOfOtherUsers", "EnableSharedDeviceControl", "EnableRemoteAccess", "EnableLiveTvManagement", "EnableLiveTvAccess", "EnableMediaPlayback", "EnableAudioPlaybackTranscoding", "EnableVideoPlaybackTranscoding", "EnablePlaybackRemuxing", "ForceRemoteSourceTranscoding", "EnableContentDeletion", "EnableContentDeletionFromFolders", "EnableContentDownloading", "EnableSyncTranscoding", "EnableMediaConversion", "EnabledDevices", "EnableAllDevices", "EnabledChannels", "EnableAllChannels", "EnabledFolders", "EnableAllFolders", "InvalidLoginAttemptCount", "LoginAttemptsBeforeLockout", "MaxActiveSessions", "EnablePublicSharing", "BlockedMediaFolders", "BlockedChannels", "RemoteClientBitrateLimit", "AuthenticationProviderId", "PasswordResetProviderId", "SyncPlayAccess"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -89,8 +92,7 @@ class UserPolicy(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -119,8 +121,7 @@ class UserPolicy(BaseModel):
         _items = []
         if self.access_schedules:
             for _item_access_schedules in self.access_schedules:
-                if _item_access_schedules:
-                    _items.append(_item_access_schedules.to_dict())
+                _items.append(_item_access_schedules.to_dict() if _item_access_schedules is not None else None)
             _dict['AccessSchedules'] = _items
         # set to None if max_parental_rating (nullable) is None
         # and model_fields_set contains the field

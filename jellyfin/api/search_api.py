@@ -10,7 +10,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -19,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from jellyfin.models.base_item_kind import BaseItemKind
 from jellyfin.models.media_type import MediaType
 from jellyfin.models.search_hint_result import SearchHintResult
@@ -47,11 +47,11 @@ class SearchApi:
         search_term: Annotated[StrictStr, Field(description="The search term to filter on.")],
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Supply a user id to search within a user's library or omit to search all.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Supply a user id to search within a user's library or omit to search all.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="If specified, only results with the specified item types are returned. This allows multiple, comma delimited.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="If specified, results with these item types are filtered out. This allows multiple, comma delimited.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="If specified, only results with the specified media types are returned. This allows multiple, comma delimited.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="If specified, only children of the parent are returned.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="If specified, only children of the parent are returned.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional filter for movies.")] = None,
         is_series: Annotated[Optional[StrictBool], Field(description="Optional filter for series.")] = None,
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for news.")] = None,
@@ -85,7 +85,7 @@ class SearchApi:
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param user_id: Optional. Supply a user id to search within a user's library or omit to search all.
-        :type user_id: str
+        :type user_id: UUID
         :param include_item_types: If specified, only results with the specified item types are returned. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param exclude_item_types: If specified, results with these item types are filtered out. This allows multiple, comma delimited.
@@ -93,7 +93,7 @@ class SearchApi:
         :param media_types: If specified, only results with the specified media types are returned. This allows multiple, comma delimited.
         :type media_types: List[MediaType]
         :param parent_id: If specified, only children of the parent are returned.
-        :type parent_id: str
+        :type parent_id: UUID
         :param is_movie: Optional filter for movies.
         :type is_movie: bool
         :param is_series: Optional filter for series.
@@ -184,11 +184,11 @@ class SearchApi:
         search_term: Annotated[StrictStr, Field(description="The search term to filter on.")],
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Supply a user id to search within a user's library or omit to search all.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Supply a user id to search within a user's library or omit to search all.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="If specified, only results with the specified item types are returned. This allows multiple, comma delimited.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="If specified, results with these item types are filtered out. This allows multiple, comma delimited.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="If specified, only results with the specified media types are returned. This allows multiple, comma delimited.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="If specified, only children of the parent are returned.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="If specified, only children of the parent are returned.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional filter for movies.")] = None,
         is_series: Annotated[Optional[StrictBool], Field(description="Optional filter for series.")] = None,
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for news.")] = None,
@@ -222,7 +222,7 @@ class SearchApi:
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param user_id: Optional. Supply a user id to search within a user's library or omit to search all.
-        :type user_id: str
+        :type user_id: UUID
         :param include_item_types: If specified, only results with the specified item types are returned. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param exclude_item_types: If specified, results with these item types are filtered out. This allows multiple, comma delimited.
@@ -230,7 +230,7 @@ class SearchApi:
         :param media_types: If specified, only results with the specified media types are returned. This allows multiple, comma delimited.
         :type media_types: List[MediaType]
         :param parent_id: If specified, only children of the parent are returned.
-        :type parent_id: str
+        :type parent_id: UUID
         :param is_movie: Optional filter for movies.
         :type is_movie: bool
         :param is_series: Optional filter for series.
@@ -321,11 +321,11 @@ class SearchApi:
         search_term: Annotated[StrictStr, Field(description="The search term to filter on.")],
         start_index: Annotated[Optional[StrictInt], Field(description="Optional. The record index to start at. All items with a lower index will be dropped from the results.")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Optional. The maximum number of records to return.")] = None,
-        user_id: Annotated[Optional[StrictStr], Field(description="Optional. Supply a user id to search within a user's library or omit to search all.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Optional. Supply a user id to search within a user's library or omit to search all.")] = None,
         include_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="If specified, only results with the specified item types are returned. This allows multiple, comma delimited.")] = None,
         exclude_item_types: Annotated[Optional[List[BaseItemKind]], Field(description="If specified, results with these item types are filtered out. This allows multiple, comma delimited.")] = None,
         media_types: Annotated[Optional[List[MediaType]], Field(description="If specified, only results with the specified media types are returned. This allows multiple, comma delimited.")] = None,
-        parent_id: Annotated[Optional[StrictStr], Field(description="If specified, only children of the parent are returned.")] = None,
+        parent_id: Annotated[Optional[UUID], Field(description="If specified, only children of the parent are returned.")] = None,
         is_movie: Annotated[Optional[StrictBool], Field(description="Optional filter for movies.")] = None,
         is_series: Annotated[Optional[StrictBool], Field(description="Optional filter for series.")] = None,
         is_news: Annotated[Optional[StrictBool], Field(description="Optional filter for news.")] = None,
@@ -359,7 +359,7 @@ class SearchApi:
         :param limit: Optional. The maximum number of records to return.
         :type limit: int
         :param user_id: Optional. Supply a user id to search within a user's library or omit to search all.
-        :type user_id: str
+        :type user_id: UUID
         :param include_item_types: If specified, only results with the specified item types are returned. This allows multiple, comma delimited.
         :type include_item_types: List[BaseItemKind]
         :param exclude_item_types: If specified, results with these item types are filtered out. This allows multiple, comma delimited.
@@ -367,7 +367,7 @@ class SearchApi:
         :param media_types: If specified, only results with the specified media types are returned. This allows multiple, comma delimited.
         :type media_types: List[MediaType]
         :param parent_id: If specified, only children of the parent are returned.
-        :type parent_id: str
+        :type parent_id: UUID
         :param is_movie: Optional filter for movies.
         :type is_movie: bool
         :param is_series: Optional filter for series.
