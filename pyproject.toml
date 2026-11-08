@@ -1,7 +1,7 @@
 [project]
 name = "jellyfin-py"
 version = "12.4.0" # x-release-please-version
-description = "Jellyfin API"
+description = "Python client for the Jellyfin media server API, generated from the official OpenAPI spec."
 authors = [
   {name = "OpenAPI Generator Community",email = "team@openapitools.org"},
 ]
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+Repository = "https://github.com/tim-vu/jellyfin-py"
 
 [dependency-groups]
 dev = [

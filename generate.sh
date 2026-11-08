@@ -31,7 +31,9 @@ java -jar "$tmp/oag.jar" generate \
   -g python \
   -o "$tmp/out" \
   -t "$here/templates" \
-  --additional-properties="packageName=jellyfin,projectName=jellyfin-py,packageVersion=${package_version},library=urllib3" \
+  --git-user-id=tim-vu \
+  --git-repo-id=jellyfin-py \
+  --additional-properties="packageName=jellyfin,projectName=jellyfin-py,packageVersion=${package_version},library=urllib3,packageUrl=https://github.com/tim-vu/jellyfin-py" \
   --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false
 
 # Generated CI and publishing scaffolding is replaced by our own workflows.
