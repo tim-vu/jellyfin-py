@@ -19,7 +19,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "jellyfin-py"
-VERSION = "12.4.0" # x-release-please-version
+VERSION = "12.4.1" # x-release-please-version
 PYTHON_REQUIRES = ">= 3.11"
 REQUIRES = [
     "urllib3 >= 2.7.0, < 3.0.0",
