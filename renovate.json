@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["custom.regex", "github-actions"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^versions\\.env$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\nGENERATOR_VERSION=(?<currentValue>\\S+)"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Generator bumps change the generated code but not the Jellyfin version: no release on their own.",
+      "matchManagers": ["custom.regex", "github-actions"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    }
+  ]
+}

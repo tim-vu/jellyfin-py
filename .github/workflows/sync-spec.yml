@@ -1,0 +1,48 @@
+name: Sync Jellyfin spec
+
+# The stable spec URL is unversioned, so Renovate cannot track it. Poll it,
+# and open a PR with the regenerated client when it changes.
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: spec
+        run: ./scripts/sync-spec.sh
+      - uses: actions/setup-java@v4
+        if: steps.spec.outputs.changed == 'true'
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: ./generate.sh
+        if: steps.spec.outputs.changed == 'true'
+      - name: Compose commit message
+        if: steps.spec.outputs.changed == 'true'
+        run: |
+          version="${{ steps.spec.outputs.spec_version }}"
+          if [ "${{ steps.spec.outputs.version_changed }}" = "true" ]; then
+            # Release-As makes release-please cut exactly the Jellyfin version.
+            printf 'feat: update to Jellyfin API %s\n\nRelease-As: %s\n' "$version" "$version" > "$RUNNER_TEMP/message"
+          else
+            printf 'chore(deps): refresh Jellyfin %s spec\n' "$version" > "$RUNNER_TEMP/message"
+          fi
+      - uses: peter-evans/create-pull-request@v7
+        if: steps.spec.outputs.changed == 'true'
+        with:
+          branch: feature/code-generation
+          commit-message: file:${{ runner.temp }}/message
+          title: "Update to Jellyfin API ${{ steps.spec.outputs.spec_version }}"
+          body: |
+            Regenerated from the current Jellyfin stable OpenAPI spec.
+
+            Merge with **rebase** (or a merge commit) so the `Release-As:` footer
+            in the commit message reaches `main`; a squash merge drops it.

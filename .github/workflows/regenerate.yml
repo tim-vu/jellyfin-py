@@ -1,0 +1,40 @@
+name: Regenerate
+
+# Renovate bumps GENERATOR_VERSION in versions.env; this commits the matching
+# regenerated client to the Renovate branch.
+on:
+  pull_request:
+    paths:
+      - versions.env
+      - templates/**
+      - scripts/**
+      - generate.sh
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.head_ref, 'renovate/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: ./generate.sh
+      - name: Commit regenerated client
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Client already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(deps): regenerate client"
+          git push

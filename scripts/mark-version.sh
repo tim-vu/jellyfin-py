@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Post-process a freshly generated client: align the distribution name, and
+# let release-please bump the version by appending an `x-release-please-version`
+# marker to every line that carries the package version. Fails loudly if the generator output changes
+# shape and a marker cannot be placed.
+#
+# Usage: mark-version.sh <generated-dir> <package-version>
+set -euo pipefail
+
+dir="$1"
+version="$2"
+marker="x-release-please-version"
+
+# mark <file> <sed-regex-matching-the-version-line> <comment-syntax>
+mark() {
+  local file="$dir/$1" pattern="$2" comment="$3"
+
+  sed -i -E "\\#${pattern}# s|\$| ${comment}|" "$file"
+
+  if [ "$(grep -c "$marker" "$file")" -ne 1 ]; then
+    echo "mark-version: expected exactly one $marker marker in $1" >&2
+    exit 1
+  fi
+}
+
+mark pyproject.toml "^version = \"${version}\"\$" "# ${marker}"
+mark setup.py "^VERSION = \"${version}\"\$" "# ${marker}"
+mark jellyfin/__init__.py "^__version__ = \"${version}\"\$" "# ${marker}"
+mark jellyfin/api_client.py "self.user_agent = 'OpenAPI-Generator/${version}/python'\$" "# ${marker}"
+mark README.md "^- Package version: ${version}\$" "<!--- ${marker} -->"
+
+# pyproject.toml names the import package; setup.py names the distribution.
+# Make them agree so build frontends accept the metadata.
+sed -i 's|^name = "jellyfin"$|name = "jellyfin-py"|' "$dir/pyproject.toml"
+if ! grep -q '^name = "jellyfin-py"$' "$dir/pyproject.toml"; then
+  echo "mark-version: could not set distribution name in pyproject.toml" >&2
+  exit 1
+fi
+
+# to_debug_report() hard-codes the version in a line ending in a backslash
+# continuation, which cannot carry a comment: read it from the package instead.
+config="$dir/jellyfin/configuration.py"
+sed -i \
+  -e "s|\"SDK Package Version: ${version}\"|\"SDK Package Version: {sdk_version}\"|" \
+  -e 's|format(env=sys.platform, pyversion=sys.version)|format(env=sys.platform, pyversion=sys.version, sdk_version=__import__("jellyfin").__version__)|' \
+  "$config"
+
+if ! grep -q "sdk_version=__import__" "$config" || grep -q "SDK Package Version: ${version}" "$config"; then
+  echo "mark-version: could not patch SDK version in configuration.py" >&2
+  exit 1
+fi
