@@ -22,7 +22,7 @@ jobs:
         if: steps.spec.outputs.changed == 'true'
         with:
           distribution: temurin
-          java-version: "21"
+          java-version: "25"
       - run: ./generate.sh
         if: steps.spec.outputs.changed == 'true'
       - name: Compose commit message
